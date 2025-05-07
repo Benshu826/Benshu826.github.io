@@ -629,7 +629,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 定时器计数频率：CK\_CNT = \frac{CLCK}{PSC + 1}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord cjk_fallback">定时器计数频率：</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.13889em;">CNT</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">PSC</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
 <h3 id="q如何设置一个20ms定时器"><a class="markdownIt-Anchor" href="#q如何设置一个20ms定时器"></a> Q：如何设置一个20ms定时器？</h3>
-<p>使用HCLK = 72MHz，预分频系数PSC = 7199，可得CK_CNT = 1KHz = 1ms，只需要20个这样的计数即可。</p>
+<p>使用HCLK = 72MHz，预分频系数PSC = 7199，可得CK_CNT = 1KHz = 1ms，只需要计数20次即可。</p>
 <h3 id="q如何开启定时器"><a class="markdownIt-Anchor" href="#q如何开启定时器"></a> Q：如何开启定时器？</h3>
 <ol>
 <li>开启RCC时钟</li>
@@ -642,7 +642,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h3 id="内容-8"><a class="markdownIt-Anchor" href="#内容-8"></a> 内容</h3>
 <p><strong>Analog - Digital Converter</strong>：模拟 - 数字转换器</p>
 <p><strong>12位逐次逼近型ADC</strong>，1us转换时间</p>
-<p>输入电压：0<sub>3.3V，转换范围：0</sub>4095</p>
+<p>输入电压：0 ~ 3.3V，转换范围：0 ~ 4095</p>
 <p><strong>AD转换的步骤：采样、保持、量化、编码</strong></p>
 <h3 id="qstm32-adc的总转换时间如何计算"><a class="markdownIt-Anchor" href="#qstm32-adc的总转换时间如何计算"></a> Q：STM32 ADC的总转换时间如何计算</h3>
 <p>T = 采样时间 + 12.5个ADC周期（12个周期量化）</p>
@@ -666,7 +666,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 </tbody>
 </table>
 <p>常见的Flash型号（了解即可）</p>
-<p><strong>页&lt;扇区&lt;块&lt;芯片</strong></p>
 <table>
 <thead>
 <tr>
@@ -703,6 +702,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </tr>
 </tbody>
 </table>
+<p><strong>页&lt;扇区&lt;块&lt;芯片</strong></p>
 <p><strong>常用的Flash擦写规则</strong></p>
 <ul>
 <li>最小擦除：扇区</li>
@@ -799,7 +799,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h3 id="内容-11"><a class="markdownIt-Anchor" href="#内容-11"></a> 内容</h3>
 <p>串口通信，<strong>异步</strong></p>
 <p><img src="https://s2.loli.net/2025/05/07/yfZ6Hv5uq1SL8m9.png" alt="" /></p>
-<p><strong>低位先行</strong>：若发送信息0X0F，则是1111 0000，最终接收信息0X0F</p>
+<p><strong>低位先行</strong>：若发送信息0X0F，则传输数据位是1111 0000，最终接收信息0X0F</p>
 <p><strong>过程：波特率对齐（比特率=波特率 * log2（N)，N是二进制位数）</strong>；起始一个<strong>低电平</strong>信号表示<strong>开始发送数据</strong>，接着是<strong>8个数据位</strong>，然后是校验位（奇/偶/NONE），最后是<strong>高电平</strong>表示停止位（0.5/1/1.5/2）</p>
 <p><img src="https://s2.loli.net/2025/05/07/NJ3RueE5X7DtIoj.png" alt="" /></p>
 <h3 id="q串口通信如何配置"><a class="markdownIt-Anchor" href="#q串口通信如何配置"></a> Q：串口通信如何配置？</h3>
@@ -814,11 +814,11 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ol>
 <h3 id="q描述下rs232和rs485的区别"><a class="markdownIt-Anchor" href="#q描述下rs232和rs485的区别"></a> Q：描述下RS232和RS485的区别？</h3>
 <p><strong>TTL（全双工）</strong>：0V表示0，+3.3V~+5V表示1</p>
-<p><strong>RS232（全双工）</strong>：+3 ~ +15表示0，-3 ~ -15V表示1，（TTL通过RS232芯片）</p>
-<p><strong>RS485（半双工）</strong>：两线压差-2 ~ -6V表示0，+2 ~ +6V表示1（TTL通过RS485芯片）</p>
+<p><strong>RS232（全双工）</strong>：+3V ~ +15V表示0，-3V ~ -15V表示1，（TTL通过RS232芯片）</p>
+<p><strong>RS485（半双工）</strong>：两线压差-2V ~ -6V表示0，+2V ~ +6V表示1（TTL通过RS485芯片）</p>
 <h2 id="i2c"><a class="markdownIt-Anchor" href="#i2c"></a> I2C</h2>
 <h3 id="内容-12"><a class="markdownIt-Anchor" href="#内容-12"></a> 内容</h3>
-<p>Inter IC BUS（<strong>同步、半双工</strong>），支持<strong>一主多从和多主多从</strong>（MSB先行）</p>
+<p>Inter IC BUS（<strong>同步、半双工</strong>），支持<strong>一主多从和多主多从</strong>（MSB高位先行）</p>
 <p>两根通信线：SCL（Serial Clock）、SDA（Serial Data），上拉电阻一般4.7K~10K</p>
 <p><strong>STM32支持7/10位地址模式</strong></p>
 <p><img src="https://s2.loli.net/2025/05/07/Lh49pJTuEyxrFGB.png" alt="" /></p>
@@ -866,7 +866,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ul>
 <h3 id="q如何确定使用哪个模式"><a class="markdownIt-Anchor" href="#q如何确定使用哪个模式"></a> Q：如何确定使用哪个模式</h3>
 <p>看<strong>从机空闲状态</strong>是低电平还是高电平，来确认CPOL；再从<strong>从机芯片时序图里确认何时采取数据</strong>。</p>
-<p><strong>下图解释：在没有进入Cycle时，通过SPICLK是高低电平，来判断CPOL；CPHA通过正中间的那个边沿判断。</strong></p>
+<p><strong>下图解释：在没有进入Cycle时，通过SPICLK是高低电平来判断CPOL；CPHA通过正中间的那个边沿判断。</strong></p>
 <p><img src="https://s2.loli.net/2025/05/07/SEBAmWquCTYNJaZ.png" alt="" /></p>
 <h2 id="看门狗"><a class="markdownIt-Anchor" href="#看门狗"></a> 看门狗</h2>
 <h3 id="内容-14"><a class="markdownIt-Anchor" href="#内容-14"></a> 内容</h3>
@@ -950,7 +950,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </tr>
 </tbody>
 </table>
-<p>每个节点都可以自己发送帧**（帧是CAN协议规定发送或接收的单位）**</p>
+<p>每个节点都可以自己发送帧（<strong>帧是CAN协议规定发送或接收的单位</strong>）</p>
 <p><img src="https://s2.loli.net/2025/05/07/zBLUehdCMscOtR3.png" alt="" /></p>
 <p><img src="https://s2.loli.net/2025/05/07/El7tqDN9u3SCAs5.png" alt="" /></p>
 <table>
@@ -1020,7 +1020,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p><strong>保留位（r0、r1）</strong>，必须<strong>全部以显性电平发送</strong>，但接收方可以接收显性、隐性的各种组合。</p>
 </li>
 <li>
-<p><strong>数据长度码（Data Link Control）</strong>，数据字节必须为0-8字节，但接收方对DLC=9~15的情况并不视为错误。</p>
+<p><strong>数据长度码（Data Link Control）</strong>，数据字节必须为0-8字节，但接收方对数据字节数=9~15的情况并不视为错误。</p>
 </li>
 </ul>
 <p><img src="https://s2.loli.net/2025/05/07/s74bY1mifvpLBSP.png" alt="" /></p>
@@ -1073,9 +1073,9 @@ CAN波特率=TQ*(TBS1 + TBS2 + SJY)   \\
           
           
               
-                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
-              
                 <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
               
           
     </div>
