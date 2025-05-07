@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 10 字
+        共 1.4k 字
       </span>
     
     
@@ -487,12 +487,299 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#freertos%E6%A6%82%E8%BF%B0%E4%B8%8E%E4%BD%93%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text"> FreeRTOS概述与体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#freertos%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text"> FreeRTOS主要内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text"> 数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-number">1.3.</span> <span class="toc-text"> 变量名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D"><span class="toc-number">1.4.</span> <span class="toc-text"> 函数名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8F%E5%90%8D"><span class="toc-number">1.5.</span> <span class="toc-text"> 宏名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text"> 内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E7%A7%8D%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 五种内存管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#heap_1"><span class="toc-number">2.1.1.</span> <span class="toc-text"> heap_1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap_2"><span class="toc-number">2.1.2.</span> <span class="toc-text"> heap_2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#q%E8%BF%99%E9%87%8C%E7%9A%84%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E6%98%AF%E6%80%8E%E4%B9%88%E6%93%8D%E4%BD%9C%E7%9A%84"><span class="toc-number">2.1.2.1.</span> <span class="toc-text"> Q：这里的最佳匹配是怎么操作的？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap_3"><span class="toc-number">2.1.3.</span> <span class="toc-text"> heap_3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#q-heap_3%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%90%97"><span class="toc-number">2.1.3.1.</span> <span class="toc-text"> Q： heap_3线程安全吗?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap_4"><span class="toc-number">2.1.4.</span> <span class="toc-text"> heap_4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#q%E8%BF%99%E9%87%8C%E7%9A%84%E9%A6%96%E6%AC%A1%E5%8C%B9%E9%85%8D%E6%98%AF%E6%80%8E%E4%B9%88%E6%93%8D%E4%BD%9C%E7%9A%84"><span class="toc-number">2.1.4.1.</span> <span class="toc-text"> Q：这里的首次匹配是怎么操作的？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap_5"><span class="toc-number">2.1.5.</span> <span class="toc-text"> heap_5</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#heap%E7%9B%B8%E5%85%B3%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text"> heap相关的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pvportmallocvportfree"><span class="toc-number">2.2.1.</span> <span class="toc-text"> pvPortMalloc&#x2F;vPortFree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xportgetfreeheapsize"><span class="toc-number">2.2.2.</span> <span class="toc-text"> xPortGetFreeHeapSize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xportgetminimumeverfreeheapsize"><span class="toc-number">2.2.3.</span> <span class="toc-text"> xPortGetMinimumEverFreeHeapSize</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text"> 任务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA"><span class="toc-number">3.1.</span> <span class="toc-text"> 任务创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4"><span class="toc-number">3.2.</span> <span class="toc-text"> 任务删除</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <p>主要学习FreeRTOS的基本操作。</p>
+        <p>主要学习韦东山FreeRTOS的操作。</p>
+<p><strong>参考</strong>：<a target="_blank" rel="noopener" href="https://rtos.100ask.net/zh/FreeRTOS/simulator/chapter1.html#_1-1-freertos%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">第一章 FreeRTOS概述与体验 | 百问网</a></p>
+<h1 id="freertos概述与体验"><a class="markdownIt-Anchor" href="#freertos概述与体验"></a> FreeRTOS概述与体验</h1>
+<h2 id="freertos主要内容"><a class="markdownIt-Anchor" href="#freertos主要内容"></a> FreeRTOS主要内容</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">FreeRTOS/Source下的文件</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">task.c</td>
+<td style="text-align:center">任务操作</td>
+</tr>
+<tr>
+<td style="text-align:center">list.c</td>
+<td style="text-align:center">列表</td>
+</tr>
+<tr>
+<td style="text-align:center">queue.c</td>
+<td style="text-align:center">提供队列操作、信号量操作</td>
+</tr>
+<tr>
+<td style="text-align:center">timer.c</td>
+<td style="text-align:center">软件定时功能</td>
+</tr>
+<tr>
+<td style="text-align:center">event_groups.c</td>
+<td style="text-align:center">通过事件组功能</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
+<ul>
+<li>TickType_t：
+<ul>
+<li><strong>FreeRTOS配置了一个周期性的时钟中断</strong>：Tick Interrupt</li>
+<li>每发生一次中断，中断次数累加，这被称为tick count</li>
+<li>tick count<strong>这个变量的类型就是TickType_t</strong></li>
+<li>TickType_t可以是16位的，也可以是32位的</li>
+<li>FreeRTOSConfig.h中定义configUSE_16_BIT_TICKS时，TickType_t就是uint16_t</li>
+<li>否则TickType_t就是uint32_t</li>
+</ul>
+</li>
+<li>BaseType_t：
+<ul>
+<li><strong>这是该架构最高效的数据类型</strong></li>
+<li>32位架构中，它就是uint32_t</li>
+<li>16位架构中，它就是uint16_t</li>
+<li>8位架构中，它就是uint8_t</li>
+<li>BaseType_t通常用作简单的返回值的类型，还有逻辑值，比如<code>pdTRUE/pdFALSE</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="变量名"><a class="markdownIt-Anchor" href="#变量名"></a> 变量名</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>变量名前缀</strong></th>
+<th style="text-align:center"><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">char</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:center">int16_t, short</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td style="text-align:center">int32_t, long</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">BaseType_t，结构体等</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">unsigned</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:center">指针</td>
+</tr>
+<tr>
+<td style="text-align:center">uc</td>
+<td style="text-align:center">uint8_t，unsigned char</td>
+</tr>
+<tr>
+<td style="text-align:center">pc</td>
+<td style="text-align:center">char指针</td>
+</tr>
+</tbody>
+</table>
+<h2 id="函数名"><a class="markdownIt-Anchor" href="#函数名"></a> 函数名</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>函数名前缀</strong></th>
+<th style="text-align:center"><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">v<strong>Task</strong>PrioritySet</td>
+<td style="text-align:center">返回值类型：void，在<strong>task.c</strong>中定义</td>
+</tr>
+<tr>
+<td style="text-align:center">x<strong>Queue</strong>Receive</td>
+<td style="text-align:center">返回值类型：BaseType_t，在<strong>queue.c</strong>中定义</td>
+</tr>
+<tr>
+<td style="text-align:center">pv<strong>Timer</strong>GetTimerID</td>
+<td style="text-align:center">返回值类型：pointer to void，在<strong>timer.c</strong>中定义</td>
+</tr>
+</tbody>
+</table>
+<h2 id="宏名"><a class="markdownIt-Anchor" href="#宏名"></a> 宏名</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏的前缀</th>
+<th style="text-align:center">在哪个文件定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">port (比如portMAX_DELAY)</td>
+<td style="text-align:center">portable.h或portmacro.h</td>
+</tr>
+<tr>
+<td style="text-align:center">task (比如taskENTER_CRITICAL())</td>
+<td style="text-align:center">task.h</td>
+</tr>
+<tr>
+<td style="text-align:center">pd (比如pdTRUE)</td>
+<td style="text-align:center">projdefs.h</td>
+</tr>
+<tr>
+<td style="text-align:center">config (比如configUSE_PREEMPTION)</td>
+<td style="text-align:center">FreeRTOSConfig.h</td>
+</tr>
+<tr>
+<td style="text-align:center">err (比如errQUEUE_FULL)</td>
+<td style="text-align:center">projdefs.h</td>
+</tr>
+</tbody>
+</table>
+<p>一般的宏定义</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pdTRUE</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">pdFALSE</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">pdPASS</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">pdFAIL</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h1 id="内存管理"><a class="markdownIt-Anchor" href="#内存管理"></a> 内存管理</h1>
+<ul>
+<li>堆：heap，由程序员自己malloc一块空间，用完后free标记为&quot;空闲&quot;</li>
+<li>栈：stack，函数调用时局部变量保存在栈中，当前程序环境也是保存在栈中。</li>
+</ul>
+<h2 id="五种内存管理方法"><a class="markdownIt-Anchor" href="#五种内存管理方法"></a> 五种内存管理方法</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">heap_1.c</td>
+<td style="text-align:center">分配简单，时间确定，没有碎片</td>
+<td style="text-align:center">只分配，不回收</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_2.c</td>
+<td style="text-align:center">动态分配，最佳匹配</td>
+<td style="text-align:center">有碎片、时间不懂</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_3.c</td>
+<td style="text-align:center">调用标准库函数</td>
+<td style="text-align:center">速度慢、时间不定</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_4.c</td>
+<td style="text-align:center">相邻的空闲碎片可合并</td>
+<td style="text-align:center">时间不定</td>
+</tr>
+<tr>
+<td style="text-align:center">heap_5.c</td>
+<td style="text-align:center">在heap_4.c基础上支持分隔的内存块</td>
+<td style="text-align:center">时间不定</td>
+</tr>
+</tbody>
+</table>
+<p>FreeRTOS在创建任务时，需要2个内核对象：<strong>task control block(TCB)、stack</strong>。</p>
+<h3 id="heap_1"><a class="markdownIt-Anchor" href="#heap_1"></a> heap_1</h3>
+<ul>
+<li>
+<p>只<strong>实现了pvPortMalloc</strong>，并<strong>没有实现vPortFree</strong>。</p>
+</li>
+<li>
+<p>如果程序<strong>不需要删除内核对象</strong>，可以使用它</p>
+</li>
+</ul>
+<h3 id="heap_2"><a class="markdownIt-Anchor" href="#heap_2"></a> heap_2</h3>
+<p>相较于heap_1</p>
+<ul>
+<li>Heap_2使用<strong>最佳匹配算法</strong>(best fit)来分配内存</li>
+<li>它<strong>支持vPortFree</strong></li>
+</ul>
+<h4 id="q这里的最佳匹配是怎么操作的"><a class="markdownIt-Anchor" href="#q这里的最佳匹配是怎么操作的"></a> Q：这里的最佳匹配是怎么操作的？</h4>
+<p>举例，一个5 10 15内存的空间，此时需要存入一个6大小的数据，那么就存放在10里面，变成5 4 15；后续又需要存放一个4大小的数据，就变成5 0 15。</p>
+<h3 id="heap_3"><a class="markdownIt-Anchor" href="#heap_3"></a> heap_3</h3>
+<ul>
+<li>使用标准C库里的malloc、free函数</li>
+</ul>
+<h4 id="q-heap_3线程安全吗"><a class="markdownIt-Anchor" href="#q-heap_3线程安全吗"></a> Q： heap_3线程安全吗?</h4>
+<p>C库里的malloc、free函数并非线程安全的，Heap_3中先暂停FreeRTOS的调度器，再去调用这些函数，使用这种方法实现了线程安全。</p>
+<h3 id="heap_4"><a class="markdownIt-Anchor" href="#heap_4"></a> heap_4</h3>
+<ul>
+<li>Heap_4使用<strong>首次适应算法</strong>(first fit)来分配内存。它还会把相邻的空闲内存合并为一个更大的空闲内存，这有助于较少内存的碎片问题。</li>
+</ul>
+<h4 id="q这里的首次匹配是怎么操作的"><a class="markdownIt-Anchor" href="#q这里的首次匹配是怎么操作的"></a> Q：这里的首次匹配是怎么操作的？</h4>
+<p>举例，一个10 5 3内存的空间，此时需要存入一个6大小的数据，那么就存放在10里面，变成4 5 3；后续又需要存放一个3大小的数据，就变成1 5 3。</p>
+<h3 id="heap_5"><a class="markdownIt-Anchor" href="#heap_5"></a> heap_5</h3>
+<ul>
+<li>相比于Heap_4，Heap_5并不局限于管理一个大数组：<strong>它可以管理多块、分隔开的内存</strong>。</li>
+</ul>
+<h2 id="heap相关的函数"><a class="markdownIt-Anchor" href="#heap相关的函数"></a> heap相关的函数</h2>
+<h3 id="pvportmallocvportfree"><a class="markdownIt-Anchor" href="#pvportmallocvportfree"></a> pvPortMalloc/vPortFree</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> * <span class="title function_">pvPortMalloc</span><span class="params">( <span class="type">size_t</span> xWantedSize )</span>;	<span class="comment">// 分配内存，如果分配内存不成功，则返回值为NULL。</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">vPortFree</span><span class="params">( <span class="type">void</span> * pv )</span>;	<span class="comment">// 释放内存</span></span><br></pre></td></tr></table></figure>
+<p>作用：<strong>分配内存、释放内存</strong>。</p>
+<p>如果分配内存不成功，则返回值为NULL。</p>
+<h3 id="xportgetfreeheapsize"><a class="markdownIt-Anchor" href="#xportgetfreeheapsize"></a> xPortGetFreeHeapSize</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">xPortGetFreeHeapSize</span><span class="params">( <span class="type">void</span> )</span>;</span><br></pre></td></tr></table></figure>
+<p>作用：<strong>当前还有多少空闲内存</strong>，heap_3中无法使用。</p>
+<h3 id="xportgetminimumeverfreeheapsize"><a class="markdownIt-Anchor" href="#xportgetminimumeverfreeheapsize"></a> xPortGetMinimumEverFreeHeapSize</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">xPortGetMinimumEverFreeHeapSize</span><span class="params">( <span class="type">void</span> )</span>;</span><br></pre></td></tr></table></figure>
+<p>作用：空闲内存容量的最小值。</p>
+<p>注意：只有heap_4、heap_5支持此函数</p>
+<h1 id="任务管理"><a class="markdownIt-Anchor" href="#任务管理"></a> 任务管理</h1>
+<p><strong>任务状态</strong>：就绪态、阻塞态、挂起态</p>
+<h2 id="任务创建"><a class="markdownIt-Anchor" href="#任务创建"></a> 任务创建</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BaseType_t <span class="title function_">xTaskCreate</span><span class="params">( TaskFunction_t pxTaskCode, <span class="comment">// 函数指针, 任务函数</span></span></span><br><span class="line"><span class="params">                        <span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> pcName, <span class="comment">// 任务的名字，不用太在意</span></span></span><br><span class="line"><span class="params">                        <span class="type">const</span> configSTACK_DEPTH_TYPE usStackDepth, <span class="comment">// 栈大小,单位为word,10表示40字节</span></span></span><br><span class="line"><span class="params">                        <span class="type">void</span> * <span class="type">const</span> pvParameters, <span class="comment">// 调用任务函数时传入的参数</span></span></span><br><span class="line"><span class="params">                        UBaseType_t uxPriority,    <span class="comment">// 优先级</span></span></span><br><span class="line"><span class="params">                        TaskHandle_t * <span class="type">const</span> pxCreatedTask )</span>; <span class="comment">// 任务句柄, 以后使用它来操作这个任务</span></span><br><span class="line"><span class="comment">//	成功：pdPASS；</span></span><br><span class="line"><span class="comment">//	失败：errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY(失败原因只有内存不足)</span></span><br></pre></td></tr></table></figure>
+<p><strong>同时创建两个程序，同优先级下，先执行最后创建的。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xTaskCreate(vTask1, <span class="string">&quot;Task 1&quot;</span>, <span class="number">1000</span>, <span class="literal">NULL</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">xTaskCreate(vTask2, <span class="string">&quot;Task 2&quot;</span>, <span class="number">1000</span>, <span class="literal">NULL</span>, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// 在执行程序时，先执行vTask2，再到Task1，任务本质是一种链表结构。</span></span><br></pre></td></tr></table></figure>
+<p><strong>多个任务可以使用同一个函数</strong>，怎么体现它们的差别？</p>
+<ul>
+<li><strong>栈不同</strong></li>
+<li>创建任务时可以传入不同的参数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span> *pcTextForTask1 = <span class="string">&quot;T1 run\r\n&quot;</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span> *pcTextForTask2 = <span class="string">&quot;T2 run\r\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">( <span class="type">void</span> )</span></span><br><span class="line">&#123;</span><br><span class="line">	prvSetupHardware();</span><br><span class="line">	</span><br><span class="line">	xTaskCreate(vTaskFunction, <span class="string">&quot;Task 1&quot;</span>, <span class="number">1000</span>, (<span class="type">void</span> *)pcTextForTask1, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line">	xTaskCreate(vTaskFunction, <span class="string">&quot;Task 2&quot;</span>, <span class="number">1000</span>, (<span class="type">void</span> *)pcTextForTask2, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 启动调度器 */</span></span><br><span class="line">	vTaskStartScheduler();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 如果程序运行到了这里就表示出错了, 一般是内存不足 */</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="任务删除"><a class="markdownIt-Anchor" href="#任务删除"></a> 任务删除</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vTaskDelete</span><span class="params">( TaskHandle_t xTaskToDelete )</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>Q：怎么删除任务？</strong></p>
+<ol>
+<li><strong>自杀</strong>：vTaskDelete(NULL)</li>
+<li><strong>被杀</strong>：别的任务执行vTaskDelete(pvTaskCode)，pvTaskCode是自己的句柄</li>
+<li><strong>杀人</strong>：执行vTaskDelete(pvTaskCode)，pvTaskCode是别的任务的句柄</li>
+</ol>
 
       </div>
     </div>
