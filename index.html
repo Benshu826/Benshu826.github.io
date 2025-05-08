@@ -467,19 +467,23 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
-            <a href="/2025/05/08/%E8%B0%83%E8%AF%95BUG/">
+            <a href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/">
             
-            调试BUG</a>
+            调试BUG与一些说明</a>
           </h3>
           <p class="index-excerpt">
               
               
                 
               
-               串口通信出现乱码
+              这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。
+ 调试BUG
+ STM32芯片被锁
+有一段时间没用STM32芯片，发现ST-LINK读不到，毫无头绪。
+解决办法：使用软件STM32 ST-LINK Utility，点击Connect + 按住STM32上芯片复位键才能连接，连接后将程序给清除掉，成功解决。
+ 串口通信出现乱码
 编码格式、波特率、主频都可能是问题原因；
-如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。
-
+如果输入英
           </p>
           <div class="index-btm post-metas">
             
@@ -660,6 +664,58 @@ GPIO_OU
               
                 
                   <span class="p-dot"></span><a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2024/06/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            
+            ESP32S3学习笔记</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              主要学习立创ESP32S3 N16R8的基本配置以及其各部件组成
+ 组成结构
+
+
+
+
+
+类别
+型号
+参数
+
+
+
+
+模组
+ESP32-S3-WROOM-1-N16R8
+搭载 Xtensa® 32 位 LX7 双核处理器，主频高达 240 MHz，内置SRAM 512kB，外置PSRAM 8MB，外置FLASH 16MB，2.4 GHz Wi-Fi (802.11 b/g/n) 40MHz带宽，Blu
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2024-06-12 14:50" pubdate>
+                  2024-06-12
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
                 
               
             
