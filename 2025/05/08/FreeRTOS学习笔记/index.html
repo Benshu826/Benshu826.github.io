@@ -467,8 +467,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2025-05-07 18:51" pubdate>
-          2025-05-07
+        <time datetime="2025-05-08 19:47" pubdate>
+          2025-05-08
         </time>
       </span>
     
@@ -800,7 +800,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vTaskDelay</span><span class="params">( <span class="type">const</span> TickType_t xTicksToDelay )</span>; <span class="comment">/* xTicksToDelay: 等待多少给Tick */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* pxPreviousWakeTime: 上一次被唤醒的时间</span></span><br><span class="line"><span class="comment"> * xTimeIncrement: 要阻塞到(pxPreviousWakeTime + xTimeIncrement)</span></span><br><span class="line"><span class="comment"> * 单位都是Tick Count</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">BaseType_t <span class="title function_">xTaskDelayUntil</span><span class="params">( TickType_t * <span class="type">const</span> pxPreviousWakeTime,</span></span><br><span class="line"><span class="params">                            <span class="type">const</span> TickType_t xTimeIncrement )</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="空闲任务及其钩子函数"><a class="markdownIt-Anchor" href="#空闲任务及其钩子函数"></a> 空闲任务及其钩子函数</h2>
-<p>**空闲任务(Idle任务)**的作用：<strong>释放被删除的任务的内存</strong></p>
+<p><strong>空闲任务</strong>(Idle任务)的作用：<strong>释放被删除的任务的内存</strong></p>
 <p>在使用<code>vTaskStartScheduler() </code>函数来创建、启动调度器时，这个函数内部会创建空闲任务：</p>
 <ul>
 <li>空闲<strong>任务优先级为0</strong>：它不能阻碍用户任务运行</li>
@@ -1716,9 +1716,9 @@ header .header__right .dropdown-menus .dropdown-menu {
           
           
               
-                <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
-              
                 <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
+              
+                <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
               
           
     </div>
