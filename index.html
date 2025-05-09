@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
-            <a href="/2025/05/09/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            <a href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
             
             Bootloader学习笔记</a>
           </h3>
@@ -478,19 +478,18 @@ header .header__right .dropdown-menus .dropdown-menu {
               
                Bootloader+IAP
  简要说明
-本学习笔记主要包括STM32F103下的Bootloader+IAP
+本学习笔记主要包括STM32F103C8T6下的Bootloader+IAP
 Bootloader：用于更新APP的程序
 IAP：在设备运行时，由Bootloader引导对自身程序擦写
 OTA：无线通信将新的固件下载到设备中（On the Air）
- 分区
-A区存放APP，B区存放Bootloader程序。OTA_Flag表示是否更新APP，存放在24C02中
-
+使用的APP数据，OTA标志位，各固件大小，版本号存储在AT24C02
+多个备份APP数据存储在W25Q6
           </p>
           <div class="index-btm post-metas">
             
               
-                <time datetime="2025-05-09 12:31" pubdate>
-                  2025-05-09
+                <time datetime="2025-05-10 03:07" pubdate>
+                  2025-05-10
                 </time>
               
             

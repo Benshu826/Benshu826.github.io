@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 3.3k 字
+        共 3.4k 字
       </span>
     
     
@@ -590,8 +590,10 @@ header .header__right .dropdown-menus .dropdown-menu {
 </table>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> pitch, roll, yaw;</span><br><span class="line"><span class="type">uint8_t</span> display_buf[<span class="number">20</span>];</span><br><span class="line">mpu_dmp_get_data(&amp;pitch, &amp;roll, &amp;yaw);</span><br><span class="line"><span class="built_in">sprintf</span>((<span class="type">char</span>*)display_buf, <span class="string">&quot;row:%.2f&quot;</span>,row);</span><br></pre></td></tr></table></figure>
 <p><em><strong>TIP:不用开漏的原因是MPU6050内部有上拉电阻。</strong></em></p>
+<p>MPU6050如果没放平稳，自检测后出现return，导致失效；注释掉其自检后的return，可临时解决问题</p>
+<img src="https://s2.loli.net/2025/05/09/EGamhDHOqgJVLF9.png" style="zoom: 80%;" />
 <h3 id="超声波"><a class="markdownIt-Anchor" href="#超声波"></a> 超声波</h3>
-<p><strong>HC-SR04 超声波测距模块</strong>可提供2cm-400cm的非接触式距离感测功能，精度可达到3mm，模块包括<strong>超声波发射器、接收器和控制电路</strong>。</p>
+<p><strong>HC-SR04 超声波测距模块</strong>可提供<code>2cm-400cm</code>的非接触式距离感测功能，精度可达到3mm，模块包括<strong>超声波发射器、接收器和控制电路</strong>。</p>
 <h4 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> 工作原理</h4>
 <table>
 <thead>

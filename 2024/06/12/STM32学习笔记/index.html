@@ -667,43 +667,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 </tr>
 </tbody>
 </table>
-<p>常见的Flash型号（了解即可）</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">型号</th>
-<th style="text-align:center">W25Q80</th>
-<th style="text-align:center">W25Q64</th>
-<th style="text-align:center">W25Q32</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">块</td>
-<td style="text-align:center">16页</td>
-<td style="text-align:center">32</td>
-<td style="text-align:center">64</td>
-</tr>
-<tr>
-<td style="text-align:center">扇区</td>
-<td style="text-align:center">256</td>
-<td style="text-align:center">512</td>
-<td style="text-align:center">1024</td>
-</tr>
-<tr>
-<td style="text-align:center">页</td>
-<td style="text-align:center">4096</td>
-<td style="text-align:center">8192</td>
-<td style="text-align:center">16384</td>
-</tr>
-<tr>
-<td style="text-align:center">总字节数</td>
-<td style="text-align:center">1M Byte</td>
-<td style="text-align:center">2M Byte</td>
-<td style="text-align:center">4M Byte</td>
-</tr>
-</tbody>
-</table>
 <p><strong>页&lt;扇区&lt;块&lt;芯片</strong></p>
 <p><strong>常用的Flash擦写规则</strong></p>
 <ul>
@@ -835,7 +798,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p><em><strong>TIP：SDA电平切换只出现在SCL低电平阶段，不要搞混</strong></em></p>
 <h3 id="qi2c的软硬件模式怎么配置"><a class="markdownIt-Anchor" href="#qi2c的软硬件模式怎么配置"></a> Q：I2C的软硬件模式怎么配置？</h3>
 <p><strong>硬件模式：复用开漏输出，不接上下拉</strong>；内部有固定I2C结构；有通信速率设置，400MBits/s</p>
-<p><strong>软件模式：复用开漏输出，上拉电阻</strong>；通过GPIO模拟I2C信号；没有通信速率配置，<strong>需要自己写一个delay</strong>，100MBits/s</p>
+<p><strong>软件模式：推挽输出，上拉电阻</strong>；通过GPIO模拟I2C信号；没有通信速率配置，<strong>需要自己写一个delay</strong>，100MBits/s</p>
 <h3 id="qi2c的仲裁机制"><a class="markdownIt-Anchor" href="#qi2c的仲裁机制"></a> Q：I2C的仲裁机制？</h3>
 <p><strong>“线与”<strong>操作（&amp;&amp;），即</strong>低电平优先</strong>，谁先发送低电平，谁就对总线占有控制权。</p>
 <h3 id="qi2c的从机设备地址id-写地址-读地址"><a class="markdownIt-Anchor" href="#qi2c的从机设备地址id-写地址-读地址"></a> Q：I2C的从机设备地址ID、写地址、读地址？</h3>
