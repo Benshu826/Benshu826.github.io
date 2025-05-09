@@ -476,7 +476,14 @@ header .header__right .dropdown-menus .dropdown-menu {
               
                 
               
-               Bootloader
+               Bootloader+IAP
+ 简要说明
+本学习笔记主要包括STM32F103下的Bootloader+IAP
+Bootloader：用于更新APP的程序
+IAP：在设备运行时，由Bootloader引导对自身程序擦写
+OTA：无线通信将新的固件下载到设备中（On the Air）
+ 分区
+A区存放APP，B区存放Bootloader程序。OTA_Flag表示是否更新APP，存放在24C02中
 
           </p>
           <div class="index-btm post-metas">
@@ -616,6 +623,63 @@ ESP32-S3-WROOM-1-N16R8
               
                 <time datetime="2025-01-12 09:50" pubdate>
                   2025-01-12
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/">
+            
+            颜色、图片、文字、图标设置</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+               颜色、图片、文字、图标
+ 设置颜色
+
+Material color palette — Vuetify
+
+ 设置图片
+
+借助Image2LCD软件，按照如下图配置
+
+将输出的数组存入.h中，加上static，在主函数调用。
+
+Image Converter — LVGL
+
+ 设置文字
+
+
+阿里巴巴普惠体系列打包免费字体下载 - 字体打包免费下载尽在字体家
+
+
+字体转换器 – 免费在线转换字体
+
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2025-01-10 11:10" pubdate>
+                  2025-01-10
                 </time>
               
             
@@ -886,48 +950,6 @@ hexo主题：Themes | Hexo
               
                 
                   <span class="p-dot"></span><a href="/categories/Markdown/">Markdown</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/">
-            
-            使用新域名后不加载主题</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-               心路历程
-看了一圈CSDN，基本上都是抄抄改改，只有几个还有点负责心，但依然没有解决我的问题，差点就放弃了，不过好在通过试错给试出来了。
- 解决方法
-使用了新域名后，发现网页的CSS和JS都没用了，但本地静态可以正常运行。这个时候需要修改个人博客底下的_config.yml文件，先找到这个地方：
-
-将url改为githubname.github.io，不要出现下一层仓库名。
-说明：CSDN上别人
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2022-05-15 11:30" pubdate>
-                  2022-05-15
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E7%BD%91%E9%A1%B5/">网页</a>
                 
               
             

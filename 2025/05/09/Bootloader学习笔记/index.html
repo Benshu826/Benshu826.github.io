@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 1 字
+        共 2.6k 字
       </span>
     
     
@@ -487,12 +487,230 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bootloader"><span class="toc-number">1.</span> <span class="toc-text"> Bootloader</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bootloaderiap"><span class="toc-number">1.</span> <span class="toc-text"> Bootloader+IAP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text"> 简要说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%8C%BA"><span class="toc-number">1.2.</span> <span class="toc-text"> 分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88"><span class="toc-number">1.3.</span> <span class="toc-text"> 方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text"> 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%B8%8Edma"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 串口与DMA</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#h%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.4.1.0.1.</span> <span class="toc-text"> .h程序</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%B2%E5%8F%A3"><span class="toc-number">1.4.1.1.</span> <span class="toc-text"> 配置串口</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#c%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.4.1.1.1.</span> <span class="toc-text"> .c程序</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEdma"><span class="toc-number">1.4.1.2.</span> <span class="toc-text"> 配置DMA</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#c%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">1.4.1.2.1.</span> <span class="toc-text"> .c程序</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.1.3.</span> <span class="toc-text"> 串口空闲中断函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#c%E7%A8%8B%E5%BA%8F-3"><span class="toc-number">1.4.1.3.1.</span> <span class="toc-text"> .c程序</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E6%96%B0%E7%9A%84printf%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.1.4.</span> <span class="toc-text"> 编写新的Printf函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i2c"><span class="toc-number">1.4.2.</span> <span class="toc-text"> I2C</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#h%E7%A8%8B%E5%BA%8F-2"><span class="toc-number">1.4.2.1.</span> <span class="toc-text"> .h程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delay"><span class="toc-number">1.4.2.2.</span> <span class="toc-text"> Delay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-start%E5%92%8Cstop%E4%BF%A1%E5%8F%B7"><span class="toc-number">1.4.2.3.</span> <span class="toc-text"> 初始化、START和STOP信号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E4%B8%80%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="toc-number">1.4.2.4.</span> <span class="toc-text"> 发送一个字节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E4%B8%80%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="toc-number">1.4.2.5.</span> <span class="toc-text"> 读取一个字节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E5%BE%85%E4%BB%8E%E6%9C%BAack"><span class="toc-number">1.4.2.6.</span> <span class="toc-text"> 等待从机ACK</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#at24c02-e2proms"><span class="toc-number">1.4.3.</span> <span class="toc-text"> AT24C02-E2PROMS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%85%A5"><span class="toc-number">1.4.3.1.</span> <span class="toc-text"> 写入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#byte-write"><span class="toc-number">1.4.3.1.1.</span> <span class="toc-text"> Byte Write</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#page-write"><span class="toc-number">1.4.3.1.2.</span> <span class="toc-text"> Page Write</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96"><span class="toc-number">1.4.3.2.</span> <span class="toc-text"> 读取</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xmodem%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.</span> <span class="toc-text"> Xmodem协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text"> 指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">2.3.</span> <span class="toc-text"> 例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crc16%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.4.</span> <span class="toc-text"> CRC16程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text"> 参考</span></a></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="bootloader"><a class="markdownIt-Anchor" href="#bootloader"></a> Bootloader</h1>
+        <h1 id="bootloaderiap"><a class="markdownIt-Anchor" href="#bootloaderiap"></a> Bootloader+IAP</h1>
+<h2 id="简要说明"><a class="markdownIt-Anchor" href="#简要说明"></a> 简要说明</h2>
+<p>本学习笔记主要包括STM32F103下的Bootloader+IAP</p>
+<p>Bootloader：用于更新APP的程序</p>
+<p>IAP：在设备运行时，由Bootloader引导对自身程序擦写</p>
+<p>OTA：无线通信将新的固件下载到设备中（On the Air）</p>
+<h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
+<p>A区存放APP，B区存放Bootloader程序。<strong>OTA_Flag表示是否更新APP，存放在24C02中</strong></p>
+<ol>
+<li>
+<p>❌️<strong>栈指针</strong>—&gt;<strong>| A | B |</strong>------&gt;程序运行后，先进入A，可不通过B进入APP；若OTA_Flag=1开始更新数据，当没有完全更新完A后出现异常，再下一次上电运行A发现程序不全，<strong>悲报，成砖头了</strong>。</p>
+</li>
+<li>
+<p>✔️<strong>栈指针</strong>—&gt;<strong>| B | A |</strong>------&gt;程序运行后，先进入B，观察OTA_Flag=1开始对A更新数据，异常退出后仍然是进入B对A进行更新，更新完成后使OTA_Flag=0。</p>
+</li>
+</ol>
+<h2 id="方案"><a class="markdownIt-Anchor" href="#方案"></a> 方案</h2>
+<p>🦝<strong>DMA + 空闲中断</strong></p>
+<p><strong>DMA</strong>负责在无需CPU帮助下，外设与寄存器之间<strong>传输数据</strong></p>
+<p><strong>空闲中断</strong>表示<strong>接收完成</strong></p>
+<p><strong>窗口接收缓冲区</strong>：<strong>数据传输</strong>过程中，<strong>接收速度和处理速度不一定一致</strong>，因此<strong>需要缓冲区先保存数据，防止数据丢失</strong>；一维数组，确认<strong>单次接收最大量</strong>，防止出现越界问题</p>
+<p><strong>缓冲区的意义</strong>：<strong>DMA发送的数据量大于要接收的量</strong>，除非空闲中断发生，否则它永远不会完成</p>
+<p><strong>SE指针对</strong>：缓冲区是一维数组，共长<strong>2048Bit</strong>，每一次发送<strong>200Bit</strong>，分成10块；每一块<strong>开头S指针</strong>（IN），<strong>结尾E指针</strong>（OUT）；若<strong>IN != OUT</strong>，代表<strong>缓冲区中存在数据</strong>，再往下判断<strong>直到IN == OUT</strong>结束；<strong>END是最后一块边界标记</strong>，不允许超过。</p>
+<img src="https://s2.loli.net/2025/05/09/ItwM21gaURXiGLh.png" style="zoom: 50%;" />
+<p>❗TIP：每次接收后，都<strong>需要判断剩余空间</strong>，以防内存不足，及时回卷；需要一个已经存放的<strong>累加值</strong></p>
+<h2 id="编程"><a class="markdownIt-Anchor" href="#编程"></a> 编程</h2>
+<p>STM32F103使用外部高速时钟HSE，8MHz；通过PLL（倍频锁相环）得到72MHz</p>
+<h3 id="串口与dma"><a class="markdownIt-Anchor" href="#串口与dma"></a> 串口与DMA</h3>
+<h5 id="h程序"><a class="markdownIt-Anchor" href="#h程序"></a> .h程序</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> U1_RX_SIZE 2048 		<span class="comment">// 数据界限</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> U1_TX_SIZE 2048</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> U1_RX_MAX 256 			<span class="comment">// 每次接收的数据，代表一组数据</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NUM 10 					<span class="comment">// 接收的最大组数</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// USART1接收和发送缓冲区</span></span><br><span class="line"><span class="type">uint8_t</span> U1_RX_Buff[U1_RX_SIZE];</span><br><span class="line"><span class="type">uint8_t</span> U1_TX_Buff[U1_TX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 某一组数据接收开始与结束， start：开始， end：结尾</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">uint8_t</span> *start;</span><br><span class="line">    <span class="type">uint8_t</span> *end;</span><br><span class="line">&#125; UCB_URxBuff;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 管理串口接收数据</span></span><br><span class="line"><span class="comment">   URxCounter	当前缓冲区中未处理的数据量</span></span><br><span class="line"><span class="comment">   URxDataPtr	缓冲区存储数组序号</span></span><br><span class="line"><span class="comment">   URxDataIN	指向下一组可写入数据的位置</span></span><br><span class="line"><span class="comment">   URxDataOUT	指向下一个待读取数据的位置</span></span><br><span class="line"><span class="comment">   URxDataEND	指向数组末尾	*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">uint16_t</span> URxCounter;</span><br><span class="line">    UCB_URxBuff URxDataPtr[NUM];</span><br><span class="line">    UCB_URxBuff *URxDataIN;</span><br><span class="line">    UCB_URxBuff *URxDataOUT;</span><br><span class="line">    UCB_URxBuff *URxDataEND;</span><br><span class="line">&#125; UCB_CB;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="配置串口"><a class="markdownIt-Anchor" href="#配置串口"></a> 配置串口</h4>
+<ol>
+<li>
+<p>设置相关<strong>外设时钟</strong></p>
+</li>
+<li>
+<p>初始化<strong>GPIO(IO分区,MODE,频率,IO口)</strong></p>
+</li>
+<li>
+<p><strong>复位串口</strong></p>
+</li>
+<li>
+<p>配置<strong>串口（初始化，波特率，校验，数据位长度，停止位个数，接收发情况）</strong></p>
+</li>
+<li>
+<p>打开<strong>相关中断（IDLE为空闲中断）</strong></p>
+</li>
+<li>
+<p><strong>调用其他功能函数</strong></p>
+</li>
+<li>
+<p><strong>使能串口</strong></p>
+</li>
+</ol>
+<h5 id="c程序"><a class="markdownIt-Anchor" href="#c程序"></a> .c程序</h5>
+<p><img src="https://s2.loli.net/2025/05/09/OnjapTsHUrgZX6A.png" alt="" /></p>
+<h4 id="配置dma"><a class="markdownIt-Anchor" href="#配置dma"></a> 配置DMA</h4>
+<ol>
+<li>
+<p>设置相关<strong>外设时钟</strong></p>
+</li>
+<li>
+<p><strong>复位DMA（DMA，通道）</strong></p>
+</li>
+<li>
+<p><strong>配置DMA（外设地址、外设宽度、内存地址、内存宽度、传输数量、优先级、外设模式、内存模式、方向）</strong></p>
+</li>
+<li>
+<p><strong>初始化DMA（DMA通道、结构体）</strong></p>
+</li>
+<li>
+<p><strong>设置循环方式</strong></p>
+</li>
+<li>
+<p><strong>使能相关通道</strong></p>
+</li>
+</ol>
+<h5 id="c程序-2"><a class="markdownIt-Anchor" href="#c程序-2"></a> .c程序</h5>
+<p><img src="https://s2.loli.net/2025/05/09/5vHiYpyeR3Bj8sk.png" alt="" /></p>
+<h4 id="串口空闲中断函数"><a class="markdownIt-Anchor" href="#串口空闲中断函数"></a> 串口空闲中断函数</h4>
+<ol>
+<li>配置<strong>相关结构体初始化</strong></li>
+<li>编写<strong>空闲中断函数</strong>（<strong>只有读标志位寄存器和数据位寄存器才能将空闲标志位清除</strong>）</li>
+<li>在空闲中断中<strong>读DMA本次添加的数量</strong>(DMA,通道)----counter += (总量 - 剩余值)</li>
+<li><strong>设置缓冲区的IN指针</strong></li>
+<li>Disable DMA，重新配置DMA（DMA，通道，大小，地址），永远不出现完成状态，使能DMA</li>
+</ol>
+<p><strong>要一直让DMA读取数据，直到出现空闲中断才会停止，因此不会出现完成状态</strong></p>
+<h5 id="c程序-3"><a class="markdownIt-Anchor" href="#c程序-3"></a> .c程序</h5>
+<p><img src="https://s2.loli.net/2025/05/09/AuD6WQVYR2mbt7U.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/05/09/3uySNRibECUpag7.png" alt="" /></p>
+<h4 id="编写新的printf函数"><a class="markdownIt-Anchor" href="#编写新的printf函数"></a> 编写新的Printf函数</h4>
+<p><img src="https://s2.loli.net/2025/05/09/daQyDsxRGJXrjuC.png" alt="" /></p>
+<h3 id="i2c"><a class="markdownIt-Anchor" href="#i2c"></a> I2C</h3>
+<p><strong>软件I2C</strong>，延时部分需要自己重新设计</p>
+<h4 id="h程序-2"><a class="markdownIt-Anchor" href="#h程序-2"></a> .h程序</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SCL_H GPIO_SetBits(GPIOB, GPIO_Pin_6)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SCL_L GPIO_ResetBits(GPIOB, GPIO_Pin_6)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SDA_H GPIO_SetBits(GPIOB, GPIO_Pin_7)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SDA_L GPIO_ResetBits(GPIOB, GPIO_Pin_7)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Read_SDA GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7)</span></span><br></pre></td></tr></table></figure>
+<h4 id="delay"><a class="markdownIt-Anchor" href="#delay"></a> Delay</h4>
+<p><img src="https://s2.loli.net/2025/05/09/gpyum8SCRIqJYkt.png" alt="" /></p>
+<h4 id="初始化-start和stop信号"><a class="markdownIt-Anchor" href="#初始化-start和stop信号"></a> 初始化、START和STOP信号</h4>
+<ol>
+<li>
+<p>开启<strong>时钟</strong></p>
+</li>
+<li>
+<p>配置<strong>GPIO</strong>（PB6，PB7，开漏模式）</p>
+</li>
+<li>
+<p>配置<strong>SCL和SDA</strong>两条线</p>
+</li>
+</ol>
+<p><strong>起始信号</strong>：SCL高电平，SDA从高电平变为低电平</p>
+<p><strong>停止信号</strong>：SCL高电平，SDA从低电平变为高电平</p>
+<p><strong>数据信号</strong>：SCL高电平，SDA保持不变；<strong>SCL低电平，SDA电平可以修改</strong></p>
+<p><strong>应答信号</strong>：SCL高电平，SDA<strong>低电平</strong>，<strong>应答</strong>，否则，非应答</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 初始化 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">I2C1_Init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE); <span class="comment">// 使能I2C1和GPIOB时钟</span></span><br><span class="line">    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);</span><br><span class="line">    </span><br><span class="line">    GPIO_InitTypeDef GPIO_StructInit;					 <span class="comment">// 初始化SCL引脚(PB6)</span></span><br><span class="line">    GPIO_StructInit.GPIO_Pin = GPIO_Pin_6;</span><br><span class="line">    GPIO_StructInit.GPIO_Mode = GPIO_Mode_Out_OD; 		 <span class="comment">// 开漏输出模式</span></span><br><span class="line">    GPIO_StructInit.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">    GPIO_Init(GPIOB, &amp;GPIO_StructInit);</span><br><span class="line"></span><br><span class="line">    GPIO_StructInit.GPIO_Pin = GPIO_Pin_7;				 <span class="comment">// 初始化SDA引脚(PB7)</span></span><br><span class="line">    GPIO_StructInit.GPIO_Mode = GPIO_Mode_Out_OD; 		 <span class="comment">// 开漏输出模式</span></span><br><span class="line">    GPIO_StructInit.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">    GPIO_Init(GPIOB, &amp;GPIO_StructInit);</span><br><span class="line"></span><br><span class="line">    SCL_H;												 <span class="comment">// 初始状态拉高总线</span></span><br><span class="line">    SDA_H;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Start信号 */</span></span><br><span class="line"><span class="comment">// 一旦 Start 产生后，数据传输必须在 SCL 为低时开始。</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">I2C_Start</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    SCL_H;			<span class="comment">//	SCL高，锁数据</span></span><br><span class="line">    SDA_H;			<span class="comment">//	SDA高</span></span><br><span class="line">    Delay_us(<span class="number">2</span>);</span><br><span class="line">    SDA_L;			<span class="comment">//	SDA低</span></span><br><span class="line">    SCL_L;			<span class="comment">//	SCL低</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* End信号 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">I2C_Stop</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    SCL_L;			<span class="comment">//	SCL低</span></span><br><span class="line">    SDA_L;			<span class="comment">//	SDA低</span></span><br><span class="line">    SCL_H;			<span class="comment">//	SCL高，锁数据</span></span><br><span class="line">    SDA_H;			<span class="comment">//	SDA高，等待下一次开始</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="发送一个字节"><a class="markdownIt-Anchor" href="#发送一个字节"></a> 发送一个字节</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">I2C_SendByte</span><span class="params">(<span class="type">uint8_t</span> tx)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int8_t</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">7</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        SCL_L;             				<span class="comment">// SCL低电平</span></span><br><span class="line">        <span class="keyword">if</span> (tx &amp; (<span class="number">1</span> &lt;&lt; i)) 				<span class="comment">// 移位操作</span></span><br><span class="line">            SDA_H;         				<span class="comment">// 值为1，SDA高电平</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            SDA_L; 						<span class="comment">// 值为0，SDA低电平</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">        SCL_H; 							<span class="comment">// SCL高电平，锁数据</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    SCL_L; 								<span class="comment">// SCL低电平</span></span><br><span class="line">    SDA_H; 								<span class="comment">// SDA高电平，表示NACK,发送就一次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="读取一个字节"><a class="markdownIt-Anchor" href="#读取一个字节"></a> 读取一个字节</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint8_t</span> <span class="title function_">I2C_ReadByte</span><span class="params">(<span class="type">uint8_t</span> ack)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int8_t</span> i;</span><br><span class="line">    <span class="type">uint8_t</span> rx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">7</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        SCL_L; 					<span class="comment">// 最9位ACK结束，防止被误认为是其他信号，SCL拉低</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">        SCL_H;              	<span class="comment">// SCL高电平，准备读SDA数据</span></span><br><span class="line">        <span class="keyword">if</span> (Read_SDA)       	</span><br><span class="line">            rx |= (<span class="number">1</span> &lt;&lt; i); 	<span class="comment">// rx最初0000 0000，位运算，1写入，0不变</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第9个时钟周期，更改ACK/NACK</span></span><br><span class="line">    SCL_L; 						<span class="comment">// SCL高电平，可以变化SDA</span></span><br><span class="line">    <span class="keyword">if</span> (ack)</span><br><span class="line">    &#123;</span><br><span class="line">        SDA_L; 					<span class="comment">// SDA低电平，表示ACK</span></span><br><span class="line">        SCL_H; 					<span class="comment">// SCL高电平，锁数据</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">        SCL_L; 					<span class="comment">// 为了下一周期，需要变化SDA为高电平</span></span><br><span class="line">        SDA_H; 					<span class="comment">// SDA高电平，以防下一次Start</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        SDA_H; 					<span class="comment">// SDA高电平，表示NACK</span></span><br><span class="line">        SCL_H; 					<span class="comment">// SCL高电平，锁数据</span></span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">        SCL_L; 					<span class="comment">// 为了下一周期，需要变化SDA为高电平</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="等待从机ack"><a class="markdownIt-Anchor" href="#等待从机ack"></a> 等待从机ACK</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint8_t</span> <span class="title function_">I2C_Wait_ACK</span><span class="params">(<span class="type">int16_t</span> timeout)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        timeout--;</span><br><span class="line">        Delay_us(<span class="number">2</span>);</span><br><span class="line">    &#125; <span class="keyword">while</span> ((Read_SDA) &amp;&amp; (timeout &gt;= <span class="number">0</span>)); 		<span class="comment">// SDA低电平表示ACK</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (timeout &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; 									<span class="comment">// 超时无应答</span></span><br><span class="line"></span><br><span class="line">    SCL_H;											<span class="comment">//拉高SCL，锁ACK/NACK</span></span><br><span class="line">    Delay_us(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> (Read_SDA != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; 									<span class="comment">// 信号不稳定</span></span><br><span class="line"></span><br><span class="line">    SCL_L;											<span class="comment">//拉低，和Start那里一样</span></span><br><span class="line">    Delay_us(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; 										<span class="comment">// 应答正常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="at24c02-e2proms"><a class="markdownIt-Anchor" href="#at24c02-e2proms"></a> AT24C02-E2PROMS</h3>
+<p><strong>I2C通信</strong>，设备地址：1 0 10  E2 E1 E0 R/非W；读R=1，0XA1；写W=0;0XA0，<strong>按字节写入</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> AT24C02_WADDR 0xA0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> AT24C02_RADDR 0xA1</span></span><br></pre></td></tr></table></figure>
+<p>AT24C02共<strong>16页</strong>，<strong>一页16字节</strong>，共256字节；<strong>存在回卷问题</strong></p>
+<h4 id="写入"><a class="markdownIt-Anchor" href="#写入"></a> 写入</h4>
+<img src="https://s2.loli.net/2025/05/09/4LQS8qFYM3cmdbp.png" style="zoom:80%;" />
+<h5 id="byte-write"><a class="markdownIt-Anchor" href="#byte-write"></a> Byte Write</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// addr:写入的EEPROM内存地址</span></span><br><span class="line"><span class="comment">// wdata:写入的数据</span></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">AT24C02_WriteByte</span><span class="params">(<span class="type">uint8_t</span> addr, <span class="type">uint8_t</span> wdata)</span></span><br><span class="line">&#123;</span><br><span class="line">    I2C_Start();</span><br><span class="line">    I2C_SendByte(AT24C02_WADDR); 			<span class="comment">// 发送写入信号</span></span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)  			<span class="comment">// 100为等待应答的信号</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;                			<span class="comment">// 芯片无应答</span></span><br><span class="line"></span><br><span class="line">    I2C_SendByte(addr);</span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; 							<span class="comment">// 写入地址失败</span></span><br><span class="line"></span><br><span class="line">    I2C_SendByte(wdata);</span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; 							<span class="comment">// 写入数据失败</span></span><br><span class="line">    I2C_Stop();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; 								<span class="comment">// 成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="page-write"><a class="markdownIt-Anchor" href="#page-write"></a> Page Write</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// addr：写入地址</span></span><br><span class="line"><span class="comment">// wdata：写入数据</span></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">AT24C02_WritePage</span><span class="params">(<span class="type">uint8_t</span> addr, <span class="type">uint8_t</span> *wdata)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> i;</span><br><span class="line">    I2C_Start();</span><br><span class="line">    I2C_SendByte(AT24C02_WADDR); 			<span class="comment">// 发送写入信号</span></span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; 							<span class="comment">// 芯片无应答</span></span><br><span class="line"></span><br><span class="line">    I2C_SendByte(addr);</span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; 							<span class="comment">// 写入地址失败</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        I2C_SendByte(wdata[i]);</span><br><span class="line">        <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">3</span> + i; 					<span class="comment">// 写入数据失败</span></span><br><span class="line">    &#125;</span><br><span class="line">    I2C_Stop();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; 								<span class="comment">// 成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="读取"><a class="markdownIt-Anchor" href="#读取"></a> 读取</h4>
+<img src="https://s2.loli.net/2025/05/09/74nb8woeaplzTcr.png" style="zoom:67%;" />
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// addr：读取的起始地址</span></span><br><span class="line"><span class="comment">// rdata：指向存储读取数据的缓冲区的指针</span></span><br><span class="line"><span class="comment">// datalen:读取数据长度</span></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">AT24C02_ReadData</span><span class="params">(<span class="type">uint8_t</span> addr, <span class="type">uint8_t</span> *rdata, <span class="type">uint16_t</span> datalen)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> i;</span><br><span class="line">    I2C_Start();</span><br><span class="line">    I2C_SendByte(AT24C02_WADDR); 			<span class="comment">// 发送写入信号</span></span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; 							<span class="comment">// 芯片无应答</span></span><br><span class="line"></span><br><span class="line">    I2C_SendByte(addr); 					<span class="comment">// 写入读取地址</span></span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; 							<span class="comment">// 写入读取地址失败</span></span><br><span class="line"></span><br><span class="line">    I2C_Start();</span><br><span class="line">    I2C_SendByte(AT24C02_RADDR); 			<span class="comment">// 发送读取信号</span></span><br><span class="line">    <span class="keyword">if</span> (I2C_Wait_ACK(<span class="number">100</span>) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>; 							<span class="comment">// 切换读模式时芯片无应答</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; datalen - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rdata[i] = I2C_ReadByte(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    rdata[datalen - <span class="number">1</span>] = I2C_ReadByte(<span class="number">0</span>); 	<span class="comment">// 读取最后一个字节时不发送ACK信号</span></span><br><span class="line">    I2C_Stop();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; 								<span class="comment">// 成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="xmodem协议"><a class="markdownIt-Anchor" href="#xmodem协议"></a> Xmodem协议</h1>
+<h2 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Byte1</th>
+<th style="text-align:center">Byte2</th>
+<th style="text-align:center">Byte3</th>
+<th style="text-align:center">Byte4 ~ Byte131</th>
+<th style="text-align:center">Byte132 ~ Byte133</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Start of Header(SOH)</td>
+<td style="text-align:center">Packet Number</td>
+<td style="text-align:center">~(Packet Number)</td>
+<td style="text-align:center">Pcacket Data</td>
+<td style="text-align:center">CRC16 Check</td>
+</tr>
+</tbody>
+</table>
+<h2 id="指令"><a class="markdownIt-Anchor" href="#指令"></a> 指令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">位</th>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SOH</td>
+<td style="text-align:center">0x01</td>
+<td style="text-align:center">128字节数据包帧头</td>
+</tr>
+<tr>
+<td style="text-align:center">STX</td>
+<td style="text-align:center">0x02</td>
+<td style="text-align:center">1024字节数据包帧头</td>
+</tr>
+<tr>
+<td style="text-align:center">EOT</td>
+<td style="text-align:center">0x04</td>
+<td style="text-align:center">结束传输</td>
+</tr>
+<tr>
+<td style="text-align:center">ACK</td>
+<td style="text-align:center">0x06</td>
+<td style="text-align:center">正确应答</td>
+</tr>
+<tr>
+<td style="text-align:center">NAK</td>
+<td style="text-align:center">0x15</td>
+<td style="text-align:center">错误应答，重传数据</td>
+</tr>
+<tr>
+<td style="text-align:center">CAN</td>
+<td style="text-align:center">0x18</td>
+<td style="text-align:center">取消传输</td>
+</tr>
+<tr>
+<td style="text-align:center">CTRLZ</td>
+<td style="text-align:center">0x1A</td>
+<td style="text-align:center">数据填充</td>
+</tr>
+<tr>
+<td style="text-align:center">HSC</td>
+<td style="text-align:center">0x43</td>
+<td style="text-align:center">握手</td>
+</tr>
+</tbody>
+</table>
+<h2 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">‘C’											<span class="comment">// 发送一个C等待数据包</span></span><br><span class="line">											<span class="comment">// (3s一次，等待应答)</span></span><br><span class="line">SOH | <span class="number">0x01</span> | <span class="number">0xFE</span> | Data[<span class="number">0</span>~<span class="number">127</span>] | CRC16		<span class="comment">// 第一条指令</span></span><br><span class="line">ACK（正确应答）</span><br><span class="line">SOH | <span class="number">0x02</span> | <span class="number">0xFD</span> | Data[<span class="number">0</span>~<span class="number">127</span>] | CRC16		<span class="comment">// 第二条指令</span></span><br><span class="line">NAK（错误应答）</span><br><span class="line">SOH | <span class="number">0x02</span> | <span class="number">0xFD</span> | Data[<span class="number">0</span>~<span class="number">127</span>] | CRC16		<span class="comment">// 第二条指令</span></span><br><span class="line">ACK</span><br><span class="line">SOH | <span class="number">0x03</span> | <span class="number">0xFC</span> | Data[<span class="number">0</span>~<span class="number">127</span>] | CRC16s	<span class="comment">// 第三条指令</span></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<h2 id="crc16程序"><a class="markdownIt-Anchor" href="#crc16程序"></a> CRC16程序</h2>
+<p>STM32支持CRC32，不支持CRC16，需要自己写</p>
+<p>多项式p(x) = <strong>x^16 + x^12 + x^5 + 1</strong>，借助多项式将输入的数值进行<strong>模2除法</strong>，在C语言中是进行<strong>异或运算</strong>^。</p>
+<p><img src="https://s2.loli.net/2025/05/09/V1B2YkysPQZipdg.png" alt="" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文字说明</span></span><br><span class="line">寄存器清零</span><br><span class="line">数据最右边补齐W位<span class="number">0</span> 							<span class="comment">// W是CRC校验值的位数</span></span><br><span class="line">when(还有数据)&#123;</span><br><span class="line">    左移寄存器<span class="number">1</span>位，读取数据的下一位到寄存器的bit <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> (左移寄存器时出现溢出)&#123;</span><br><span class="line">        寄存器 ^= poly;    				<span class="comment">// 这里的poly=0011，按照上面的例子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">寄存器的值就是校验值</span><br><span class="line">    </span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">Xmodem_CRC16</span><span class="params">(<span class="type">uint8_t</span> *data, <span class="type">uint16_t</span> datalen)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint8_t</span> i;</span><br><span class="line">	<span class="type">uint16_t</span> Crcinit = <span class="number">0x0000</span>; 	<span class="comment">// 初始化为0</span></span><br><span class="line">	<span class="type">uint16_t</span> Poly = <span class="number">0x1021</span>;	   	<span class="comment">// XMODEM 使用的多项式：x^16 + x^12 + x^5 + 1</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (datalen--)</span><br><span class="line">	&#123;</span><br><span class="line">		Crcinit = (*data &lt;&lt; <span class="number">8</span>) ^ Crcinit;</span><br><span class="line">		<span class="comment">// 左移八位是因为CRC是高位优先计算，异或是为了改变当前CRC的值</span></span><br><span class="line">		<span class="comment">// 异或将新数据“混合”进当前的CRC值，使CRC计算能覆盖所有输入数据</span></span><br><span class="line">		<span class="comment">// 若直接赋值会丢失之前计算的CRC值</span></span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) <span class="comment">// 每个bit都要影响CRC计算，所以必须循环 8 次</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (Crcinit &amp; <span class="number">0x8000</span>) 	<span class="comment">// 检查最高位是否为1</span></span><br><span class="line">				Crcinit = (Crcinit &lt;&lt; <span class="number">1</span>) ^ Poly;</span><br><span class="line">			<span class="comment">// 如果最高位是1，说明当前的CRC值已经达到或超过多项式的最高位(Poly最高位为0x1000)</span></span><br><span class="line">			<span class="comment">// 必须减去多项(即^Poly)否则CRC值会越来越大</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				Crcinit = (Crcinit &lt;&lt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		data++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Crcinit;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/havenxie/stm32-iap-uart-boot">havenxie/stm32-iap-uart-boot: STM32 IAP(UART模式)的BOOT部分</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SatHeBEVG/?spm_id_from=333.1007.top_right_bar_window_default_collection.content.click">【手把手教程 4G通信物联网 OTA远程升级 BootLoader程序设计】GD32F103C8T6单片机【上篇章】_哔哩哔哩_bilibili</a></p>
 
       </div>
     </div>
@@ -508,9 +726,9 @@ header .header__right .dropdown-menus .dropdown-menu {
           
           
               
-                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
-              
                 <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
               
           
     </div>
