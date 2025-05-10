@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 7.3k 字
+        共 7.4k 字
       </span>
     
     
@@ -497,9 +497,11 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>本学习笔记主要包括<strong>STM32F103C8T6</strong>下的Bootloader+IAP</p>
 <p><strong>Bootloader</strong>：用于更新APP的程序</p>
 <p><strong>IAP</strong>：在设备运行时，由Bootloader引导对自身程序擦写</p>
-<p><strong>OTA</strong>：无线通信将新的固件下载到设备中（On the Air）</p>
+<p><strong>OTA</strong>：无线通信将新的固件下载到设备中（Over The Air）</p>
 <p><strong>使用的APP数据，OTA标志位，各固件大小，版本号存储在AT24C02</strong></p>
 <p><strong>多个备份APP数据存储在W25Q64</strong></p>
+<p>Q：明明操作了AT24C02和W25Q64，为什么还要操作单片机上的SRAM？</p>
+<p>A：AT24C02和Flash读写太慢，跟不上CPU的速度，在CPU和它们中间加个存储区域作为中转。</p>
 <h2 id="整体流程图"><a class="markdownIt-Anchor" href="#整体流程图"></a> 整体流程图</h2>
 <p><img src="https://s2.loli.net/2025/05/10/ADCErlteIk9JBR4.png" alt="" /></p>
 <h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
