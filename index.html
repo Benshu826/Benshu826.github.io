@@ -476,14 +476,14 @@ header .header__right .dropdown-menus .dropdown-menu {
               
                 
               
-              Bootloader+IAP
-null简要说明
+               Bootloader+IAP
+ 简要说明
 本学习笔记主要包括STM32F103C8T6下的Bootloader+IAP
 Bootloader：用于更新APP的程序
 IAP：在设备运行时，由Bootloader引导对自身程序擦写
 OTA：无线通信将新的固件下载到设备中（On the Air）
 使用的APP数据，OTA标志位，各固件大小，版本号存储在AT24C02
-多个备份APP数据存储在W25
+多个备份APP数据存储在W25Q6
           </p>
           <div class="index-btm post-metas">
             
@@ -520,13 +520,13 @@ OTA：无线通信将新的固件下载到设备中（On the Air）
                 
               
               这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。
-调试BUG
-nullSTM32芯片被锁
+ 调试BUG
+ STM32芯片被锁
 有一段时间没用STM32芯片，发现ST-LINK读不到，毫无头绪。
 解决办法：使用软件STM32 ST-LINK Utility，点击Connect + 按住STM32上芯片复位键才能连接，连接后将程序给清除掉，成功解决。
-null串口通信出现乱码
+ 串口通信出现乱码
 编码格式、波特率、主频都可能是问题原因；
-
+如果输入英
           </p>
           <div class="index-btm post-metas">
             
@@ -562,7 +562,7 @@ null串口通信出现乱码
               
                 
               
-              实物
+               实物
 
           </p>
           <div class="index-btm post-metas">
@@ -600,7 +600,7 @@ null串口通信出现乱码
                 
               
               主要学习立创ESP32S3 N16R8的基本配置以及其各部件组成
-组成结构
+ 组成结构
 
 
 
@@ -615,7 +615,7 @@ null串口通信出现乱码
 
 模组
 ESP32-S3-WROOM-1-N16R8
-搭载 Xtensa® 32 位 LX7 双核处理器，主频高达 240 MHz，内置SRAM 512kB，外置PSRAM 8MB，外置FLASH 16MB，2.4 GHz Wi-Fi (802.11 b/g/n) 40MHz带宽，Blue
+搭载 Xtensa® 32 位 LX7 双核处理器，主频高达 240 MHz，内置SRAM 512kB，外置PSRAM 8MB，外置FLASH 16MB，2.4 GHz Wi-Fi (802.11 b/g/n) 40MHz带宽，Blu
           </p>
           <div class="index-btm post-metas">
             
@@ -651,12 +651,12 @@ ESP32-S3-WROOM-1-N16R8
               
                 
               
-              颜色、图片、文字、图标
-null设置颜色
+               颜色、图片、文字、图标
+ 设置颜色
 
 Material color palette — Vuetify
 
-null设置图片
+ 设置图片
 
 借助Image2LCD软件，按照如下图配置
 
@@ -664,13 +664,15 @@ null设置图片
 
 Image Converter — LVGL
 
-null设置文字
+ 设置文字
 
 
 阿里巴巴普惠体系列打包免费字体下载 - 字体打包免费下载尽在字体家
 
 
-字体转换器 – 免费
+字体转换器 – 免费在线转换字体
+
+
           </p>
           <div class="index-btm post-metas">
             
@@ -707,8 +709,8 @@ null设置文字
                 
               
               主要学习韦东山FreeRTOS的操作。
-FreeRTOS概述与体验
-nullFreeRTOS主要内容
+ FreeRTOS概述与体验
+ FreeRTOS主要内容
 
 
 
@@ -739,11 +741,11 @@ event_groups.c
 
 
 
-null数据类型
+ 数据类型
 
 TickType_t：
 
-Free
+FreeRTOS配
           </p>
           <div class="index-btm post-metas">
             
@@ -780,14 +782,14 @@ Free
                 
               
               主要实现基于STM32F103C8T6的HAL库编程PID平衡车项目。
-null实物
+ 实物
 
 
-nullSTM32 CubeMX配置
+ STM32 CubeMX配置
 
 使用外部高速时钟8MHz，通过PLL倍频到72MHz。
 RCC----&gt;HSE、LSE = Crystal/Ceramic Resonator（晶振）----&gt;HCLK = 72MHz
-null点亮LED
+ 点亮LED
 
 
 
@@ -799,7 +801,8 @@ HAL配置
 
 
 LED
-PC1
+PC13
+GPIO_OU
           </p>
           <div class="index-btm post-metas">
             
@@ -841,9 +844,9 @@ Q：哈希体系和冯洛伊曼体系区别：前者是指令集和数据存储�
 STM32是小端存储，高地址的数据在低字节上
 堆的地址向上，栈的地址向下
 32位处理器，一个指针4字节；64位处理器，一个指针8字节
-nullSTM32F103C8T6基本配置
-null内容
-
+ STM32F103C8T6基本配置
+ 内容
+STM32最
           </p>
           <div class="index-btm post-metas">
             
@@ -879,15 +882,15 @@ null内容
               
                 
               
-              null这个人太懒了，根本就妹写正文呀！还是来看看可爱猫猫吧！
+               这个人太懒了，根本就妹写正文呀！还是来看看可爱猫猫吧！
 
-null学习参考
+ 学习参考
 
 搭建1：hexo史上最全搭建教程-CSDN博客
 搭建2：使用Hexo在GitHub Pages上搭建部署免费的个人博客网站（下：Hexo部署）——最详细全面解读教程（没有之一） - 简书
 hexo主题：Themes | Hexo
 处理公式问题：Hexo折腾系列（六）数学公式渲染优化 - 江风引雨の小po站
-图床工
+图床工具参考1：H
           </p>
           <div class="index-btm post-metas">
             
@@ -923,16 +926,16 @@ hexo主题：Themes | Hexo
               
                 
               
-              Markdown基础用法
-null官网网址：http://www.typora.io/
+               Markdown基础用法
+ 官网网址：http://www.typora.io/
 可以下载排字模板和编辑主题。
 使用Typora，通过Ctrl+/即可进入Markdown源代码编辑模式。
-null标题
+ 标题
 #+空格+标题名称-----------一级标题
 ##+空格+标题名称---------二级标题
 ###+空格+标题名称--------三级标题
 ####+空格+标题名称------四级标题
-
+#####
           </p>
           <div class="index-btm post-metas">
             
