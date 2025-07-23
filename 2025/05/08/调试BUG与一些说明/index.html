@@ -1,94 +1,315 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>Ben Shu &#39;s Blog | </title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-<link rel="stylesheet" href="/css/reset.css">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/main.css">
 
     
-<link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+
+
 
     
-<link rel="stylesheet" href="/css/markdown.css">
+    
+          
 
     
-<link rel="stylesheet" href="/css/fonts.css">
-
+    
+    
+    
+    <title>
+        
+            调试BUG与一些说明 | Ben Shu &#39;s Blog
+        
+    </title>
+    
+    
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
-    <body>
-        <div class="paper">
-            <div class="paper-main">
-                
-                    <div class="post-header">
-    <a class="logo" href="/">Ben Shu &#39;s Blog</a>
-    <a class="go-home" href="/">
-        <svg width="8" height="14" viewBox="0 0 8 14">
-            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+<body>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/image/pic.jpg">     
+        </v-avatar> 
     </a>
-</div>
-                
-                <div class="post-main">
-
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                Archives
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                About
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
     
-    
-        <div class="post-main-title">
-            调试BUG与一些说明
-        </div>
-        <div class="post-meta">
-            2025-05-08
-        </div>
-        <div class="post-md">
-            <p>这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。</p>
-<h1 id="调试bug"><a class="markdownIt-Anchor" href="#调试bug"></a> 调试BUG</h1>
-<h2 id="stm32芯片被锁"><a class="markdownIt-Anchor" href="#stm32芯片被锁"></a> STM32芯片被锁</h2>
-<p>有一段时间没用STM32芯片，发现<strong>ST-LINK读不到</strong>，毫无头绪。</p>
-<p><strong>解决办法</strong>：使用软件<strong>STM32 ST-LINK Utility</strong>，<strong>点击Connect + 按住STM32上芯片复位键</strong>才能连接，连接后将程序给清除掉，成功解决。</p>
-<h2 id="串口通信出现乱码"><a class="markdownIt-Anchor" href="#串口通信出现乱码"></a> 串口通信出现乱码</h2>
-<p>编码格式、波特率、主频都可能是问题原因；</p>
-<p><strong>如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。</strong></p>
-<h2 id="esp32的新版i2c驱动不了摄像头"><a class="markdownIt-Anchor" href="#esp32的新版i2c驱动不了摄像头"></a> ESP32的新版I2C驱动不了摄像头</h2>
-<p>这个问题来自于<strong>旧I2C不支持新版摄像头驱动</strong>，一直报错，ESP IDF 5.4<strong>降低</strong>到ESP IDF 5.2即可。</p>
-<p>更新过驱动，也实现了摄像头，但是配合其他外设也需要修改对应的旧版I2C（液晶屏触摸等），暂不操作。</p>
-<h1 id="一些说明"><a class="markdownIt-Anchor" href="#一些说明"></a> 一些说明</h1>
-<ul>
-<li><code>#pragma once</code>，表示本头文件只可以包含一次，相当于 <code>#ifndef #define #endif</code></li>
-</ul>
-<h2 id="为什么编码器要用short来表示16位"><a class="markdownIt-Anchor" href="#为什么编码器要用short来表示16位"></a> 为什么编码器要用short来表示16位</h2>
-<p>STM32平衡车项目中处理编码器的计数使用short；</p>
-<p><strong>计算机存的是补码</strong>，short字节范围：-32768~ 32767，负数会变成32768 - n</p>
-<p><strong>正数的原码 = 反码 = 补码</strong></p>
-<p><strong>负数的反码是原码除了符号位其他位取反，补码是反码加1</strong></p>
-
-        </div>
-
-    
-
-</div>
-                <div class="footer">
-    <span>Copyright © 2022 Ben Shu &#39;s Blog</span>
-    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這李設計</a></span>
-</div>
-
-
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
-
-
-<script src="/js/highlight.min.js"></script>
-
-
-<script src="/js/highlightjs-line-numbers.js"></script>
-
-
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
-
+        <div class="post-toc">
+            <a href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/" class="toc-header">Table of Contents</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E8%AF%95BUG"><span class="toc-number">1.</span> <span class="toc-text">调试BUG</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STM32%E8%8A%AF%E7%89%87%E8%A2%AB%E9%94%81"><span class="toc-number">1.1.</span> <span class="toc-text">STM32芯片被锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">串口通信出现乱码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESP32%E7%9A%84%E6%96%B0%E7%89%88I2C%E9%A9%B1%E5%8A%A8%E4%B8%8D%E4%BA%86%E6%91%84%E5%83%8F%E5%A4%B4"><span class="toc-number">1.3.</span> <span class="toc-text">ESP32的新版I2C驱动不了摄像头</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">一些说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BC%96%E7%A0%81%E5%99%A8%E8%A6%81%E7%94%A8short%E6%9D%A5%E8%A1%A8%E7%A4%BA16%E4%BD%8D"><span class="toc-number">2.1.</span> <span class="toc-text">为什么编码器要用short来表示16位</span></a></li></ol></li></ol>
             </div>
         </div>
-    </body>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2021 - 2025 
+                Big Ben
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/" rel="home">Ben Shu &#39;s Blog</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/">调试BUG与一些说明</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      Posted on:&nbsp;2025-05-08
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      Edited on:&nbsp;2025-05-09
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      In:&nbsp;<a class="category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      Views:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
+  </div>
+</div>
+
+    
+    
+    
+    
+    <div class="post-content typo">
+        <p>这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。</p>
+<h1 id="调试BUG"><a href="#调试BUG" class="headerlink" title="调试BUG"></a>调试BUG</h1><h2 id="STM32芯片被锁"><a href="#STM32芯片被锁" class="headerlink" title="STM32芯片被锁"></a>STM32芯片被锁</h2><p>有一段时间没用STM32芯片，发现<strong>ST-LINK读不到</strong>，毫无头绪。</p>
+<p><strong>解决办法</strong>：使用软件<strong>STM32 ST-LINK Utility</strong>，<strong>点击Connect + 按住STM32上芯片复位键</strong>才能连接，连接后将程序给清除掉，成功解决。</p>
+<h2 id="串口通信出现乱码"><a href="#串口通信出现乱码" class="headerlink" title="串口通信出现乱码"></a>串口通信出现乱码</h2><p>编码格式、波特率、主频都可能是问题原因；</p>
+<p><strong>如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。</strong></p>
+<h2 id="ESP32的新版I2C驱动不了摄像头"><a href="#ESP32的新版I2C驱动不了摄像头" class="headerlink" title="ESP32的新版I2C驱动不了摄像头"></a>ESP32的新版I2C驱动不了摄像头</h2><p>这个问题来自于<strong>旧I2C不支持新版摄像头驱动</strong>，一直报错，ESP IDF 5.4<strong>降低</strong>到ESP IDF 5.2即可。</p>
+<p>更新过驱动，也实现了摄像头，但是配合其他外设也需要修改对应的旧版I2C（液晶屏触摸等），暂不操作。</p>
+<h1 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a>一些说明</h1><ul>
+<li><code>#pragma once</code>，表示本头文件只可以包含一次，相当于 <code>#ifndef #define #endif</code></li>
+</ul>
+<h2 id="为什么编码器要用short来表示16位"><a href="#为什么编码器要用short来表示16位" class="headerlink" title="为什么编码器要用short来表示16位"></a>为什么编码器要用short来表示16位</h2><p>STM32平衡车项目中处理编码器的计数使用short；</p>
+<p><strong>计算机存的是补码</strong>，short字节范围：-32768~ 32767，负数会变成32768 - n</p>
+<p><strong>正数的原码 &#x3D; 反码 &#x3D; 补码</strong></p>
+<p><strong>负数的反码是原码除了符号位其他位取反，补码是反码加1</strong></p>
+
+    </div>
+    <!--文末结束语-->
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
+        
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                    Bootloader学习笔记
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/">      
+                    基于ESP32S3的智能终端系统
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2021 - 2025 Big Ben</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+
+</body>
 </html>

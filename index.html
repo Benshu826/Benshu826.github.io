@@ -1,123 +1,550 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>Ben Shu &#39;s Blog | </title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-<link rel="stylesheet" href="/css/reset.css">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/main.css">
 
     
-<link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+
+
 
     
-<link rel="stylesheet" href="/css/markdown.css">
+    
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
 
     
-<link rel="stylesheet" href="/css/fonts.css">
-
+    
+    
+    
+    <title>
+          
+            Ben Shu &#39;s Blog
+        
+    </title>
+    
+    
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
-    <body>
-        <div class="paper">
-            <div class="paper-main">
-                
-                    <div class="header">
-    <a class="logo" href="/">Ben Shu &#39;s Blog</a>
-    <ul class="nav">
+<body>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/image/pic.jpg">     
+        </v-avatar> 
+    </a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
         
-        <li><a href="/">首页</a></li>
+            
+            <v-list-item href="/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                Archives
+            </v-list-item-content>
+            </v-list-item>
         
-        <li><a href="/archives">归档</a></li>
+            
+            <v-list-item href="/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                About
+            </v-list-item-content>
+            </v-list-item>
         
-        <li><a href="/about">关于</a></li>
-        
-    </ul>
-</div>
-                
-                <div class="post-list">
+    </v-list>
+    <v-divider></v-divider>
     
-    <div class="post">
-        <a class="post-title" href="/2025/07/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/">CAN通信学习</a>
-        <div class="post-except">
-             CAN通信笔记
-CAN（Controller Area Network Bus），控制局域网总线。
- 基本特征
+        <v-list id="sub-menu" class="font-weight-medium" dense>
+            
+                
+                    <v-list-item href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>嵌入式</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/categories/Markdown/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>Markdown</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/categories/%E9%A1%B9%E7%9B%AE/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="2" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>项目</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/categories/%E7%BD%91%E9%A1%B5/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="2" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>网页</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+        </v-list>    
+    
 
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2021 - 2025 
+                Big Ben
+            </span>
+        </div>
+    </div>
+</div>
 
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/" rel="home">Ben Shu &#39;s Blog</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 index-card">
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-07-12
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/CAN%E9%80%9A%E4%BF%A1/ >CAN通信</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/07/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/">CAN通信学习</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          CAN通信笔记CAN（Controller Area Network Bus），控制局域网总线。
+基本特征
 两根通信线（CAN_H、CAN_L），无需共地
-
 
 差分信号通信，抗干扰能力强
 
-
-高速CAN（ISO11898）：125k~1Mbps，&lt;40m
-
-
-低速CAN（ISO11519）：10k~125kbps，&lt;1km
-
-
-异步，无需时钟线，通信速率由双方协定
-
-
-半双工，可挂载多设备，多设备同时发送通过仲裁判断先后
-
-
-11/29位报文ID，用于区
-            <a class="read-more" href="/2025/07/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/"> ... </a>
-        </div>
-        <div class="post-date">2025.07.12</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Bootloader学习笔记</a>
-        <div class="post-except">
-             Bootloader+IAP
- 简要说明
-本学习笔记主要包括STM32F103C8T6下的Bootloader+IAP
+高速C...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/07/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-05-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/STM32/ >STM32</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Bootloader学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          Bootloader+IAP简要说明本学习笔记主要包括STM32F103C8T6下的Bootloader+IAP
 Bootloader：用于更新APP的程序
-IAP：在设备运行时，由Bootloader引导对自身程序擦写
-OTA：无线通信将新的固件下载到设备中（Over The Air）
-使用的APP数据，OTA标志位，各固件大小，版本号存储在AT24C02
-多个备份APP数据存储在W25Q64
-Q：明明操作了AT24C02和W25Q64，为什么还要操作单片机上的SR
-            <a class="read-more" href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"> ... </a>
-        </div>
-        <div class="post-date">2025.05.10</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/">调试BUG与一些说明</a>
-        <div class="post-except">
-            这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。
- 调试BUG
- STM32芯片被锁
-有一段时间没用STM32芯片，发现ST-LINK读不到，毫无头绪。
-解决办法：使用软件STM32 ST-LINK Utility，点击Connect + 按住STM32上芯片复位键才能连接，连接后将程序给清除掉，成功解决。
- 串口通信出现乱码
-编码格式、波特率、主频都可能是问题原因；
-如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。
- ESP32的新版I
-            <a class="read-more" href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/"> ... </a>
-        </div>
-        <div class="post-date">2025.05.08</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/">基于ESP32S3的智能终端系统</a>
-        <div class="post-except">
-             实物
+IAP：在设备运行时，由Bootlo...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-05-08
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E8%B0%83%E8%AF%95/ >调试</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/">调试BUG与一些说明</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。
+调试BUGSTM32芯片被锁有一段时间没用STM32芯片，发现ST-LINK读不到，毫无头绪。
+解决办法：使用软件STM32 ...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-02-22
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E9%A1%B9%E7%9B%AE/ >项目</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/ESP32/ >ESP32</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/LVGL/ >LVGL</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E7%89%A9%E8%81%94%E7%BD%91/ >物联网</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E9%A1%B9%E7%9B%AE/">项目></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/">基于ESP32S3的智能终端系统</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          实物暂时没空，后续整理。
 
-            <a class="read-more" href="/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/"> ... </a>
-        </div>
-        <div class="post-date">2025.02.22</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2025/01/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">ESP32S3学习笔记</a>
-        <div class="post-except">
-            主要学习立创ESP32S3 N16R8的基本配置以及其各部件组成
- 组成结构
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-01-12
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/ESP/ >ESP</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/01/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">ESP32S3学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          主要学习立创ESP32S3 N16R8的基本配置以及其各部件组成
+组成结构
+
 
 
 
@@ -129,64 +556,111 @@ Q：明明操作了AT24C02和W25Q64，为什么还要操作单片机上的SR
 
 
 
-
 模组
 ESP32-S3-WROOM-1-N16R8
-搭载 Xtensa® 32 位 LX7 双核处理器，主频高达 240 MHz，内置SRAM 512kB，外置PSRAM 8MB，外置FLASH 16MB，2.4 GHz Wi-Fi (802.11 b/g/n) 40MHz带宽，Bluetooth 5 (LE) 和 Bluetooth Mesh，集成AI向量指令，
-            <a class="read-more" href="/2025/01/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"> ... </a>
-        </div>
-        <div class="post-date">2025.01.12</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/">颜色、图片、文字、图标设置</a>
-        <div class="post-except">
-             颜色、图片、文字、图标
- 设置颜色
-
+搭载 Xtensa® 32 位...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/01/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2025-01-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/">颜色、图片、文字、图标设置</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          颜色、图片、文字、图标设置颜色
 Material color palette — Vuetify
 
- 设置图片
-
+设置图片
 借助Image2LCD软件，按照如下图配置
 
-将输出的数组存入.h中，加上static，在主函数调用。
+将输出的数组存入.h中，加上stati...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2024-12-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/STM32/ >STM32</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2024/12/20/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">FreeRTOS学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          主要学习韦东山FreeRTOS的操作。
+FreeRTOS概述与体验FreeRTOS主要内容
 
-Image Converter — LVGL
 
- 设置文字
-
-
-阿里巴巴普惠体系列打包免费字体下载 - 字体打包免费下载尽在字体家
-
-
-字体转换器 – 免费在线转换字体
-
-
-Font Converter — LVGL
-
-
- 设置图标
-
-
-Font Aw
-            <a class="read-more" href="/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/"> ... </a>
-        </div>
-        <div class="post-date">2025.01.10</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2024/12/20/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">FreeRTOS学习笔记</a>
-        <div class="post-except">
-            主要学习韦东山FreeRTOS的操作。
- FreeRTOS概述与体验
- FreeRTOS主要内容
-
-
-
-FreeRTOS/Source下的文件
+FreeRTOS&#x2F;Source下的文件
 作用
-
 
 
 
@@ -194,132 +668,224 @@ task.c
 任务操作
 
 
-list.c
-列表
+list...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2024/12/20/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2024-10-22
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/STM32/ >STM32</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E9%A1%B9%E7%9B%AE/ >项目</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/PID/ >PID</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E9%A1%B9%E7%9B%AE/">项目></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2024/10/22/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84%E6%99%BA%E8%83%BD%E5%B9%B3%E8%A1%A1%E8%BD%A6/">基于STM32F103的智能平衡车</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          主要实现基于STM32F103C8T6的HAL库编程PID平衡车项目。
+实物
 
 
-queue.c
-提供队列操作、信号量操作
 
-
-timer.c
-软件定时功能
-
-
-event_groups.c
-通过事件组功能
-
-
-
- 数据类型
-
-TickType_t：
-
-FreeRTOS配置了一个周期性的时钟中断：Tick Interrupt
-每发生一次中断，中断次数
-            <a class="read-more" href="/2024/12/20/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"> ... </a>
-        </div>
-        <div class="post-date">2024.12.20</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2024/10/22/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84%E6%99%BA%E8%83%BD%E5%B9%B3%E8%A1%A1%E8%BD%A6/">基于STM32F103的智能平衡车</a>
-        <div class="post-except">
-            主要实现基于STM32F103C8T6的HAL库编程PID平衡车项目。
- 实物
-
-
- STM32 CubeMX配置
+STM32 CubeMX配置
 
 使用外部高速时钟8MHz，通过PLL倍频到72MHz。
-RCC----&gt;HSE、LSE = Crystal/Ceramic Resonator（晶振）----&gt;HCLK = 72MHz
- 点亮LED
-
-
-
-名称
-IO
-HAL配置
-
-
-
-
-LED
-PC13
-GPIO_OUTPUT
-
-
-
-SYS----&gt;Debug = Serial Wire(下
-            <a class="read-more" href="/2024/10/22/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84%E6%99%BA%E8%83%BD%E5%B9%B3%E8%A1%A1%E8%BD%A6/"> ... </a>
-        </div>
-        <div class="post-date">2024.10.22</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">STM32学习笔记</a>
-        <div class="post-except">
-            主要学习了STM32C8T6的基本配置以及其各部件组成。
-Q：哈希体系和冯洛伊曼体系区别：前者是指令集和数据存储在不同存储器，后者是存储在同一个存储器
-计算机五大组成部分：控制器、运算器、存储器、输入、输出
-STM32是小端存储，高地址的数据在低字节上
-堆的地址向上，栈的地址向下
-32位处理器，一个指针4字节；64位处理器，一个指针8字节
- STM32F103C8T6基本配置
- 内容
-STM32最小系统版组成：MCU、时钟电路、复位电路、外部接口电路、电源电路，启动电路。
-
-
-            <a class="read-more" href="/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"> ... </a>
-        </div>
-        <div class="post-date">2024.06.12</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2024/01/15/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99/">如何做一个这样的网站</a>
-        <div class="post-except">
-             这个人太懒了，根本就妹写正文呀！还是来看看可爱猫猫吧！
-
- 学习参考
-
-搭建1：hexo史上最全搭建教程-CSDN博客
-搭建2：使用Hexo在GitHub Pages上搭建部署免费的个人博客网站（下：Hexo部署）——最详细全面解读教程（没有之一） - 简书
-hexo主题：Themes | Hexo
-处理公式问题：Hexo折腾系列（六）数学公式渲染优化 - 江风引雨の小po站
-图床工具参考1：Home - SM.MS | Dashboard
-图床工具参考2：【Typora】
-            <a class="read-more" href="/2024/01/15/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99/"> ... </a>
-        </div>
-        <div class="post-date">2024.01.15</div>
-    </div>
-    
-</div>
-
-<div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
-</div>
-
-                <div class="footer">
-    <span>Copyright © 2022 Ben Shu &#39;s Blog</span>
-    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這李設計</a></span>
-</div>
-
-
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
-
-
-<script src="/js/highlight.min.js"></script>
-
-
-<script src="/js/highlightjs-line-numbers.js"></script>
-
-
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
-
+RCC—-&gt;HS...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2024/10/22/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84%E6%99%BA%E8%83%BD%E5%B9%B3%E8%A1%A1%E8%BD%A6/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2024-06-12
             </div>
-        </div>
-    </body>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/STM32/ >STM32</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">STM32学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          主要学习了STM32C8T6的基本配置以及其各部件组成。
+Q：哈希体系和冯洛伊曼体系区别：前者是指令集和数据存储在不同存储器，后者是存储在同一个存储器
+计算机五大组成部分：控制器、运算器、存储器...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2024-01-15
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+              <v-card flat color="secondary" tile class="index-article-header-tag  font-weight-medium">
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ >学习笔记</a>
+                  </span>
+                
+                  <span class="index-article-header-tag-content">
+                    <v-icon>fas fa-tag</v-icon>
+                    <a rel="tag" href = /tags/hexo/ >hexo</a>
+                  </span>
+                
+              </v-card>
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/categories/%E7%BD%91%E9%A1%B5/">网页></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2024/01/15/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99/">如何做一个这样的网站</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          这个人太懒了，根本就妹写正文呀！还是来看看可爱猫猫吧！
+学习参考
+搭建1：hexo史上最全搭建教程-CSDN博客
+搭建2：使用Hexo在GitHub Pages上搭建部署免费的个人博客网站（下：...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/2024/01/15/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+   
+</v-card>  
+
+
+  <div id="pagination" class="text-center">
+    <v-pagination 
+      v-model="currentPage" 
+      :length=2 
+      @input="PageChange" 
+      prev-icon="chevron_left"
+      next-icon="chevron_right"
+      color="secondary"
+    ></v-pagination>
+  </div>
+         
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2021 - 2025 Big Ben</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>
