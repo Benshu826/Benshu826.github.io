@@ -469,7 +469,7 @@
 <li>使用标准C库里的malloc、free函数</li>
 </ul>
 <h4 id="q-heap_3线程安全吗"><a class="markdownIt-Anchor" href="#q-heap_3线程安全吗"></a> Q： heap_3线程安全吗?</h4>
-<p>C库里的malloc、free函数并非线程安全的，Heap_3中先暂停FreeRTOS的调度器，再去调用这些函数，使用这种方法实现了线程安全。</p>
+<p>C库里的malloc、free函数并非线程安全的，Heap_3中先暂停FreeRTOS的调度器，再去调用这些函数，使用<strong>这种方法实现了线程安全</strong>。</p>
 <h3 id="heap_4"><a class="markdownIt-Anchor" href="#heap_4"></a> heap_4</h3>
 <ul>
 <li>Heap_4使用<strong>首次适应算法</strong>(first fit)来分配内存。它还会把相邻的空闲内存合并为一个更大的空闲内存，这有助于较少内存的碎片问题。</li>
