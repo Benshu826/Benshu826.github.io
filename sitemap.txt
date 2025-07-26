@@ -1,6 +1,6 @@
+http://example.com/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 http://example.com/2025/01/12/ESP32S3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 http://example.com/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
-http://example.com/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 http://example.com/2025/07/24/MQTT%E5%8D%8F%E8%AE%AE/
 http://example.com/2024/12/20/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 http://example.com/search/index.html
@@ -20,6 +20,7 @@ http://example.com/
 http://example.com/tags/CAN%E9%80%9A%E4%BF%A1/
 http://example.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 http://example.com/tags/STM32/
+http://example.com/tags/MQTT/
 http://example.com/tags/ESP/
 http://example.com/tags/%E5%AD%A6%E4%B9%A0/
 http://example.com/tags/hexo/
@@ -30,7 +31,6 @@ http://example.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/
 http://example.com/tags/PID/
 http://example.com/tags/%E6%AF%94%E8%B5%9B/
 http://example.com/tags/%E8%B0%83%E8%AF%95/
-http://example.com/tags/MQTT/
 http://example.com/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/
 http://example.com/categories/Markdown/
 http://example.com/categories/%E7%BD%91%E9%A1%B5/
