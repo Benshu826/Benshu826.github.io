@@ -238,17 +238,41 @@
 <p><img src="https://s2.loli.net/2025/07/27/ilGDFK1mO96fJkz.png" alt="" /></p>
 <h2 id="systick-svc-pendsv"><a class="markdownIt-Anchor" href="#systick-svc-pendsv"></a> SysTick、SVC、PendSV</h2>
 <h4 id="systick_handler-系统时钟"><a class="markdownIt-Anchor" href="#systick_handler-系统时钟"></a> SysTick_Handler - 系统时钟</h4>
+<ul>
+<li>
 <p>就像心跳，定期检查是否需要切换任务</p>
+</li>
+<li>
 <p>频率固定，系统运行期间持续工作</p>
+</li>
+<li>
 <p>负责时间管理和调度触发</p>
+</li>
+</ul>
 <h4 id="svc_handler-系统启动器"><a class="markdownIt-Anchor" href="#svc_handler-系统启动器"></a> SVC_Handler - 系统启动器</h4>
+<ul>
+<li>
 <p>就像点火器，只负责启动第一个任务</p>
+</li>
+<li>
 <p>只调用一次，启动后就不工作了</p>
+</li>
+<li>
 <p>从特权模式切换到用户模式</p>
+</li>
+</ul>
 <h4 id="pendsv_handler-任务切换器"><a class="markdownIt-Anchor" href="#pendsv_handler-任务切换器"></a> PendSV_Handler - 任务切换器</h4>
+<ul>
+<li>
 <p>就像交通指挥员，负责安排哪个任务先运行</p>
+</li>
+<li>
 <p>需要切换时才工作，优先级最低</p>
+</li>
+<li>
 <p>在用户模式下进行任务切换</p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
