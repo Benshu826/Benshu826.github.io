@@ -1,337 +1,710 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>蓝桥杯第十二届心得 - Ben Shu &#39;s Blog</title>
     
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
     
-        <link rel="shortcut icon" href="/icons/favicon.ico">
-    
-     
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
-    
-<link rel="stylesheet" href="/css/main.css">
-
-    
-    
-
-
-
-
-
+    <meta name="description" content="">
+    <meta name="author" content="Big Ben">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="蓝桥杯第十二届心得"/>
+    <style>
 
 
     
-    
-          
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+    .post-copyright:after {
+        position: absolute;
+        color: #fff;
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3E%3Cpath fill='gray' d='M245.8 214.9l-33.2 17.3c-9.4-19.6-25.2-20-27.4-20-22.2 0-33.3 14.6-33.3 43.9 0 23.5 9.2 43.8 33.3 43.8 14.4 0 24.6-7 30.5-21.3l30.6 15.5a73.2 73.2 0 01-65.1 39c-22.6 0-74-10.3-74-77 0-58.7 43-77 72.6-77 30.8-.1 52.7 11.9 66 35.8zm143 0l-32.7 17.3c-9.5-19.8-25.7-20-27.9-20-22.1 0-33.2 14.6-33.2 43.9 0 23.5 9.2 43.8 33.2 43.8 14.5 0 24.7-7 30.5-21.3l31 15.5c-2 3.8-21.3 39-65 39-22.7 0-74-9.9-74-77 0-58.7 43-77 72.6-77C354 179 376 191 389 214.8zM247.7 8C104.7 8 0 123 0 256c0 138.4 113.6 248 247.6 248C377.5 504 496 403 496 256 496 118 389.4 8 247.6 8zm.8 450.8c-112.5 0-203.7-93-203.7-202.8 0-105.5 85.5-203.3 203.8-203.3A201.7 201.7 0 01451.3 256c0 121.7-99.7 202.9-202.9 202.9z'/%3E%3C/svg%3E");
+        content: ' ';
+        height: 10rem;
+        width: 10rem;
+        right: -2rem;
+        top: -2rem;
+        opacity: .1;
+    }
+
+</style>
 
     
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
     
     
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
     
-    <title>
-        
-            蓝桥杯第十二届心得 | Ben Shu &#39;s Blog
-        
-    </title>
+    <script src="/js/main.js"></script>
     
-    
+      
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
-<body>
-    <div id="app">
-        <v-app>
-            <v-content id="page">
-                <v-container fluid>
-                    <v-row>
-                        <v-col cols="2" class="d-none d-md-block">
-                            <div id="sidebar" class="float-right">
-    <a href="/" rel="home">
-        <v-avatar size=96>
-            <img id="logo" src="/image/pic.jpg">     
-        </v-avatar> 
-    </a>
-    <v-divider></v-divider>
-    <div class="mini-menu">
-        <v-btn icon href="/">
-            <v-icon>home</v-icon>
-        </v-btn>
-        <v-btn icon href="/categories/">
-            <v-icon>folder</v-icon>
-        </v-btn>
-        <v-btn icon href="/tags/">
-            <v-icon>bookmark</v-icon>
-        </v-btn>
-        <v-btn icon @click="SetNightMode">
-            <v-icon>{{ nightMode }}</v-icon>
-        </v-btn>
-    </div>
-    <v-list id="main-menu" class="font-weight-bold" flat>
-        
-            
-            <v-list-item href="/archives/" link>
-            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                Archives
-            </v-list-item-content>
-            </v-list-item>
-        
-            
-            <v-list-item href="/about/" link>
-            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                About
-            </v-list-item-content>
-            </v-list-item>
-        
-    </v-list>
-    <v-divider></v-divider>
-    
-        <div class="post-toc">
-            <a href="/2022/04/28/%E8%93%9D%E6%A1%A5%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%8D%95%E7%89%87%E6%9C%BA%E5%BF%83%E5%BE%97/" class="toc-header">Table of Contents</a>
-            <div class="toc-content">
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%84%9F%E6%82%9F"><span class="toc-number">1.</span> <span class="toc-text"> 感悟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text"> 新手上路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text"> 学习思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text"> 一些需要注意的点！！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#led"><span class="toc-number">4.1.</span> <span class="toc-text"> LED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9Fdelay"><span class="toc-number">4.2.</span> <span class="toc-text"> 延迟delay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96"><span class="toc-number">4.3.</span> <span class="toc-text"> 按键消抖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E6%8C%89%E9%94%AE"><span class="toc-number">4.4.</span> <span class="toc-text"> 矩阵按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ds13b20"><span class="toc-number">4.5.</span> <span class="toc-text"> DS13B20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iic"><span class="toc-number">4.6.</span> <span class="toc-text"> IIC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwm"><span class="toc-number">4.7.</span> <span class="toc-text"> PWM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#io%E5%92%8Cmm%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.8.</span> <span class="toc-text"> IO和MM模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE"><span class="toc-number">5.</span> <span class="toc-text"> 结尾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E9%9D%92%E5%B1%B1%E4%B8%8D%E6%94%B9%E7%A2%A7%E6%B0%B4%E9%95%BF%E6%B5%81"><span class="toc-number">6.</span> <span class="toc-text"> 最后，青山不改，碧水长流</span></a></li></ol>
-            </div>
-        </div>
-    
 
-    <div id="footer">
-        <div class="footer-social">
+    <body>
+        <header>
             
-                
-                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
-                    <v-icon>fas fa-envelope</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
-                    <v-icon>fab fa-github</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
-                    <v-icon>fab fa-steam</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
-                    <v-icon>fab fa-weibo</v-icon>
-                </v-btn>
-            
-        </div>
-        <v-divider></v-divider>
-        <div class="footer-content">
-            
-                <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    Total Visitors <span id="busuanzi_value_site_uv"></span>
-                </span>
-                <br>
-            
-            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
-            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-            <span>
-                &copy; 2021 - 2025 
-                Big Ben
-            </span>
-        </div>
-    </div>
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">主页</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/about/" class="button">
+			<div class="navbar-menu">关于</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/about/" class="dropdown-menu button">关于</a>
+		<br>
+		
+	</div>
 </div>
 
-                        </v-col>
-                        <v-col cols="12" md="10">
-                            <v-row>
-  <v-col cols="12" md="8" align-self="end">
-    <div id="site-header">
-      <div id="site-title">
-        <a href="/" rel="home">Ben Shu &#39;s Blog</a>
-      </div>
-      <div id="site-description"></div>
-      <div id="mobile-menu" class="d-block d-md-none">
-        <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
-        <div class="mobile-mini-menu">
-          <v-btn icon href="/">
-              <v-icon>home</v-icon>
-          </v-btn>
-          <v-btn icon href="/categories/">
-              <v-icon>folder</v-icon>
-          </v-btn>
-          <v-btn icon href="/tags/">
-              <v-icon>bookmark</v-icon>
-          </v-btn>
-          <v-btn icon @click="SetNightMode">
-              <v-icon>{{ nightMode }}</v-icon>
-          </v-btn>
-          
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
             
-            <v-btn icon href="/archives/">
-              <v-icon>archive</v-icon>
-            </v-btn>
-          
-            
-            <v-btn icon href="/about/">
-              <v-icon>account_circle</v-icon>
-            </v-btn>
-          
-        </div>
-      </div>    
-    </div>
-  </v-col>  
-  <v-col cols="4" align-self="end" class="d-none d-md-block">
-    <v-col align-self="end">
-      <v-text-field label="请输入关键字" data-src="/search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,true)"></v-text-field>
-    </v-col> 
-  </v-col>
-</v-row>
 
-                            <v-card class="elevation-2 post-card">
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>蓝桥杯第十二届心得</h3>
+    
+      <span class="post-meta-label">
+        Big Ben
+      </span>
     
     
-        <div class="post-header">
-  <a class="post-header-title font-weight-medium" href="/2022/04/28/%E8%93%9D%E6%A1%A5%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%8D%95%E7%89%87%E6%9C%BA%E5%BF%83%E5%BE%97/">蓝桥杯第十二届心得</a>
-  <div class="post-header-meta">   
-    <span>
-      <v-icon color="">event</v-icon>
-      Posted on:&nbsp;2022-04-28
-    </span>
-    <span>
-      <v-icon color="">event_available</v-icon>
-      Edited on:&nbsp;2025-07-24
-    </span>
-    <span>
-      <v-icon color="">folder</v-icon>
-      In:&nbsp;<a class="category-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
-    </span>
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2022-04-28 18:51" pubdate>
+          2022-04-28
+        </time>
+      </span>
     
-    <span>
-      <v-icon color="">visibility</v-icon>
-      Views:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
-    </span>
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 1.4k 字
+      </span>
+    
+    
     
   </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%84%9F%E6%82%9F"><span class="toc-number">1.</span> <span class="toc-text">感悟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">新手上路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">学习思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9%EF%BC%81%EF%BC%81"><span class="toc-number">4.</span> <span class="toc-text">一些需要注意的点！！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">4.1.</span> <span class="toc-text">LED</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9Fdelay"><span class="toc-number">4.2.</span> <span class="toc-text">延迟delay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE%E6%B6%88%E6%8A%96"><span class="toc-number">4.3.</span> <span class="toc-text">按键消抖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E6%8C%89%E9%94%AE"><span class="toc-number">4.4.</span> <span class="toc-text">矩阵按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DS13B20"><span class="toc-number">4.5.</span> <span class="toc-text">DS13B20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IIC"><span class="toc-number">4.6.</span> <span class="toc-text">IIC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWM"><span class="toc-number">4.7.</span> <span class="toc-text">PWM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E5%92%8CMM%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.8.</span> <span class="toc-text">IO和MM模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE"><span class="toc-number">5.</span> <span class="toc-text">结尾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%EF%BC%8C%E9%9D%92%E5%B1%B1%E4%B8%8D%E6%94%B9%EF%BC%8C%E7%A2%A7%E6%B0%B4%E9%95%BF%E6%B5%81"><span class="toc-number">6.</span> <span class="toc-text">最后，青山不改，碧水长流</span></a></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h1><p>今年的蓝桥杯单片机难吗，不是很难，但注重细心。一分付出，一分收获。今年我有幸参加了第十二届的比赛，但因为自己操作不当，优化代码的过程中删了定时器，没在主函数删了调用函数，导致已经完成的大厦轰然倒塌。自己也很难受，但没办法，希望看到文章的你们不要犯这种低级问题。<br>Emmmm…….，不过后来拿了省一，挺意外的。</p>
+<h1 id="新手上路"><a href="#新手上路" class="headerlink" title="新手上路"></a>新手上路</h1><p>基础部分的内容，推荐大家去看小蜜蜂老师的视频，讲的很好，网址: <a target="_blank" rel="noopener" href="https://www.xmf393.com/2019/06/11/2019061103">https://www.xmf393.com/2019/06/11/2019061103</a>.</p>
+<h1 id="学习思路"><a href="#学习思路" class="headerlink" title="学习思路"></a>学习思路</h1><p>以下是我的学习思路<br>首先：先学会LED、蜂鸣器、继电器、按键、数码管、数码管位选、串口等基本操作。<br>其次：ds1302，ds18b20，eeprom(24C02)，PCF8591等。<br>然后：PWM呼吸灯，DA(因为我刚开始一直没找到)、超声波。<br>最关键的是一定要做省赛题！实操很重要！</p>
+<p>赛题链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ULZzd9nSA8l21VQQiDYvuQ">https://pan.baidu.com/s/1ULZzd9nSA8l21VQQiDYvuQ </a>.<br>提取码：1234 </p>
+<h1 id="一些需要注意的点！！"><a href="#一些需要注意的点！！" class="headerlink" title="一些需要注意的点！！"></a>一些需要注意的点！！</h1><h2 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h2><p>首先要说的是LED灯，比如第10届省赛题目中，如果单独点亮LED，会出现原先没有定义的灯跟着一起亮，我的解决方法如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">led</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> key1,key2,key3,key4;</span><br><span class="line">	<span class="keyword">if</span>(s4_stat == <span class="number">0</span>)										key1 = <span class="number">0x01</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s4_stat == <span class="number">1</span>)									key1 = <span class="number">0x02</span>;</span><br><span class="line">	<span class="keyword">if</span>((dat_sz&gt;=<span class="number">0</span>&amp;&amp;dat_sz&lt;<span class="number">150</span>)||(dat_sz&gt;=<span class="number">250</span>&amp;&amp;dat_sz&lt;<span class="number">350</span>))	key2 = <span class="number">0x04</span>;</span><br><span class="line">	<span class="keyword">else</span>													key2 = <span class="number">0x00</span>;</span><br><span class="line">	<span class="keyword">if</span>(dat_f&gt;=<span class="number">0</span>&amp;&amp;dat_f&lt;<span class="number">1000</span>||dat_f&gt;=<span class="number">5000</span>&amp;&amp;dat_f&lt;<span class="number">10000</span>)		key3 = <span class="number">0x08</span>;</span><br><span class="line">	<span class="keyword">else</span>													key3 = <span class="number">0x00</span>;</span><br><span class="line">	<span class="keyword">if</span>(DA_dy == <span class="number">103</span>)										key4 = <span class="number">0x10</span>;</span><br><span class="line">	<span class="keyword">else</span>													key4 = <span class="number">0x00</span>;</span><br><span class="line">	P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = ~(key1|key2|key3|key4);P2 = <span class="number">0x00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="延迟delay"><a href="#延迟delay" class="headerlink" title="延迟delay"></a>延迟delay</h2><p>本来不想单独拿出来讲的，实在是初学者这里出问题的太多了。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个t是0-255</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个t是0-65536</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个不影响数码管显示</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;数码管显示&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="按键消抖"><a href="#按键消抖" class="headerlink" title="按键消抖"></a>按键消抖</h2><p>有时候题目会让你只加1，但你按了按键会出现加的好多，这里推荐一种解决方法<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(key == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	delay(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">if</span>(key == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		相关操作;</span><br><span class="line">		<span class="keyword">while</span>(key == <span class="number">0</span>)&#123;数码管操作;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="矩阵按键"><a href="#矩阵按键" class="headerlink" title="矩阵按键"></a>矩阵按键</h2><p>我参考的B站一位UP主，写的很好，这里用的是reg52<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">sbit P42 = P4^<span class="number">2</span>;</span><br><span class="line">sbit P44 = P4^<span class="number">4</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> key_value;</span><br><span class="line"><span class="type">void</span> <span class="title function_">scan_key</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	P3 = <span class="number">0x0f</span>;P42 = <span class="number">0</span>;P44 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(P3 != <span class="number">0x0f</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">if</span>(P3 != <span class="number">0x0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="keyword">switch</span>(P3)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0e</span>:key_value = <span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0d</span>:key_value = <span class="number">4</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0b</span>:key_value = <span class="number">8</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x07</span>:key_value = <span class="number">12</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		P3 = <span class="number">0xf0</span>;P42 = <span class="number">1</span>;P44 = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(P3)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0xe0</span>:key_value += <span class="number">3</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0xd0</span>:key_value += <span class="number">2</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(P42 == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			key_value += <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="comment">//	！！这里可以根据key_value的值做其他的按键操作！！</span></span><br><span class="line">		<span class="keyword">while</span>(P3 != <span class="number">0xf0</span>);</span><br><span class="line">		<span class="keyword">while</span>(P42 != <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">while</span>(P44 != <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="DS13B20"><a href="#DS13B20" class="headerlink" title="DS13B20"></a>DS13B20</h2><p>关于ds13b20读取温度，onewire里面的延迟都要增大10-12倍。特别注意的就是，蜜蜂老师那的temp是16位的，LSB、MSB是8位的，还有就是老师那的delay(700)是unsigned int的而不是unsigned char，要特别注意一下。两位小数的读法我建议大家去找找相关内容看看，以免考到。</p>
+<h2 id="IIC"><a href="#IIC" class="headerlink" title="IIC"></a>IIC</h2><p>IIC这一块除了DA输出，其他没啥可说的，DA输出参考代码如下(只需要这样然后主函数调用就行，接着你去拿万用表测J3的D/A与GND两个位置就可以得到差不多的数值)：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">write_DA</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	IIC_Start(); </span><br><span class="line">	IIC_SendByte(<span class="number">0x90</span>);</span><br><span class="line">	IIC_WaitAck();</span><br><span class="line">	IIC_SendByte(<span class="number">0x40</span>);		<span class="comment">//0100 0000 这里的第二位置为1为DA，0为AD</span></span><br><span class="line">	IIC_WaitAck();</span><br><span class="line">	IIC_SendByte(DA_dy1);	<span class="comment">//DA_dy1的值是0-255，换算5V电压</span></span><br><span class="line">	IIC_WaitAck();			<span class="comment">//你只需要乘以500/255.0f = 1.96可到就行</span></span><br><span class="line">	IIC_Stop(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>还有一个点就是应答和非应答。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IIC_SendAck(x);	<span class="comment">//0的话值0-128,1的话值是0-255.</span></span><br></pre></td></tr></table></figure>
+<h2 id="PWM"><a href="#PWM" class="headerlink" title="PWM"></a>PWM</h2><p>有些小伙伴可能学了很久都没搞懂PWM是怎么搞的，我举个例子。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> count,time,pwm_duty,led_light;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">()</span>				<span class="comment">//定时器</span></span><br><span class="line">&#123;</span><br><span class="line">	TMOD = <span class="number">0x01</span>;</span><br><span class="line">	TH0 = (<span class="number">65536</span> - <span class="number">100</span>) / <span class="number">256</span>;</span><br><span class="line">	TL0 = (<span class="number">65536</span> - <span class="number">100</span>) % <span class="number">256</span>;</span><br><span class="line">	TR0 = <span class="number">1</span>;</span><br><span class="line">	ET0 = <span class="number">1</span>;</span><br><span class="line">	EA = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> 函数名() interrupt <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">	TH0 = (<span class="number">65536</span> - <span class="number">100</span>) / <span class="number">256</span>;</span><br><span class="line">	TL0 = (<span class="number">65536</span> - <span class="number">100</span>) % <span class="number">256</span>;</span><br><span class="line">	count++;</span><br><span class="line">	<span class="keyword">if</span>(count &lt;= pwm_duty)</span><br><span class="line">	&#123;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xfe</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(count &lt; <span class="number">10</span>)</span><br><span class="line">	&#123;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xff</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;count = <span class="number">0</span>;time++;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xfe</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">pwm</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(time == <span class="number">5</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		time = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(led_light == <span class="number">0</span>) <span class="comment">//0是亮、1是暗</span></span><br><span class="line">		<span class="keyword">if</span>(pwm_duty == <span class="number">10</span>)	pwm_duty = <span class="number">10</span>,led_light = <span class="number">1</span>;	<span class="keyword">else</span>	pwm_duty++;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(led_light == <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">if</span>(pwm_duty == <span class="number">0</span>)   pwm_duty = <span class="number">0</span>,led_light = <span class="number">0</span>;		<span class="keyword">else</span> 	pwm_duty--;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>首先我们要的是小灯缓慢亮0.5s，缓慢灭0.5s，先定义一个100us的定时器，先经过count走了10次后，time++了，五次后也就是count加了50次(换算也就是50ms)，然后led灯会变一次pwm_duty，也就是小灯的亮度，总共要变10次，也就是0.5s，达到效果。</p>
+<h2 id="IO和MM模式"><a href="#IO和MM模式" class="headerlink" title="IO和MM模式"></a>IO和MM模式</h2><p>省赛我还没看到要求用MM模式的，大多数都是要求IO模式，最好都学一下，MM模式比IO模式多用一个absacc.h的头文件。</p>
+<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>希望看到这篇文章的你，不会和我刚考完一样，感觉自己的付出和回报不成正比，自己的心态很受打击。当我知道没删那个的时候，我当时人直接懵了，手机也摔地上碎屏了，自己付出了很多，和老师与陪自己一起走过来经常交流的赛友们学到了很多，但最后因为一个很小的问题导致这样，自己真的完全接受不了。不过人生总有得有失吧，唉，大家国赛加油！<br>最后记得根据题目意思交压缩包，而不是只交了一份hex文件！！！</p>
+<h1 id="最后，青山不改，碧水长流"><a href="#最后，青山不改，碧水长流" class="headerlink" title="最后，青山不改，碧水长流"></a>最后，青山不改，碧水长流</h1>
+      </div>
+    </div>
 </div>
 
-    
-    
-    
-    
-    <div class="post-content typo">
-        <h1 id="感悟"><a class="markdownIt-Anchor" href="#感悟"></a> 感悟</h1>
-<p>今年的蓝桥杯单片机难吗，不是很难，但注重细心。一分付出，一分收获。今年我有幸参加了第十二届的比赛，但因为自己操作不当，优化代码的过程中删了定时器，没在主函数删了调用函数，导致已经完成的大厦轰然倒塌。自己也很难受，但没办法，希望看到文章的你们不要犯这种低级问题。<br />
-Emmmm…，不过后来拿了省一，挺意外的。</p>
-<h1 id="新手上路"><a class="markdownIt-Anchor" href="#新手上路"></a> 新手上路</h1>
-<p>基础部分的内容，推荐大家去看小蜜蜂老师的视频，讲的很好，网址: <a target="_blank" rel="noopener" href="https://www.xmf393.com/2019/06/11/2019061103">https://www.xmf393.com/2019/06/11/2019061103</a>.</p>
-<h1 id="学习思路"><a class="markdownIt-Anchor" href="#学习思路"></a> 学习思路</h1>
-<p>以下是我的学习思路<br />
-首先：先学会LED、蜂鸣器、继电器、按键、数码管、数码管位选、串口等基本操作。<br />
-其次：ds1302，ds18b20，eeprom(24C02)，PCF8591等。<br />
-然后：PWM呼吸灯，DA(因为我刚开始一直没找到)、超声波。<br />
-最关键的是一定要做省赛题！实操很重要！</p>
-<p>赛题链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ULZzd9nSA8l21VQQiDYvuQ">https://pan.baidu.com/s/1ULZzd9nSA8l21VQQiDYvuQ </a>.<br />
-提取码：1234</p>
-<h1 id="一些需要注意的点"><a class="markdownIt-Anchor" href="#一些需要注意的点"></a> 一些需要注意的点！！</h1>
-<h2 id="led"><a class="markdownIt-Anchor" href="#led"></a> LED</h2>
-<p>首先要说的是LED灯，比如第10届省赛题目中，如果单独点亮LED，会出现原先没有定义的灯跟着一起亮，我的解决方法如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">led</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> key1,key2,key3,key4;</span><br><span class="line">	<span class="keyword">if</span>(s4_stat == <span class="number">0</span>)										key1 = <span class="number">0x01</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s4_stat == <span class="number">1</span>)									key1 = <span class="number">0x02</span>;</span><br><span class="line">	<span class="keyword">if</span>((dat_sz&gt;=<span class="number">0</span>&amp;&amp;dat_sz&lt;<span class="number">150</span>)||(dat_sz&gt;=<span class="number">250</span>&amp;&amp;dat_sz&lt;<span class="number">350</span>))	key2 = <span class="number">0x04</span>;</span><br><span class="line">	<span class="keyword">else</span>													key2 = <span class="number">0x00</span>;</span><br><span class="line">	<span class="keyword">if</span>(dat_f&gt;=<span class="number">0</span>&amp;&amp;dat_f&lt;<span class="number">1000</span>||dat_f&gt;=<span class="number">5000</span>&amp;&amp;dat_f&lt;<span class="number">10000</span>)		key3 = <span class="number">0x08</span>;</span><br><span class="line">	<span class="keyword">else</span>													key3 = <span class="number">0x00</span>;</span><br><span class="line">	<span class="keyword">if</span>(DA_dy == <span class="number">103</span>)										key4 = <span class="number">0x10</span>;</span><br><span class="line">	<span class="keyword">else</span>													key4 = <span class="number">0x00</span>;</span><br><span class="line">	P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = ~(key1|key2|key3|key4);P2 = <span class="number">0x00</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="延迟delay"><a class="markdownIt-Anchor" href="#延迟delay"></a> 延迟delay</h2>
-<p>本来不想单独拿出来讲的，实在是初学者这里出问题的太多了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个t是0-255</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个t是0-65536</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个不影响数码管显示</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;数码管显示&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="按键消抖"><a class="markdownIt-Anchor" href="#按键消抖"></a> 按键消抖</h2>
-<p>有时候题目会让你只加1，但你按了按键会出现加的好多，这里推荐一种解决方法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(key == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	delay(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">if</span>(key == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		相关操作;</span><br><span class="line">		<span class="keyword">while</span>(key == <span class="number">0</span>)&#123;数码管操作;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="矩阵按键"><a class="markdownIt-Anchor" href="#矩阵按键"></a> 矩阵按键</h2>
-<p>我参考的B站一位UP主，写的很好，这里用的是reg52</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">sbit P42 = P4^<span class="number">2</span>;</span><br><span class="line">sbit P44 = P4^<span class="number">4</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> key_value;</span><br><span class="line"><span class="type">void</span> <span class="title function_">scan_key</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	P3 = <span class="number">0x0f</span>;P42 = <span class="number">0</span>;P44 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(P3 != <span class="number">0x0f</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(<span class="number">100</span>);</span><br><span class="line">		<span class="keyword">if</span>(P3 != <span class="number">0x0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="keyword">switch</span>(P3)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0e</span>:key_value = <span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0d</span>:key_value = <span class="number">4</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x0b</span>:key_value = <span class="number">8</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0x07</span>:key_value = <span class="number">12</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		P3 = <span class="number">0xf0</span>;P42 = <span class="number">1</span>;P44 = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(P3)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0xe0</span>:key_value += <span class="number">3</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0xd0</span>:key_value += <span class="number">2</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(P42 == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			key_value += <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="comment">//	！！这里可以根据key_value的值做其他的按键操作！！</span></span><br><span class="line">		<span class="keyword">while</span>(P3 != <span class="number">0xf0</span>);</span><br><span class="line">		<span class="keyword">while</span>(P42 != <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">while</span>(P44 != <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="ds13b20"><a class="markdownIt-Anchor" href="#ds13b20"></a> DS13B20</h2>
-<p>关于ds13b20读取温度，onewire里面的延迟都要增大10-12倍。特别注意的就是，蜜蜂老师那的temp是16位的，LSB、MSB是8位的，还有就是老师那的delay(700)是unsigned int的而不是unsigned char，要特别注意一下。两位小数的读法我建议大家去找找相关内容看看，以免考到。</p>
-<h2 id="iic"><a class="markdownIt-Anchor" href="#iic"></a> IIC</h2>
-<p>IIC这一块除了DA输出，其他没啥可说的，DA输出参考代码如下(只需要这样然后主函数调用就行，接着你去拿万用表测J3的D/A与GND两个位置就可以得到差不多的数值)：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">write_DA</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	IIC_Start(); </span><br><span class="line">	IIC_SendByte(<span class="number">0x90</span>);</span><br><span class="line">	IIC_WaitAck();</span><br><span class="line">	IIC_SendByte(<span class="number">0x40</span>);		<span class="comment">//0100 0000 这里的第二位置为1为DA，0为AD</span></span><br><span class="line">	IIC_WaitAck();</span><br><span class="line">	IIC_SendByte(DA_dy1);	<span class="comment">//DA_dy1的值是0-255，换算5V电压</span></span><br><span class="line">	IIC_WaitAck();			<span class="comment">//你只需要乘以500/255.0f = 1.96可到就行</span></span><br><span class="line">	IIC_Stop(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还有一个点就是应答和非应答。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IIC_SendAck(x);	<span class="comment">//0的话值0-128,1的话值是0-255.</span></span><br></pre></td></tr></table></figure>
-<h2 id="pwm"><a class="markdownIt-Anchor" href="#pwm"></a> PWM</h2>
-<p>有些小伙伴可能学了很久都没搞懂PWM是怎么搞的，我举个例子。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> count,time,pwm_duty,led_light;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Init</span><span class="params">()</span>				<span class="comment">//定时器</span></span><br><span class="line">&#123;</span><br><span class="line">	TMOD = <span class="number">0x01</span>;</span><br><span class="line">	TH0 = (<span class="number">65536</span> - <span class="number">100</span>) / <span class="number">256</span>;</span><br><span class="line">	TL0 = (<span class="number">65536</span> - <span class="number">100</span>) % <span class="number">256</span>;</span><br><span class="line">	TR0 = <span class="number">1</span>;</span><br><span class="line">	ET0 = <span class="number">1</span>;</span><br><span class="line">	EA = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> 函数名() interrupt <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">	TH0 = (<span class="number">65536</span> - <span class="number">100</span>) / <span class="number">256</span>;</span><br><span class="line">	TL0 = (<span class="number">65536</span> - <span class="number">100</span>) % <span class="number">256</span>;</span><br><span class="line">	count++;</span><br><span class="line">	<span class="keyword">if</span>(count &lt;= pwm_duty)</span><br><span class="line">	&#123;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xfe</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(count &lt; <span class="number">10</span>)</span><br><span class="line">	&#123;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xff</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;count = <span class="number">0</span>;time++;P2 = (P2 &amp; <span class="number">0x1f</span>) | <span class="number">0x80</span>;P0 = <span class="number">0xfe</span>;P2 = <span class="number">0x00</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">pwm</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(time == <span class="number">5</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		time = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(led_light == <span class="number">0</span>) <span class="comment">//0是亮、1是暗</span></span><br><span class="line">		<span class="keyword">if</span>(pwm_duty == <span class="number">10</span>)	pwm_duty = <span class="number">10</span>,led_light = <span class="number">1</span>;	<span class="keyword">else</span>	pwm_duty++;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(led_light == <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">if</span>(pwm_duty == <span class="number">0</span>)   pwm_duty = <span class="number">0</span>,led_light = <span class="number">0</span>;		<span class="keyword">else</span> 	pwm_duty--;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>首先我们要的是小灯缓慢亮0.5s，缓慢灭0.5s，先定义一个100us的定时器，先经过count走了10次后，time++了，五次后也就是count加了50次(换算也就是50ms)，然后led灯会变一次pwm_duty，也就是小灯的亮度，总共要变10次，也就是0.5s，达到效果。</p>
-<h2 id="io和mm模式"><a class="markdownIt-Anchor" href="#io和mm模式"></a> IO和MM模式</h2>
-<p>省赛我还没看到要求用MM模式的，大多数都是要求IO模式，最好都学一下，MM模式比IO模式多用一个absacc.h的头文件。</p>
-<h1 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h1>
-<p>希望看到这篇文章的你，不会和我刚考完一样，感觉自己的付出和回报不成正比，自己的心态很受打击。当我知道没删那个的时候，我当时人直接懵了，手机也摔地上碎屏了，自己付出了很多，和老师与陪自己一起走过来经常交流的赛友们学到了很多，但最后因为一个很小的问题导致这样，自己真的完全接受不了。不过人生总有得有失吧，唉，大家国赛加油！<br />
-最后记得根据题目意思交压缩包，而不是只交了一份hex文件！！！</p>
-<h1 id="最后青山不改碧水长流"><a class="markdownIt-Anchor" href="#最后青山不改碧水长流"></a> 最后，青山不改，碧水长流</h1>
+<div class="post-category">
 
-    </div>
-    <!--文末结束语-->
-    
-        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
-    
-    <!--页脚广告-->
-    
-    <v-divider></v-divider>
-    
-    <div class="post-nav">             
+    <div id="p-meta-i">
         
-            <div class="post-nav-button float-left">
-                <v-icon>chevron_left</v-icon>
-                <a class="font-weight-bold text-left" href="/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/">
-                    使用新域名后不加载主题
-                </a>
-            </div>
               
-        
+                <a class="hover-with-bg" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/%E6%AF%94%E8%B5%9B/"># 比赛</a>
+              
+          
     </div>
-</v-card>
+</div>
 
 
+<div class="post-footer">
+  
 
+</div>
+
+</article>
+
+
+        </div>
         
-                            <div id="mobile-footer" class="d-block d-md-none">
-                                <v-divider></v-divider>
-                                <div id="mobile-footer-content">
-                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-                                    <span> &copy; 2021 - 2025 Big Ben</span>
-                                </div>
-                            </div>                   
-                        </v-col>                                            
-                    </v-row>
-                </v-container>
-            </v-content>
-        </v-app>
-    </div>
+<footer class="text-center">
     
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+    
+    
+    
+    
+    <p>&copy;  2022 - 2025&nbsp;&nbsp;本书</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
 
-<script src="/js/main.js"></script>
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
 
 
 
 
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/oCoke/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({
-        startOnLoad: true,
-        theme: "default"
-    });</script>
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
 
 
 
 
 
-</body>
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
 </html>
