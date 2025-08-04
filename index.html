@@ -467,44 +467,6 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
-            <a href="/2025/07/31/Altium_Designer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-            
-            Altium_Designer学习笔记</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-               Altium_Designer学习笔记
-正在温习写笔记~~~~
-
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2025-07-31 11:10" pubdate>
-                  2025-07-31
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
             <a href="/2025/07/27/%E5%9F%BA%E4%BA%8EBootloader%E7%9A%84%E7%AE%80%E6%98%93%E6%A1%8C%E9%9D%A2%E9%97%B9%E9%92%9F/">
             
             基于Bootloader的简易桌面闹钟</a>
@@ -747,8 +709,20 @@ OTA：无线通信将新的固件下载到设备中（Over The Air）
                 
               
                实物
-暂时没空，后续整理。
+LVGL界面使用Gui Guider制作，使用LVGL 8.3；图标库来自iconfont
+iconfont-阿里巴巴矢量图标库
+ 界面预览
 
+其他功能参考立创和官方例程制作，使用ESP-IDF环境。
+暂时没空，后续整理。
+ 其他
+ESP32S3的FreeRTOS是自带的，但是STM32的FreeRTOS是移植的
+
+
+
+项目
+官方 FreeRTOS
+ESP32-S3 的 FreeRTOS（
           </p>
           <div class="index-btm post-metas">
             
@@ -944,6 +918,55 @@ FreeRTOS配
               
                 
                   <span class="p-dot"></span><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2024/10/22/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84%E6%99%BA%E8%83%BD%E5%B9%B3%E8%A1%A1%E8%BD%A6/">
+            
+            基于STM32F103的智能平衡车</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              主要实现基于STM32F103C8T6的HAL库编程PID平衡车项目。
+ 实物
+
+
+ 硬件部分
+
+ Layout布局
+
+ STM32 CubeMX配置
+
+使用外部高速时钟8MHz，通过PLL倍频到72MHz
+RCC----&gt;HSE、LSE = Crystal/Ceramic Resonator（晶振）----&gt;HCLK = 72MHz
+ OLED
+屏的大小为0.96寸，像素点为128*
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2024-10-22 11:30" pubdate>
+                  2024-10-22
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
                 
               
             

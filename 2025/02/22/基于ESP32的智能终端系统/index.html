@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 10 字
+        共 221 字
       </span>
     
     
@@ -487,13 +487,71 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%89%A9"><span class="toc-number">1.</span> <span class="toc-text"> 实物</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%89%A9"><span class="toc-number">1.</span> <span class="toc-text"> 实物</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88"><span class="toc-number">1.0.1.</span> <span class="toc-text"> 界面预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.1.</span> <span class="toc-text"> 其他</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
         <h1 id="实物"><a class="markdownIt-Anchor" href="#实物"></a> 实物</h1>
-<p>暂时没空，后续整理。</p>
+<p>LVGL界面使用<strong>Gui Guider</strong>制作，使用LVGL 8.3；图标库来自<strong>iconfont</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">iconfont-阿里巴巴矢量图标库</a></p>
+<h3 id="界面预览"><a class="markdownIt-Anchor" href="#界面预览"></a> 界面预览</h3>
+<p><img src="https://s2.loli.net/2025/08/04/JNpOYTuUInAGg57.png" alt="" /></p>
+<p>其他功能参考立创和官方例程制作，使用ESP-IDF环境。</p>
+<p><strong>暂时没空，后续整理。</strong></p>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p><strong>ESP32S3的FreeRTOS</strong>是<strong>自带的</strong>，但是<strong>STM32的FreeRTOS是移植的</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">官方 FreeRTOS</th>
+<th style="text-align:center">ESP32-S3 的 FreeRTOS（ESP-IDF）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">来源</td>
+<td style="text-align:center">AWS / FreeRTOS 官方</td>
+<td style="text-align:center">基于 FreeRTOS，Espressif 定制</td>
+</tr>
+<tr>
+<td style="text-align:center">支持内核数</td>
+<td style="text-align:center"><strong>通常单核</strong></td>
+<td style="text-align:center"><strong>支持多核</strong>（SMP）</td>
+</tr>
+<tr>
+<td style="text-align:center">硬件集成</td>
+<td style="text-align:center"><strong>不集成硬件</strong></td>
+<td style="text-align:center"><strong>集成 Wi-Fi / BLE / 外设等</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">任务调度</td>
+<td style="text-align:center">单核调度器</td>
+<td style="text-align:center">双核调度器（支持亲和性）</td>
+</tr>
+<tr>
+<td style="text-align:center">功耗管理</td>
+<td style="text-align:center">需手动实现</td>
+<td style="text-align:center">支持 Tickless Idle，低功耗优化</td>
+</tr>
+<tr>
+<td style="text-align:center">API 接口</td>
+<td style="text-align:center">标准 FreeRTOS API</td>
+<td style="text-align:center">支持标准 + Espressif 自定义 API</td>
+</tr>
+<tr>
+<td style="text-align:center">文件系统/网络等</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">ESP-IDF 提供完整网络、文件系统支持</td>
+</tr>
+<tr>
+<td style="text-align:center">配置方式</td>
+<td style="text-align:center"><code>FreeRTOSConfig.h</code></td>
+<td style="text-align:center"><code>menuconfig</code> 菜单配置（Kconfig）</td>
+</tr>
+</tbody>
+</table>
 
       </div>
     </div>
