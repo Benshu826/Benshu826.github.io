@@ -1,6 +1,341 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C语言常见知识点</title>
+    <url>/2025/08/31/C%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="1-二叉树通过中序遍历和后序遍历判断前序遍历"><a class="markdownIt-Anchor" href="#1-二叉树通过中序遍历和后序遍历判断前序遍历"></a> 1. 二叉树通过中序遍历和后序遍历，判断前序遍历</h2>
+<p><strong>前序遍历：中左右；中序遍历：左中右；后序遍历：左右中。</strong></p>
+<ul>
+<li>先从后序找根节点</li>
+<li>根据根节点，从中序遍历区分左子树和右子树</li>
+<li>区分后再找对应的根据节点，循环往复</li>
+</ul>
+<p>已知中序：32145，后序32145</p>
+<p>先看后序最末尾，5是根节点，对应中序遍历中5的左侧为左子树，右侧为右子树，可知3214是左子树；再看后续，3214已知是左子树，那么4就是根节点，对应中序遍历中4的左侧为左子树，右侧为右子树，可知321是左子树，…，可知，前序遍历是32145。</p>
+<h2 id="2常见的排序算法"><a class="markdownIt-Anchor" href="#2常见的排序算法"></a> 2.常见的排序算法</h2>
+<p><img src="https://s2.loli.net/2025/08/31/mfbLrSzBQW6sged.png" alt="" /></p>
+<p>TIP：希尔排序其实就是分组的插入排序。</p>
+<h2 id="3将递归算法改成非递归算法一般用栈"><a class="markdownIt-Anchor" href="#3将递归算法改成非递归算法一般用栈"></a> 3.将递归算法改成非递归算法，一般用栈</h2>
+<h2 id="4关于指针和数组"><a class="markdownIt-Anchor" href="#4关于指针和数组"></a> 4.关于指针和数组</h2>
+<p>*<em>指针数组： int <em>arr[10];</em></em></p>
+<p>数组里的<strong>每个元素都是一个指针</strong>，arr是数组名，arr[i]是一个指针。</p>
+<p>*<em>数组指针： int (<em>p)[10];</em></em></p>
+<p><strong>一个指针，指向整个数组</strong>，</p>
+<p>**Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, <em>(int <em>)(&amp;a + 1) - 1)的输出</em></em></p>
+<p>(&amp;a + 1)是a + 6， 这里的*(int *)没什么意义,*(int *)(&amp;a + 1) - 1)是a + 5，即6。</p>
+<p>**Q2：char <em>buff[] = {“char”, “int”, “double”}; printf(“%c\n”, <em>(buff+1)[1])的输出</em></em></p>
+<p>(buff+1)是&quot;int&quot;，因为[]的优先级大于*，所以*(buff+1)[1]=*(buff+1+1)=*(buff+2)，即取&quot;double&quot;的首元素&quot;d&quot;。</p>
+<ul>
+<li>
+<p>a，类型int*，即首元素的指针</p>
+</li>
+<li>
+<p><strong>&amp;a，类型int (*)[6]，即整个数组地址</strong></p>
+</li>
+<li>
+<p>*a，等价于a[0] —&gt; *(a+i) = a[i]</p>
+</li>
+</ul>
+<h2 id="5常量指针和指针常量"><a class="markdownIt-Anchor" href="#5常量指针和指针常量"></a> 5.常量指针和指针常量</h2>
+<p>**常量指针：const int <em>a[]; / int const <em>a[];</em></em></p>
+<p><strong>底层Const</strong>，指针<strong>所指内容</strong>是常量，<strong>不能通过指针修改</strong>（但指针可以指向别处）</p>
+<p>*<em>指针常量：int <em>const a[];</em></em></p>
+<p><strong>顶层Const</strong>，<strong>指针</strong>本身是常量，<strong>初始化后不能再指向别的地址</strong>。</p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CAN通信学习</title>
+    <url>/2025/06/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="can通信笔记"><a class="markdownIt-Anchor" href="#can通信笔记"></a> CAN通信笔记</h1>
+<p>CAN（Controller Area Network Bus），控制局域网总线。</p>
+<h2 id="基本特征"><a class="markdownIt-Anchor" href="#基本特征"></a> 基本特征</h2>
+<ul>
+<li>
+<p>两根通信线（CAN_H、CAN_L），<strong>无需共地</strong></p>
+</li>
+<li>
+<p><strong>差分信号</strong>通信，抗干扰能力强</p>
+</li>
+<li>
+<p>高速CAN（ISO11898）：125k~1Mbps，&lt;40m</p>
+</li>
+<li>
+<p>低速CAN（ISO11519）：10k~125kbps，&lt;1km</p>
+</li>
+<li>
+<p><strong>异步</strong>，无需时钟线，通信速率由双方协定</p>
+</li>
+<li>
+<p><strong>半双工</strong>，可挂载多设备，<strong>多设备同时发送通过仲裁判断先后</strong></p>
+</li>
+<li>
+<p><strong>11/29位报文ID</strong>，用于区分消息功能，同时决定优先级**（小的优先）**</p>
+</li>
+<li>
+<p>可配置<strong>1~8字节的有效载荷</strong></p>
+</li>
+<li>
+<p>可实现<strong>广播式和请求式</strong>两种传输</p>
+</li>
+<li>
+<p>应答、CRC校验、位填充、位同步、错误处理等特性</p>
+</li>
+</ul>
+<h2 id="硬件电路"><a class="markdownIt-Anchor" href="#硬件电路"></a> 硬件电路</h2>
+<p><img src="https://s2.loli.net/2025/07/24/FydOPNIJWvxrp94.png" alt="" /></p>
+<h3 id="两个终端电阻的意义"><a class="markdownIt-Anchor" href="#两个终端电阻的意义"></a> 两个终端电阻的意义</h3>
+<ol>
+<li>
+<p><strong>防止回波反射</strong></p>
+</li>
+<li>
+<p><strong>没有设备操作时</strong>，将两根差分线电压“收紧”，<strong>使其电压一致</strong></p>
+</li>
+</ol>
+<p>（高速CAN的电阻阻值小，所以收紧更快，但能耗更大）</p>
+<h3 id="电平标准"><a class="markdownIt-Anchor" href="#电平标准"></a> 电平标准</h3>
+<p>CAN总线使用<strong>差分信号</strong>,即（<strong>Vcan_H - Vcan_L</strong>）</p>
+<ul>
+<li><strong>高速CAN</strong>规定</li>
+</ul>
+<p>电压差为0V表示逻辑1（隐性电平）</p>
+<p>电压差为2V表示逻辑0（显性电平）</p>
+<ul>
+<li><strong>低速CAN</strong>规定</li>
+</ul>
+<p>电压差为-1.5V表示逻辑1（隐性电平）</p>
+<p>电压差为3V表示逻辑0（显性电平）</p>
+<h2 id="帧格式"><a class="markdownIt-Anchor" href="#帧格式"></a> 帧格式</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">帧类型</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据帧</td>
+<td style="text-align:center">发送设备主动发送数据</td>
+</tr>
+<tr>
+<td style="text-align:center">遥控帧</td>
+<td style="text-align:center">接收设备主动请求数据</td>
+</tr>
+<tr>
+<td style="text-align:center">错误帧</td>
+<td style="text-align:center">某个设备检测出错误时向其他设备通知错误</td>
+</tr>
+<tr>
+<td style="text-align:center">过载帧</td>
+<td style="text-align:center">接收设备通知其尚未做好接收准备</td>
+</tr>
+<tr>
+<td style="text-align:center">帧间隔</td>
+<td style="text-align:center">用于将数据帧及遥控帧与前面的帧分隔开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据帧"><a class="markdownIt-Anchor" href="#数据帧"></a> 数据帧</h3>
+<p><img src="https://s2.loli.net/2025/07/24/NIBvbY56zMZ3LQx.png" alt="" /></p>
+<p>SOF（Start of Frame）：帧起始，表示后面一段波形是传输的数据位</p>
+<p>ID（Identify）：标识符，区分功能，决定优先级</p>
+<p>RTR（Remote Transmission Request）：数据帧（0），遥控帧（1）。</p>
+<p>IDE（Identifier Extension）：用于区分标准格式（0）和扩展格式（1）</p>
+<p>r0/r1（Reserve）：保留位，为后续留空间</p>
+<p>DLC（Data Length Code）：数据长度</p>
+<p>ACK槽，发送方（1），接收方（0），如果没有接收方就（1），告知发送方</p>
+<p><strong>ACK槽允许多个接收方共同拉开总线</strong></p>
+<p><strong>SRR</strong>：替代RTR的位，用于<strong>保证标准格式高于扩展格式的优先级</strong></p>
+<p>EOF（End of Frame）：帧结束，表示传输完毕</p>
+<h3 id="遥控帧"><a class="markdownIt-Anchor" href="#遥控帧"></a> 遥控帧</h3>
+<p><strong>遥控帧无数据段，RTR为隐形电平1</strong>，其他部分与数据帧相同</p>
+<p><img src="https://s2.loli.net/2025/07/24/ivsZVrE8J4Tb5FU.png" alt="" /></p>
+<h3 id="错误帧"><a class="markdownIt-Anchor" href="#错误帧"></a> 错误帧</h3>
+<p>总线上所有设备都会监督总线数据，一旦发现“位错误”、“填充错误”、“CRC错误”、“格式错误”、“应答错误”，<strong>这些设备就会发出错误帧来破坏数据，同时终止当前的发送设备</strong>。</p>
+<p><img src="https://s2.loli.net/2025/07/24/ywMD7HjAbCeGX3B.png" alt="" /></p>
+<ul>
+<li>主动错误会破坏别人的，被动错误会破坏自己的</li>
+</ul>
+<h3 id="过载帧"><a class="markdownIt-Anchor" href="#过载帧"></a> 过载帧</h3>
+<p>接收方收到大量数据而无法处理时，其可以发出过载帧，延缓发送方的数据发送，以平衡总线负担，避免数据丢失。</p>
+<p><img src="https://s2.loli.net/2025/07/24/4RGkZDB1efXtS5U.png" alt="" /></p>
+<h3 id="帧间隔"><a class="markdownIt-Anchor" href="#帧间隔"></a> 帧间隔</h3>
+<p>将数据帧和远程帧与前面的帧分离开</p>
+<p><img src="https://s2.loli.net/2025/07/24/Au6SR5a4dLzi2br.png" alt="" /></p>
+<h3 id="位填充"><a class="markdownIt-Anchor" href="#位填充"></a> 位填充</h3>
+<p><strong>规则</strong>：发送方<strong>连续发送5个相同电平</strong>后，自动<strong>追加一个相反电平</strong>的填充位；<strong>接收方</strong>检测到填充位时，<strong>会自动移除</strong>，恢复原始数据。</p>
+<p>例如：<br />
+即时发送： 100000110       10000011110</p>
+<p>实际发送： 1000001110     1000001111100</p>
+<p>实际接收： 1000001110     1000001111100</p>
+<p>移除填充： 100000110       10000011110</p>
+<p><strong>位填充的作用</strong>：</p>
+<ul>
+<li>增加波形的定位信息，利于接收方执行“再同步”，防止波形长时间无变化，当只接收方不能精准掌握数据采样时机</li>
+<li>将正常数据流与“错误帧”、“过载帧”区分开</li>
+<li>保持CAN总线在发送正常数据流时的活跃状态，防止被总线误认为空闲</li>
+</ul>
+<h2 id="位同步"><a class="markdownIt-Anchor" href="#位同步"></a> 位同步</h2>
+<ul>
+<li>
+<p>CAN总线没有时钟线，总线上所有设备通过<strong>约定波特率</strong>来<strong>确定每一位数据位时长</strong></p>
+</li>
+<li>
+<p>发送方以约定的位时长每隔固定时间输出一个数据位</p>
+</li>
+<li>
+<p>接收方以约定的位时长每个固定时间采样总线的电平，输入一个数据位</p>
+</li>
+<li>
+<p>理想状态下，接收方能依次采样到发送方发出的每个数据位，且采样点位于数据位中心附近</p>
+</li>
+</ul>
+<h3 id="位时序"><a class="markdownIt-Anchor" href="#位时序"></a> 位时序</h3>
+<p>为了能够灵活调整每个采样点的位置，使采样点对齐数据位中心附近，<strong>CAN总线对每一个数据位的时长进行更细划分</strong>，分为同步段（SS）、传播时间段（PTS）、相位缓冲段1（PBS1）和相位缓冲段2（PBS2），每隔段由若干个最小时间单位（Tq）构成</p>
+<ul>
+<li>SS = 1Tq</li>
+<li>PTS = 1 ~ 8 Tq</li>
+<li>PBS1 = 1 ~ 8 Tq</li>
+<li>PBS2 = 2 ~ 8 Tq</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/ntCflEzV3guBori.png" alt="" /></p>
+<p><strong>最开始就没有同步时序</strong>。</p>
+<h3 id="硬同步初始位置同步"><a class="markdownIt-Anchor" href="#硬同步初始位置同步"></a> 硬同步(初始位置同步)</h3>
+<p>每个设备都有一个位时序计时周期，当某个设备（发送方）率先发送报文，其他所有设备（接收方）收到SOF的下降沿时，接收方会将自己的位时序计时周期拨到SS段，与发送方的位时序计时周期保持同步；</p>
+<p><strong>硬同步只在第一个下降沿（SOF下降沿）有效</strong>；</p>
+<p>经过硬同步后，若发送方和接收方的时钟没有误差，则后续所有数据位的采样点必须都会对齐数据位中心附近</p>
+<p><img src="https://s2.loli.net/2025/07/24/lwtY9Hd21jNs7Zz.png" alt="" /></p>
+<p><strong>最开始接收采样正确，但始终有误差，随着误差积累，采样点逐渐偏离。</strong></p>
+<h3 id="再同步"><a class="markdownIt-Anchor" href="#再同步"></a> 再同步</h3>
+<ul>
+<li>若发送方或接收方的时钟有误差，随着误差积累，数据位边沿逐渐偏离SS段，则此时接收方根据再同步补偿宽度（SJW）通过<strong>加长PBS1段，或缩短PBS2段</strong>，调整同步</li>
+<li>再同步可以发生在每一个下降沿之后的每个数据位跳变边沿</li>
+</ul>
+<p>SJW = 1 ~ 4 Tq</p>
+<p><strong>如果误差值小于等于SJW指定值，则误差几个Tq，补偿几个Tq，否则补偿SJW</strong></p>
+<p>SJW是补偿的上限，防止波形中的噪声对位时序造成过大影响。</p>
+<p><img src="https://s2.loli.net/2025/07/24/jDnNcMzGxSUtuOK.png" alt="" /></p>
+<h3 id="波特率的计算"><a class="markdownIt-Anchor" href="#波特率的计算"></a> 波特率的计算</h3>
+<p>波特率 = 1 / (一个数据位的时长) = 1 / (Tss + Tpts + Tpbs1 + Tpbs2)</p>
+<p>举例</p>
+<p>SS = 1 Tq，PTS = 3 Tq，PBS1 = 3 Tq，PBS2 = 3 Tq；Tq = 0.5 us</p>
+<p>波特率 = 1 / (0.5us + 1.5us + 1.5us + 1.5us) = 200kbps</p>
+<h2 id="仲裁"><a class="markdownIt-Anchor" href="#仲裁"></a> 仲裁</h2>
+<p>CAN总线只有一对差分信号线，同一时间只能有一个设备操作总线发送数据，<strong>如果多个设备同时有发送需求，该如何分配？</strong></p>
+<h3 id="规则1先占先得"><a class="markdownIt-Anchor" href="#规则1先占先得"></a> 规则1——先占先得</h3>
+<ul>
+<li>
+<p>若当前<strong>已经有设备操作总线发送数据帧/遥控帧</strong>，则其他任何设备不能再同时发送数据帧/遥控帧（<strong>可以发送错误帧/过载帧破坏当前数据</strong>）</p>
+</li>
+<li>
+<p>任何设备检测到<strong>连续11个隐性电平</strong>，即认为<strong>总线空闲</strong>，<strong>只有总线空闲，设备才可以发送数据帧/遥控帧</strong></p>
+</li>
+<li>
+<p>一旦有设备正在发送数据帧/遥控帧，总线就会变活跃状态，必然不会出现连续11个隐性电平（连续6个就是错误帧/过载帧），其他设备自然也不会破坏当前发送</p>
+</li>
+<li>
+<p>若总线活跃，其他设备有发送需求，则需要等待总线变空闲，才能执行发送需求</p>
+</li>
+</ul>
+<h3 id="规则2非破坏性仲裁"><a class="markdownIt-Anchor" href="#规则2非破坏性仲裁"></a> 规则2——非破坏性仲裁</h3>
+<p><strong>根据ID号（仲裁段）进行非破坏性仲裁，ID号小的取到总线控制权</strong>，ID号大的仲裁失利将转为接收状态，等待下一次总线空闲时再尝试发送。</p>
+<h4 id="实现非破坏性仲裁两个要求"><a class="markdownIt-Anchor" href="#实现非破坏性仲裁两个要求"></a> 实现非破坏性仲裁两个要求：</h4>
+<ul>
+<li>
+<p>线与特性：总线上任何一个设备发送显性电平0时，总线就会呈现显性电平0，只有当所有设备都发送隐性电平1时，总线才会呈现隐性电平1；即0 &amp; X  = 0， 1 &amp; 1 = 1.</p>
+</li>
+<li>
+<p>回读机制：每隔设备发出一个数据位后，都会读回总线当前的电平状态，以确认自己发出的电平是否被真实发送出去了。根据线与特性，发出0，读回必然是0，但是发出1读回不一定是1.<strong>（此刻是还在仲裁段，发出数据1，读回数据0，表示有设备在占用总线，ID小的优先）</strong></p>
+</li>
+</ul>
+<h4 id="优先级补充"><a class="markdownIt-Anchor" href="#优先级补充"></a> 优先级补充</h4>
+<ul>
+<li>
+<p><strong>数据帧和遥控帧ID号一样时，数据帧的优先级高于遥控帧</strong></p>
+</li>
+<li>
+<p><strong>标准格式的11位ID号和扩展格式29位ID号的前11位系统，标准格式的优先级高于扩展格式</strong>（SSR必须始终为1）</p>
+</li>
+</ul>
+<h2 id="错误类型"><a class="markdownIt-Anchor" href="#错误类型"></a> 错误类型</h2>
+<p>错误有5种：位错误、填充错误、CRC错误、格式错误、应答错误</p>
+<p><img src="https://s2.loli.net/2025/07/24/MmE48gt5k3LKpD7.png" alt="" /></p>
+<p>为了防止某个设备发疯一样，一直认为别的设备发送是错误帧，引入<strong>错误状态</strong></p>
+<h3 id="错误状态"><a class="markdownIt-Anchor" href="#错误状态"></a> 错误状态</h3>
+<ul>
+<li>主动错误状态的设备正常参与通信并检测到错误时发出主动错误帧（会破坏别的数据帧）</li>
+<li>被动错误状态的设备正常参与通信但检测到错误时只能发出被动错误帧（不会破坏别的数据帧）</li>
+<li>总线关闭状态的设备不能参与通信</li>
+<li>每隔设备内部管理一个TEC和REC，根据TEC和REC确定直接的状态</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/SkbB8ojwI2rM1O5.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/07/24/I68snYPTvfMuiQU.png" alt="" /></p>
+<h2 id="stm32-can外设"><a class="markdownIt-Anchor" href="#stm32-can外设"></a> STM32 CAN外设</h2>
+<ul>
+<li>
+<p>波特率最高可达1Mbps</p>
+</li>
+<li>
+<p>3个可配置优先级的发送邮箱 —— 发送缓冲区</p>
+</li>
+<li>
+<p>2个3级深度接收FIFO —— 接收缓冲区</p>
+</li>
+<li>
+<p>14个过滤器组 —— 过滤无关报文</p>
+</li>
+<li>
+<p>时间触发通信、自动离线恢复、自动唤醒、禁止自动重传、接收FIFO溢出处理方式可配置、发送优先级可配置、双CAN模式</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/4fXN3hrozaApKw2.png" alt="" /></p>
+<h3 id="标识符过滤器"><a class="markdownIt-Anchor" href="#标识符过滤器"></a> 标识符过滤器</h3>
+<ul>
+<li>
+<p>每个过滤器的核心由两个32位寄存器组成：R1[31:0]和R2[31:0]；x = 0,…,13</p>
+</li>
+<li>
+<p>FSCx：位宽设置；置0，16位；置1，32位</p>
+</li>
+<li>
+<p>FBMx：模式设置；置0，屏蔽模式；置1，列表模式</p>
+</li>
+<li>
+<p>FFAx：关联模式；置0，FIFO 0；置1，FIFO 1</p>
+</li>
+<li>
+<p>FACTx：激活设置；置0，禁用；置1，启用、</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/D53jncszLtSyEKO.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/07/24/NzLVncImCh8sZjB.png" alt="" /></p>
+<p>（TIP：第二行Mask的0x700 ---- 0111 0000 0000，表示接收的第2到4位必须和ID相同）</p>
+<h3 id="测试模式"><a class="markdownIt-Anchor" href="#测试模式"></a> 测试模式</h3>
+<p><img src="https://s2.loli.net/2025/07/24/oHWz7Z3FiTdPuan.png" alt="" /></p>
+<h3 id="工作模式"><a class="markdownIt-Anchor" href="#工作模式"></a> 工作模式</h3>
+<p><img src="https://s2.loli.net/2025/07/24/l7gpX8YyLdzs21e.png" alt="" /></p>
+<h3 id="位时间特征"><a class="markdownIt-Anchor" href="#位时间特征"></a> 位时间特征</h3>
+<p><img src="https://s2.loli.net/2025/07/24/vFjc6RTKwbhLIXs.png" alt="" /></p>
+<p>TIP：STM32里面PBS1和PBS2合并成一个BS段</p>
+<h3 id="中断"><a class="markdownIt-Anchor" href="#中断"></a> 中断</h3>
+<p><img src="https://s2.loli.net/2025/07/24/hHASOJDMRbKeBvT.png" alt="" /></p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>CAN通信</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bootloader学习笔记</title>
     <url>/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="bootloaderiap"><a class="markdownIt-Anchor" href="#bootloaderiap"></a> Bootloader+IAP</h1>
@@ -31,6 +366,15 @@
 <p>在无需CPU帮助下，<strong>DMA</strong>负责外设与寄存器之间<strong>数据传输</strong></p>
 <p><strong>空闲中断</strong>（IDLE）是串口通信中<strong>判断“接收完成”的经典方式</strong></p>
 <p><strong>环形缓冲区</strong>：<strong>数据传输</strong>过程中，<strong>接收速度和处理速度可能不一致</strong>，因此<strong>需要缓冲区先保存数据，防止数据丢失</strong>；一维数组，确认<strong>单次接收最大量</strong>，防止出现越界问题</p>
+<p><strong>Q：如何判断Read和Write的状态问题？</strong></p>
+<ol>
+<li>
+<p><strong>预留一个空位。Read == Write，即空；（Write + 1）% N == R，即满；</strong></p>
+</li>
+<li>
+<p>通过一个count计数，W是生产者，R是消费者；每次W就count+1，每次R就count-1；0&lt;=count&lt;=Max_Count。</p>
+</li>
+</ol>
 <p><strong>SE指针对（环形缓冲）</strong>：缓冲区是一维数组，总长度为 2048 Byte，划分为10个数据块，每个数据块200 Byte。通过两个指针 IN（生产者指针）和 OUT（消费者指针）管理缓冲区的读写操作。当 IN ≠ OUT 时，表示缓冲区中存在待处理的数据包。指针每次移动一个数据块（200字节），当指针到达缓冲区末尾时自动回卷到起始位置，实现环形缓冲机制。</p>
 <img src="https://s2.loli.net/2025/08/22/Mg31NUZXFtv5TCk.png" style="zoom:50%;" />
 <p>❗TIP：每次接收后，都<strong>需要判断剩余空间</strong>，以防内存不足，及时回卷；需要记录已经存放的<strong>累加值</strong></p>
@@ -443,34 +787,8 @@
         <category>嵌入式</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>STM32</tag>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C语言易错问题</title>
-    <url>/2025/08/31/C%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>语法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux学习笔记</title>
-    <url>/2025/08/26/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="linux学习笔记学习ing"><a class="markdownIt-Anchor" href="#linux学习笔记学习ing"></a> Linux学习笔记(学习ing…)</h1>
-<p><s>FOC、CANOpen和AutoSAR是什么，真不熟。</s></p>
-<p>抽空还是再看看Linux吧。（未完待续）</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -711,360 +1029,18 @@
       </tags>
   </entry>
   <entry>
-    <title>Markdown基础用法</title>
-    <url>/2023/04/12/Markdown%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1 id="markdown基础用法"><a class="markdownIt-Anchor" href="#markdown基础用法"></a> Markdown基础用法</h1>
-<h3 id="官网网址httpwwwtyporaio"><a class="markdownIt-Anchor" href="#官网网址httpwwwtyporaio"></a> 官网网址：<a href="http://www.typora.io/">http://www.typora.io/</a></h3>
-<p>可以下载排字模板和编辑主题。</p>
-<p><strong>使用Typora，通过Ctrl+/即可进入Markdown源代码编辑模式。</strong></p>
-<h3 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h3>
-<p>#+空格+标题名称-----------一级标题<br />
-##+空格+标题名称---------二级标题<br />
-###+空格+标题名称--------三级标题<br />
-####+空格+标题名称------四级标题<br />
-#####+空格+标题名称------五级标题<br />
-######+空格+标题名称-----六级标题<br />
-<em><strong>最大支持六级标题</strong></em></p>
-<h3 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h3>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> + 文字 + *         斜体</span><br><span class="line">** + 文字 + **       加粗</span><br><span class="line"><span class="strong">*** + 文字 + **</span>*     斜体加粗</span><br><span class="line">~~ + 文字 + ~~       删除线</span><br></pre></td></tr></table></figure>
-<p>对于标准的markdown文本是不支持居中对齐的。不过markdown同时兼容HTML，可以通过HTML语法格式书写来让文本居中对齐。</p>
-<h3 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h3>
-<blockquote>
-<p>‘&gt;’+加空格+文字</p>
-</blockquote>
-<h3 id="分割线"><a class="markdownIt-Anchor" href="#分割线"></a> 分割线</h3>
-<p>1.三个*然后回车<br />
-2.三个-（减号）回车</p>
-<h3 id="插入图片"><a class="markdownIt-Anchor" href="#插入图片"></a> 插入图片</h3>
-<p>①本地的图片：英文的！+[图片名称]+（路径）<br />
-②网络图：英文的！+[图片名称]+（网络图片地址）<br />
-比如：<br />
-<img src="https://s2.loli.net/2025/05/07/YhvXnKTEQL4FM2j.png" alt="" /></p>
-<h3 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h3>
-<p>[点击跳转到+名称]（网站、文件等地址）<br />
-比如：<a href="https://blog.csdn.net/weixin_47795024?spm=1001.2100.3001.5343">我的博客</a></p>
-<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
-<p>①有序列表；序号（1，①）+英文的句号（.）+输入得内容，然后回车自动补出下一个序号<br />
-②无序列表；减号（-）+空格+输入内容        回车自动补出下一个</p>
-<h3 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h3>
-<p>右击创建表格</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<p>Tab键上面的点（·）三个 + 代码类型（java c++ c#等）然后回车</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="数学公式"><a class="markdownIt-Anchor" href="#数学公式"></a> 数学公式</h3>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">
-\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1771em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-<p><a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">LaTeX公式格式</a></p>
-<h1 id="markdown快捷键"><a class="markdownIt-Anchor" href="#markdown快捷键"></a> Markdown快捷键</h1>
-<p>撤销：Ctrl/Command + Z<br />
-重做：Ctrl/Command + Y<br />
-加粗：Ctrl/Command + B<br />
-斜体：Ctrl/Command + I<br />
-标题：Ctrl/Command + Shift + H<br />
-无序列表：Ctrl/Command + Shift + U<br />
-有序列表：Ctrl/Command + Shift + O<br />
-检查列表：Ctrl/Command + Shift + C<br />
-插入代码：Ctrl/Command + Shift + K<br />
-插入链接：Ctrl/Command + Shift + L<br />
-插入图片：Ctrl/Command + Shift + G<br />
-查找：Ctrl/Command + F<br />
-mand + Shift + L<br />
-插入图片：Ctrl/Command + Shift + G<br />
-查找：Ctrl/Command + F<br />
-替换：Ctrl/Command + G</p>
+    <title>Linux学习笔记</title>
+    <url>/2025/08/26/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="linux学习笔记学习ing"><a class="markdownIt-Anchor" href="#linux学习笔记学习ing"></a> Linux学习笔记(学习ing…)</h1>
+<p><s>FOC、CANOpen和AutoSAR是什么，真不熟。</s></p>
+<p>抽空还是再看看Linux吧。（未完待续）</p>
 ]]></content>
       <categories>
-        <category>Markdown</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CAN通信学习</title>
-    <url>/2025/06/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="can通信笔记"><a class="markdownIt-Anchor" href="#can通信笔记"></a> CAN通信笔记</h1>
-<p>CAN（Controller Area Network Bus），控制局域网总线。</p>
-<h2 id="基本特征"><a class="markdownIt-Anchor" href="#基本特征"></a> 基本特征</h2>
-<ul>
-<li>
-<p>两根通信线（CAN_H、CAN_L），<strong>无需共地</strong></p>
-</li>
-<li>
-<p><strong>差分信号</strong>通信，抗干扰能力强</p>
-</li>
-<li>
-<p>高速CAN（ISO11898）：125k~1Mbps，&lt;40m</p>
-</li>
-<li>
-<p>低速CAN（ISO11519）：10k~125kbps，&lt;1km</p>
-</li>
-<li>
-<p><strong>异步</strong>，无需时钟线，通信速率由双方协定</p>
-</li>
-<li>
-<p><strong>半双工</strong>，可挂载多设备，<strong>多设备同时发送通过仲裁判断先后</strong></p>
-</li>
-<li>
-<p><strong>11/29位报文ID</strong>，用于区分消息功能，同时决定优先级**（小的优先）**</p>
-</li>
-<li>
-<p>可配置<strong>1~8字节的有效载荷</strong></p>
-</li>
-<li>
-<p>可实现<strong>广播式和请求式</strong>两种传输</p>
-</li>
-<li>
-<p>应答、CRC校验、位填充、位同步、错误处理等特性</p>
-</li>
-</ul>
-<h2 id="硬件电路"><a class="markdownIt-Anchor" href="#硬件电路"></a> 硬件电路</h2>
-<p><img src="https://s2.loli.net/2025/07/24/FydOPNIJWvxrp94.png" alt="" /></p>
-<h3 id="两个终端电阻的意义"><a class="markdownIt-Anchor" href="#两个终端电阻的意义"></a> 两个终端电阻的意义</h3>
-<ol>
-<li>
-<p><strong>防止回波反射</strong></p>
-</li>
-<li>
-<p><strong>没有设备操作时</strong>，将两根差分线电压“收紧”，<strong>使其电压一致</strong></p>
-</li>
-</ol>
-<p>（高速CAN的电阻阻值小，所以收紧更快，但能耗更大）</p>
-<h3 id="电平标准"><a class="markdownIt-Anchor" href="#电平标准"></a> 电平标准</h3>
-<p>CAN总线使用<strong>差分信号</strong>,即（<strong>Vcan_H - Vcan_L</strong>）</p>
-<ul>
-<li><strong>高速CAN</strong>规定</li>
-</ul>
-<p>电压差为0V表示逻辑1（隐性电平）</p>
-<p>电压差为2V表示逻辑0（显性电平）</p>
-<ul>
-<li><strong>低速CAN</strong>规定</li>
-</ul>
-<p>电压差为-1.5V表示逻辑1（隐性电平）</p>
-<p>电压差为3V表示逻辑0（显性电平）</p>
-<h2 id="帧格式"><a class="markdownIt-Anchor" href="#帧格式"></a> 帧格式</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">帧类型</th>
-<th style="text-align:center">用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">数据帧</td>
-<td style="text-align:center">发送设备主动发送数据</td>
-</tr>
-<tr>
-<td style="text-align:center">遥控帧</td>
-<td style="text-align:center">接收设备主动请求数据</td>
-</tr>
-<tr>
-<td style="text-align:center">错误帧</td>
-<td style="text-align:center">某个设备检测出错误时向其他设备通知错误</td>
-</tr>
-<tr>
-<td style="text-align:center">过载帧</td>
-<td style="text-align:center">接收设备通知其尚未做好接收准备</td>
-</tr>
-<tr>
-<td style="text-align:center">帧间隔</td>
-<td style="text-align:center">用于将数据帧及遥控帧与前面的帧分隔开</td>
-</tr>
-</tbody>
-</table>
-<h3 id="数据帧"><a class="markdownIt-Anchor" href="#数据帧"></a> 数据帧</h3>
-<p><img src="https://s2.loli.net/2025/07/24/NIBvbY56zMZ3LQx.png" alt="" /></p>
-<p>SOF（Start of Frame）：帧起始，表示后面一段波形是传输的数据位</p>
-<p>ID（Identify）：标识符，区分功能，决定优先级</p>
-<p>RTR（Remote Transmission Request）：数据帧（0），遥控帧（1）。</p>
-<p>IDE（Identifier Extension）：用于区分标准格式（0）和扩展格式（1）</p>
-<p>r0/r1（Reserve）：保留位，为后续留空间</p>
-<p>DLC（Data Length Code）：数据长度</p>
-<p>ACK槽，发送方（1），接收方（0），如果没有接收方就（1），告知发送方</p>
-<p><strong>ACK槽允许多个接收方共同拉开总线</strong></p>
-<p><strong>SRR</strong>：替代RTR的位，用于<strong>保证标准格式高于扩展格式的优先级</strong></p>
-<p>EOF（End of Frame）：帧结束，表示传输完毕</p>
-<h3 id="遥控帧"><a class="markdownIt-Anchor" href="#遥控帧"></a> 遥控帧</h3>
-<p><strong>遥控帧无数据段，RTR为隐形电平1</strong>，其他部分与数据帧相同</p>
-<p><img src="https://s2.loli.net/2025/07/24/ivsZVrE8J4Tb5FU.png" alt="" /></p>
-<h3 id="错误帧"><a class="markdownIt-Anchor" href="#错误帧"></a> 错误帧</h3>
-<p>总线上所有设备都会监督总线数据，一旦发现“位错误”、“填充错误”、“CRC错误”、“格式错误”、“应答错误”，<strong>这些设备就会发出错误帧来破坏数据，同时终止当前的发送设备</strong>。</p>
-<p><img src="https://s2.loli.net/2025/07/24/ywMD7HjAbCeGX3B.png" alt="" /></p>
-<ul>
-<li>主动错误会破坏别人的，被动错误会破坏自己的</li>
-</ul>
-<h3 id="过载帧"><a class="markdownIt-Anchor" href="#过载帧"></a> 过载帧</h3>
-<p>接收方收到大量数据而无法处理时，其可以发出过载帧，延缓发送方的数据发送，以平衡总线负担，避免数据丢失。</p>
-<p><img src="https://s2.loli.net/2025/07/24/4RGkZDB1efXtS5U.png" alt="" /></p>
-<h3 id="帧间隔"><a class="markdownIt-Anchor" href="#帧间隔"></a> 帧间隔</h3>
-<p>将数据帧和远程帧与前面的帧分离开</p>
-<p><img src="https://s2.loli.net/2025/07/24/Au6SR5a4dLzi2br.png" alt="" /></p>
-<h3 id="位填充"><a class="markdownIt-Anchor" href="#位填充"></a> 位填充</h3>
-<p><strong>规则</strong>：发送方<strong>连续发送5个相同电平</strong>后，自动<strong>追加一个相反电平</strong>的填充位；<strong>接收方</strong>检测到填充位时，<strong>会自动移除</strong>，恢复原始数据。</p>
-<p>例如：<br />
-即时发送： 100000110       10000011110</p>
-<p>实际发送： 1000001110     1000001111100</p>
-<p>实际接收： 1000001110     1000001111100</p>
-<p>移除填充： 100000110       10000011110</p>
-<p><strong>位填充的作用</strong>：</p>
-<ul>
-<li>增加波形的定位信息，利于接收方执行“再同步”，防止波形长时间无变化，当只接收方不能精准掌握数据采样时机</li>
-<li>将正常数据流与“错误帧”、“过载帧”区分开</li>
-<li>保持CAN总线在发送正常数据流时的活跃状态，防止被总线误认为空闲</li>
-</ul>
-<h2 id="位同步"><a class="markdownIt-Anchor" href="#位同步"></a> 位同步</h2>
-<ul>
-<li>
-<p>CAN总线没有时钟线，总线上所有设备通过<strong>约定波特率</strong>来<strong>确定每一位数据位时长</strong></p>
-</li>
-<li>
-<p>发送方以约定的位时长每隔固定时间输出一个数据位</p>
-</li>
-<li>
-<p>接收方以约定的位时长每个固定时间采样总线的电平，输入一个数据位</p>
-</li>
-<li>
-<p>理想状态下，接收方能依次采样到发送方发出的每个数据位，且采样点位于数据位中心附近</p>
-</li>
-</ul>
-<h3 id="位时序"><a class="markdownIt-Anchor" href="#位时序"></a> 位时序</h3>
-<p>为了能够灵活调整每个采样点的位置，使采样点对齐数据位中心附近，<strong>CAN总线对每一个数据位的时长进行更细划分</strong>，分为同步段（SS）、传播时间段（PTS）、相位缓冲段1（PBS1）和相位缓冲段2（PBS2），每隔段由若干个最小时间单位（Tq）构成</p>
-<ul>
-<li>SS = 1Tq</li>
-<li>PTS = 1 ~ 8 Tq</li>
-<li>PBS1 = 1 ~ 8 Tq</li>
-<li>PBS2 = 2 ~ 8 Tq</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/ntCflEzV3guBori.png" alt="" /></p>
-<p><strong>最开始就没有同步时序</strong>。</p>
-<h3 id="硬同步初始位置同步"><a class="markdownIt-Anchor" href="#硬同步初始位置同步"></a> 硬同步(初始位置同步)</h3>
-<p>每个设备都有一个位时序计时周期，当某个设备（发送方）率先发送报文，其他所有设备（接收方）收到SOF的下降沿时，接收方会将自己的位时序计时周期拨到SS段，与发送方的位时序计时周期保持同步；</p>
-<p><strong>硬同步只在第一个下降沿（SOF下降沿）有效</strong>；</p>
-<p>经过硬同步后，若发送方和接收方的时钟没有误差，则后续所有数据位的采样点必须都会对齐数据位中心附近</p>
-<p><img src="https://s2.loli.net/2025/07/24/lwtY9Hd21jNs7Zz.png" alt="" /></p>
-<p><strong>最开始接收采样正确，但始终有误差，随着误差积累，采样点逐渐偏离。</strong></p>
-<h3 id="再同步"><a class="markdownIt-Anchor" href="#再同步"></a> 再同步</h3>
-<ul>
-<li>若发送方或接收方的时钟有误差，随着误差积累，数据位边沿逐渐偏离SS段，则此时接收方根据再同步补偿宽度（SJW）通过<strong>加长PBS1段，或缩短PBS2段</strong>，调整同步</li>
-<li>再同步可以发生在每一个下降沿之后的每个数据位跳变边沿</li>
-</ul>
-<p>SJW = 1 ~ 4 Tq</p>
-<p><strong>如果误差值小于等于SJW指定值，则误差几个Tq，补偿几个Tq，否则补偿SJW</strong></p>
-<p>SJW是补偿的上限，防止波形中的噪声对位时序造成过大影响。</p>
-<p><img src="https://s2.loli.net/2025/07/24/jDnNcMzGxSUtuOK.png" alt="" /></p>
-<h3 id="波特率的计算"><a class="markdownIt-Anchor" href="#波特率的计算"></a> 波特率的计算</h3>
-<p>波特率 = 1 / (一个数据位的时长) = 1 / (Tss + Tpts + Tpbs1 + Tpbs2)</p>
-<p>举例</p>
-<p>SS = 1 Tq，PTS = 3 Tq，PBS1 = 3 Tq，PBS2 = 3 Tq；Tq = 0.5 us</p>
-<p>波特率 = 1 / (0.5us + 1.5us + 1.5us + 1.5us) = 200kbps</p>
-<h2 id="仲裁"><a class="markdownIt-Anchor" href="#仲裁"></a> 仲裁</h2>
-<p>CAN总线只有一对差分信号线，同一时间只能有一个设备操作总线发送数据，<strong>如果多个设备同时有发送需求，该如何分配？</strong></p>
-<h3 id="规则1先占先得"><a class="markdownIt-Anchor" href="#规则1先占先得"></a> 规则1——先占先得</h3>
-<ul>
-<li>
-<p>若当前<strong>已经有设备操作总线发送数据帧/遥控帧</strong>，则其他任何设备不能再同时发送数据帧/遥控帧（<strong>可以发送错误帧/过载帧破坏当前数据</strong>）</p>
-</li>
-<li>
-<p>任何设备检测到<strong>连续11个隐性电平</strong>，即认为<strong>总线空闲</strong>，<strong>只有总线空闲，设备才可以发送数据帧/遥控帧</strong></p>
-</li>
-<li>
-<p>一旦有设备正在发送数据帧/遥控帧，总线就会变活跃状态，必然不会出现连续11个隐性电平（连续6个就是错误帧/过载帧），其他设备自然也不会破坏当前发送</p>
-</li>
-<li>
-<p>若总线活跃，其他设备有发送需求，则需要等待总线变空闲，才能执行发送需求</p>
-</li>
-</ul>
-<h3 id="规则2非破坏性仲裁"><a class="markdownIt-Anchor" href="#规则2非破坏性仲裁"></a> 规则2——非破坏性仲裁</h3>
-<p><strong>根据ID号（仲裁段）进行非破坏性仲裁，ID号小的取到总线控制权</strong>，ID号大的仲裁失利将转为接收状态，等待下一次总线空闲时再尝试发送。</p>
-<h4 id="实现非破坏性仲裁两个要求"><a class="markdownIt-Anchor" href="#实现非破坏性仲裁两个要求"></a> 实现非破坏性仲裁两个要求：</h4>
-<ul>
-<li>
-<p>线与特性：总线上任何一个设备发送显性电平0时，总线就会呈现显性电平0，只有当所有设备都发送隐性电平1时，总线才会呈现隐性电平1；即0 &amp; X  = 0， 1 &amp; 1 = 1.</p>
-</li>
-<li>
-<p>回读机制：每隔设备发出一个数据位后，都会读回总线当前的电平状态，以确认自己发出的电平是否被真实发送出去了。根据线与特性，发出0，读回必然是0，但是发出1读回不一定是1.<strong>（此刻是还在仲裁段，发出数据1，读回数据0，表示有设备在占用总线，ID小的优先）</strong></p>
-</li>
-</ul>
-<h4 id="优先级补充"><a class="markdownIt-Anchor" href="#优先级补充"></a> 优先级补充</h4>
-<ul>
-<li>
-<p><strong>数据帧和遥控帧ID号一样时，数据帧的优先级高于遥控帧</strong></p>
-</li>
-<li>
-<p><strong>标准格式的11位ID号和扩展格式29位ID号的前11位系统，标准格式的优先级高于扩展格式</strong>（SSR必须始终为1）</p>
-</li>
-</ul>
-<h2 id="错误类型"><a class="markdownIt-Anchor" href="#错误类型"></a> 错误类型</h2>
-<p>错误有5种：位错误、填充错误、CRC错误、格式错误、应答错误</p>
-<p><img src="https://s2.loli.net/2025/07/24/MmE48gt5k3LKpD7.png" alt="" /></p>
-<p>为了防止某个设备发疯一样，一直认为别的设备发送是错误帧，引入<strong>错误状态</strong></p>
-<h3 id="错误状态"><a class="markdownIt-Anchor" href="#错误状态"></a> 错误状态</h3>
-<ul>
-<li>主动错误状态的设备正常参与通信并检测到错误时发出主动错误帧（会破坏别的数据帧）</li>
-<li>被动错误状态的设备正常参与通信但检测到错误时只能发出被动错误帧（不会破坏别的数据帧）</li>
-<li>总线关闭状态的设备不能参与通信</li>
-<li>每隔设备内部管理一个TEC和REC，根据TEC和REC确定直接的状态</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/SkbB8ojwI2rM1O5.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/07/24/I68snYPTvfMuiQU.png" alt="" /></p>
-<h2 id="stm32-can外设"><a class="markdownIt-Anchor" href="#stm32-can外设"></a> STM32 CAN外设</h2>
-<ul>
-<li>
-<p>波特率最高可达1Mbps</p>
-</li>
-<li>
-<p>3个可配置优先级的发送邮箱 —— 发送缓冲区</p>
-</li>
-<li>
-<p>2个3级深度接收FIFO —— 接收缓冲区</p>
-</li>
-<li>
-<p>14个过滤器组 —— 过滤无关报文</p>
-</li>
-<li>
-<p>时间触发通信、自动离线恢复、自动唤醒、禁止自动重传、接收FIFO溢出处理方式可配置、发送优先级可配置、双CAN模式</p>
-</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/4fXN3hrozaApKw2.png" alt="" /></p>
-<h3 id="标识符过滤器"><a class="markdownIt-Anchor" href="#标识符过滤器"></a> 标识符过滤器</h3>
-<ul>
-<li>
-<p>每个过滤器的核心由两个32位寄存器组成：R1[31:0]和R2[31:0]；x = 0,…,13</p>
-</li>
-<li>
-<p>FSCx：位宽设置；置0，16位；置1，32位</p>
-</li>
-<li>
-<p>FBMx：模式设置；置0，屏蔽模式；置1，列表模式</p>
-</li>
-<li>
-<p>FFAx：关联模式；置0，FIFO 0；置1，FIFO 1</p>
-</li>
-<li>
-<p>FACTx：激活设置；置0，禁用；置1，启用、</p>
-</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/D53jncszLtSyEKO.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/07/24/NzLVncImCh8sZjB.png" alt="" /></p>
-<p>（TIP：第二行Mask的0x700 ---- 0111 0000 0000，表示接收的第2到4位必须和ID相同）</p>
-<h3 id="测试模式"><a class="markdownIt-Anchor" href="#测试模式"></a> 测试模式</h3>
-<p><img src="https://s2.loli.net/2025/07/24/oHWz7Z3FiTdPuan.png" alt="" /></p>
-<h3 id="工作模式"><a class="markdownIt-Anchor" href="#工作模式"></a> 工作模式</h3>
-<p><img src="https://s2.loli.net/2025/07/24/l7gpX8YyLdzs21e.png" alt="" /></p>
-<h3 id="位时间特征"><a class="markdownIt-Anchor" href="#位时间特征"></a> 位时间特征</h3>
-<p><img src="https://s2.loli.net/2025/07/24/vFjc6RTKwbhLIXs.png" alt="" /></p>
-<p>TIP：STM32里面PBS1和PBS2合并成一个BS段</p>
-<h3 id="中断"><a class="markdownIt-Anchor" href="#中断"></a> 中断</h3>
-<p><img src="https://s2.loli.net/2025/07/24/hHASOJDMRbKeBvT.png" alt="" /></p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>CAN通信</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1227,6 +1203,77 @@ mand + Shift + L<br />
       <tags>
         <tag>学习笔记</tag>
         <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown基础用法</title>
+    <url>/2023/04/12/Markdown%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="markdown基础用法"><a class="markdownIt-Anchor" href="#markdown基础用法"></a> Markdown基础用法</h1>
+<h3 id="官网网址httpwwwtyporaio"><a class="markdownIt-Anchor" href="#官网网址httpwwwtyporaio"></a> 官网网址：<a href="http://www.typora.io/">http://www.typora.io/</a></h3>
+<p>可以下载排字模板和编辑主题。</p>
+<p><strong>使用Typora，通过Ctrl+/即可进入Markdown源代码编辑模式。</strong></p>
+<h3 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h3>
+<p>#+空格+标题名称-----------一级标题<br />
+##+空格+标题名称---------二级标题<br />
+###+空格+标题名称--------三级标题<br />
+####+空格+标题名称------四级标题<br />
+#####+空格+标题名称------五级标题<br />
+######+空格+标题名称-----六级标题<br />
+<em><strong>最大支持六级标题</strong></em></p>
+<h3 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> + 文字 + *         斜体</span><br><span class="line">** + 文字 + **       加粗</span><br><span class="line"><span class="strong">*** + 文字 + **</span>*     斜体加粗</span><br><span class="line">~~ + 文字 + ~~       删除线</span><br></pre></td></tr></table></figure>
+<p>对于标准的markdown文本是不支持居中对齐的。不过markdown同时兼容HTML，可以通过HTML语法格式书写来让文本居中对齐。</p>
+<h3 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h3>
+<blockquote>
+<p>‘&gt;’+加空格+文字</p>
+</blockquote>
+<h3 id="分割线"><a class="markdownIt-Anchor" href="#分割线"></a> 分割线</h3>
+<p>1.三个*然后回车<br />
+2.三个-（减号）回车</p>
+<h3 id="插入图片"><a class="markdownIt-Anchor" href="#插入图片"></a> 插入图片</h3>
+<p>①本地的图片：英文的！+[图片名称]+（路径）<br />
+②网络图：英文的！+[图片名称]+（网络图片地址）<br />
+比如：<br />
+<img src="https://s2.loli.net/2025/05/07/YhvXnKTEQL4FM2j.png" alt="" /></p>
+<h3 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h3>
+<p>[点击跳转到+名称]（网站、文件等地址）<br />
+比如：<a href="https://blog.csdn.net/weixin_47795024?spm=1001.2100.3001.5343">我的博客</a></p>
+<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
+<p>①有序列表；序号（1，①）+英文的句号（.）+输入得内容，然后回车自动补出下一个序号<br />
+②无序列表；减号（-）+空格+输入内容        回车自动补出下一个</p>
+<h3 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h3>
+<p>右击创建表格</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<p>Tab键上面的点（·）三个 + 代码类型（java c++ c#等）然后回车</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数学公式"><a class="markdownIt-Anchor" href="#数学公式"></a> 数学公式</h3>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">
+\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1771em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p><a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">LaTeX公式格式</a></p>
+<h1 id="markdown快捷键"><a class="markdownIt-Anchor" href="#markdown快捷键"></a> Markdown快捷键</h1>
+<p>撤销：Ctrl/Command + Z<br />
+重做：Ctrl/Command + Y<br />
+加粗：Ctrl/Command + B<br />
+斜体：Ctrl/Command + I<br />
+标题：Ctrl/Command + Shift + H<br />
+无序列表：Ctrl/Command + Shift + U<br />
+有序列表：Ctrl/Command + Shift + O<br />
+检查列表：Ctrl/Command + Shift + C<br />
+插入代码：Ctrl/Command + Shift + K<br />
+插入链接：Ctrl/Command + Shift + L<br />
+插入图片：Ctrl/Command + Shift + G<br />
+查找：Ctrl/Command + F<br />
+mand + Shift + L<br />
+插入图片：Ctrl/Command + Shift + G<br />
+查找：Ctrl/Command + F<br />
+替换：Ctrl/Command + G</p>
+]]></content>
+      <categories>
+        <category>Markdown</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1412,6 +1459,7 @@ mand + Shift + L<br />
 </tbody>
 </table>
 <h1 id="内存管理"><a class="markdownIt-Anchor" href="#内存管理"></a> 内存管理</h1>
+<p>FreeRTOS的内存管理包括<strong>静态内存管理</strong>和<strong>动态内存管理</strong>。</p>
 <ul>
 <li>堆：heap，由程序员自己malloc一块空间，用完后free标记为&quot;空闲&quot;</li>
 <li>栈：stack，函数调用时局部变量保存在栈中，当前程序环境也是保存在栈中。</li>
@@ -2446,9 +2494,28 @@ mand + Shift + L<br />
         <category>嵌入式</category>
       </categories>
       <tags>
-        <tag>STM32</tag>
         <tag>学习笔记</tag>
+        <tag>STM32</tag>
         <tag>Bootloader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用新域名后不加载主题</title>
+    <url>/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="心路历程"><a class="markdownIt-Anchor" href="#心路历程"></a> <strong>心路历程</strong></h3>
+<p>看了一圈CSDN，基本上都是抄抄改改，只有几个还有点负责心，但依然没有解决我的问题，差点就放弃了，不过好在通过试错给试出来了。</p>
+<h3 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h3>
+<p>使用了新域名后，发现网页的CSS和JS都没用了，但本地静态可以正常运行。这个时候需要修改个人博客底下的_config.yml文件，先找到这个地方：</p>
+<p><img src="https://s2.loli.net/2025/05/07/KCLeSkUBlQGursV.png" alt="" /></p>
+<p>将url改为<strong><a href="http://githubname.github.io">githubname.github.io</a></strong>，<strong>不要出现下一层仓库名</strong>。</p>
+<p><strong>说明</strong>：CSDN上别人的解决方法不适用，是因为我们这个没有单独给出root，切记切记。</p>
+]]></content>
+      <categories>
+        <category>网页</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -2849,25 +2916,6 @@ kernel = cv2.getStructuringElement(MODE, SIZE, POINT)
       </tags>
   </entry>
   <entry>
-    <title>使用新域名后不加载主题</title>
-    <url>/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="心路历程"><a class="markdownIt-Anchor" href="#心路历程"></a> <strong>心路历程</strong></h3>
-<p>看了一圈CSDN，基本上都是抄抄改改，只有几个还有点负责心，但依然没有解决我的问题，差点就放弃了，不过好在通过试错给试出来了。</p>
-<h3 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h3>
-<p>使用了新域名后，发现网页的CSS和JS都没用了，但本地静态可以正常运行。这个时候需要修改个人博客底下的_config.yml文件，先找到这个地方：</p>
-<p><img src="https://s2.loli.net/2025/05/07/KCLeSkUBlQGursV.png" alt="" /></p>
-<p>将url改为<strong><a href="http://githubname.github.io">githubname.github.io</a></strong>，<strong>不要出现下一层仓库名</strong>。</p>
-<p><strong>说明</strong>：CSDN上别人的解决方法不适用，是因为我们这个没有单独给出root，切记切记。</p>
-]]></content>
-      <categories>
-        <category>网页</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>STM32学习笔记</title>
     <url>/2024/06/12/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>主要学习STM32C8T6的基本配置以及各部件操作。</p>
@@ -3017,13 +3065,22 @@ kernel = cv2.getStructuringElement(MODE, SIZE, POINT)
 <p><strong>通用/高级</strong>定时器：<strong>支持向上计数、向下计数、中央对齐</strong></p>
 </li>
 </ul>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>定时器计数频率：</mtext><mi>C</mi><mi>K</mi><mi mathvariant="normal">_</mi><mi>C</mi><mi>N</mi><mi>T</mi><mo>=</mo><mfrac><mrow><mi>C</mi><mi>L</mi><mi>C</mi><mi>K</mi></mrow><mrow><mi>P</mi><mi>S</mi><mi>C</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-定时器计数频率：CK\_CNT = \frac{CLCK}{PSC + 1}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord cjk_fallback">定时器计数频率：</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.13889em;">CNT</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">PSC</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-<p>CLCK是定时器输入时钟（一般是APB时钟），PSC是预分频器数值，RCC是自动重装寄存器（PWM的最大占空比）。</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>定时器计数频率：</mtext><mi>C</mi><mi>K</mi><mi mathvariant="normal">_</mi><mi>C</mi><mi>N</mi><mi>T</mi><mo>=</mo><mfrac><mrow><mi>H</mi><mi>C</mi><mi>L</mi><mi>K</mi></mrow><mrow><mi>P</mi><mi>S</mi><mi>C</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+定时器计数频率：CK\_CNT = \frac{HCLK}{PSC + 1}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord cjk_fallback">定时器计数频率：</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal" style="margin-right:0.13889em;">CNT</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">PSC</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p>HCLK是定时器输入时钟（一般是APB时钟），PSC是预分频器数值，<strong>RCC</strong>是自动重装寄存器（<strong>PWM的最大占空比</strong>）。</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>定时器溢出周期：</mtext><mi>T</mi><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>P</mi><mi>S</mi><mi>C</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>A</mi><mi>R</mi><mi>R</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><msub><mi>f</mi><mrow><mi>h</mi><mi>c</mi><mi>l</mi><mi>k</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">
+定时器溢出周期：T = \frac{(PSC+1)(ARR+1)}{f_{hclk}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">定时器溢出周期：</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3074em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">PSC</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.00773em;">RR</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
 <p><img src="https://s2.loli.net/2025/05/07/EjZKNokdDmv8YpH.png" alt="" /></p>
 <h3 id="q如何设置一个20ms定时器"><a class="markdownIt-Anchor" href="#q如何设置一个20ms定时器"></a> Q：如何设置一个20ms定时器？</h3>
-<p>给定HCLK = 72MHz，选择预分频系数PSC = 7199，计算CK_CNT = 10KHz = 0.1ms，只需要计数200次即可。</p>
+<ul>
+<li>HCLK = 72MHz；</li>
+<li>设置预分频系数PSC = 7199，计算CK_CNT = 10KHz = 0.1ms；</li>
+<li>ARR计数199次（200 - 1）。</li>
+</ul>
+<h3 id="q如果hclk72mhzpsc999arr7199那么是多少s"><a class="markdownIt-Anchor" href="#q如果hclk72mhzpsc999arr7199那么是多少s"></a> Q：如果HCLK=72MHz，PSC=999，ARR=7199，那么是多少s？</h3>
+<p>T = (999 + 1)(7199 + 1) / 72000000 = 0.1s</p>
 <h3 id="q如何开启定时器"><a class="markdownIt-Anchor" href="#q如何开启定时器"></a> Q：如何开启定时器？</h3>
 <ol>
 <li>开启RCC时钟</li>
@@ -3038,8 +3095,24 @@ kernel = cv2.getStructuringElement(MODE, SIZE, POINT)
 <p>输入电压：0 ~ 3.3V，转换范围：0 ~ 4095</p>
 <p><strong>ADC转换的步骤：采样 —&gt; 保持 —&gt;量化 —&gt; 编码</strong></p>
 <h3 id="qstm32-adc的总转换时间如何计算"><a class="markdownIt-Anchor" href="#qstm32-adc的总转换时间如何计算"></a> Q：STM32 ADC的总转换时间如何计算</h3>
-<p>T = 采样时间 + 12.5个ADC周期</p>
-<p>（12个周期量化，0.5周期位采样保持转换的准备时间）</p>
+<p>T = 采样时间 + 12.5个ADC周期(12个周期量化，0.5周期位采样保持转换的准备时间)</p>
+<p><strong>例 1：F1 常见配置</strong></p>
+<ul>
+<li>
+<p>HCLK = 72 MHz，PCLK2 = 72 MHz，ADC_PRE = 6  ⇒  f_ADC=12 MHz</p>
+</li>
+<li>
+<p>采样时间选 <strong>13.5 cycles</strong></p>
+</li>
+<li>
+<p>1 个通道：</p>
+<p>T_ch = (13.5 + 12.5) / 12 MHz = 26 / 12000000 ≈ 2.17 us</p>
+</li>
+<li>
+<p>若一次转换 3 个通道且都用 13.5 cycles：</p>
+<p>T_total = 3 × 2.17 us ≈ 6.5 μs</p>
+</li>
+</ul>
 <h2 id="stm32的flash"><a class="markdownIt-Anchor" href="#stm32的flash"></a> STM32的Flash</h2>
 <ul>
 <li><strong>Flash写入只能将1写成0，不能将0写成1</strong>，因此要写新数据，必须先擦除（擦除是将0恢复成1）</li>
@@ -3082,7 +3155,7 @@ kernel = cv2.getStructuringElement(MODE, SIZE, POINT)
 <p>NOR<strong>写和擦慢，容量小，价格贵</strong></p>
 </li>
 </ul>
-<h2 id="存储器之间对照"><a class="markdownIt-Anchor" href="#存储器之间对照"></a> 存储器之间对照</h2>
+<h2 id="存储器对比"><a class="markdownIt-Anchor" href="#存储器对比"></a> 存储器对比</h2>
 <ul>
 <li>
 <p><strong>SRAM</strong>：静态随机存储，不需要定时刷新充电，存储速度快，容量小，<strong>断电丢失</strong></p>
@@ -3515,8 +3588,8 @@ CAN波特率=TQ*(TBS1 + TBS2 + SJY)   \\
         <category>嵌入式</category>
       </categories>
       <tags>
-        <tag>STM32</tag>
         <tag>学习笔记</tag>
+        <tag>STM32</tag>
       </tags>
   </entry>
   <entry>
@@ -3604,6 +3677,80 @@ X_L=wL=2 \pi fL
       </categories>
       <tags>
         <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于ESP32S3的智能终端系统</title>
+    <url>/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="实物"><a class="markdownIt-Anchor" href="#实物"></a> 实物</h1>
+<p>LVGL界面使用<strong>Gui Guider</strong>制作，使用LVGL 8.3；图标库来自<strong>iconfont</strong></p>
+<p><a href="https://www.iconfont.cn/">iconfont-阿里巴巴矢量图标库</a></p>
+<h3 id="界面预览"><a class="markdownIt-Anchor" href="#界面预览"></a> 界面预览</h3>
+<p><img src="https://s2.loli.net/2025/08/04/JNpOYTuUInAGg57.png" alt="" /></p>
+<p>其他功能参考立创和官方例程制作，使用ESP-IDF环境。</p>
+<p><strong>暂时没空，后续整理。</strong></p>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p><strong>ESP32S3的FreeRTOS</strong>是<strong>自带的</strong>，但是<strong>STM32的FreeRTOS是移植的</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">官方 FreeRTOS</th>
+<th style="text-align:center">ESP32-S3 的 FreeRTOS（ESP-IDF）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">来源</td>
+<td style="text-align:center">AWS / FreeRTOS 官方</td>
+<td style="text-align:center">基于 FreeRTOS，Espressif 定制</td>
+</tr>
+<tr>
+<td style="text-align:center">支持内核数</td>
+<td style="text-align:center"><strong>通常单核</strong></td>
+<td style="text-align:center"><strong>支持多核</strong>（SMP）</td>
+</tr>
+<tr>
+<td style="text-align:center">硬件集成</td>
+<td style="text-align:center"><strong>不集成硬件</strong></td>
+<td style="text-align:center"><strong>集成 Wi-Fi / BLE / 外设等</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">任务调度</td>
+<td style="text-align:center">单核调度器</td>
+<td style="text-align:center">双核调度器（支持亲和性）</td>
+</tr>
+<tr>
+<td style="text-align:center">功耗管理</td>
+<td style="text-align:center">需手动实现</td>
+<td style="text-align:center">支持 Tickless Idle，低功耗优化</td>
+</tr>
+<tr>
+<td style="text-align:center">API 接口</td>
+<td style="text-align:center">标准 FreeRTOS API</td>
+<td style="text-align:center">支持标准 + Espressif 自定义 API</td>
+</tr>
+<tr>
+<td style="text-align:center">文件系统/网络等</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">ESP-IDF 提供完整网络、文件系统支持</td>
+</tr>
+<tr>
+<td style="text-align:center">配置方式</td>
+<td style="text-align:center"><code>FreeRTOSConfig.h</code></td>
+<td style="text-align:center"><code>menuconfig</code> 菜单配置（Kconfig）</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>项目</tag>
+        <tag>ESP32</tag>
+        <tag>LVGL</tag>
+        <tag>物联网</tag>
       </tags>
   </entry>
   <entry>
@@ -3754,80 +3901,6 @@ X_L=wL=2 \pi fL
         <tag>Bootloader</tag>
         <tag>项目</tag>
         <tag>FreeRTOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于ESP32S3的智能终端系统</title>
-    <url>/2025/02/22/%E5%9F%BA%E4%BA%8EESP32%E7%9A%84%E6%99%BA%E8%83%BD%E7%BB%88%E7%AB%AF%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="实物"><a class="markdownIt-Anchor" href="#实物"></a> 实物</h1>
-<p>LVGL界面使用<strong>Gui Guider</strong>制作，使用LVGL 8.3；图标库来自<strong>iconfont</strong></p>
-<p><a href="https://www.iconfont.cn/">iconfont-阿里巴巴矢量图标库</a></p>
-<h3 id="界面预览"><a class="markdownIt-Anchor" href="#界面预览"></a> 界面预览</h3>
-<p><img src="https://s2.loli.net/2025/08/04/JNpOYTuUInAGg57.png" alt="" /></p>
-<p>其他功能参考立创和官方例程制作，使用ESP-IDF环境。</p>
-<p><strong>暂时没空，后续整理。</strong></p>
-<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
-<p><strong>ESP32S3的FreeRTOS</strong>是<strong>自带的</strong>，但是<strong>STM32的FreeRTOS是移植的</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">项目</th>
-<th style="text-align:center">官方 FreeRTOS</th>
-<th style="text-align:center">ESP32-S3 的 FreeRTOS（ESP-IDF）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">来源</td>
-<td style="text-align:center">AWS / FreeRTOS 官方</td>
-<td style="text-align:center">基于 FreeRTOS，Espressif 定制</td>
-</tr>
-<tr>
-<td style="text-align:center">支持内核数</td>
-<td style="text-align:center"><strong>通常单核</strong></td>
-<td style="text-align:center"><strong>支持多核</strong>（SMP）</td>
-</tr>
-<tr>
-<td style="text-align:center">硬件集成</td>
-<td style="text-align:center"><strong>不集成硬件</strong></td>
-<td style="text-align:center"><strong>集成 Wi-Fi / BLE / 外设等</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">任务调度</td>
-<td style="text-align:center">单核调度器</td>
-<td style="text-align:center">双核调度器（支持亲和性）</td>
-</tr>
-<tr>
-<td style="text-align:center">功耗管理</td>
-<td style="text-align:center">需手动实现</td>
-<td style="text-align:center">支持 Tickless Idle，低功耗优化</td>
-</tr>
-<tr>
-<td style="text-align:center">API 接口</td>
-<td style="text-align:center">标准 FreeRTOS API</td>
-<td style="text-align:center">支持标准 + Espressif 自定义 API</td>
-</tr>
-<tr>
-<td style="text-align:center">文件系统/网络等</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">ESP-IDF 提供完整网络、文件系统支持</td>
-</tr>
-<tr>
-<td style="text-align:center">配置方式</td>
-<td style="text-align:center"><code>FreeRTOSConfig.h</code></td>
-<td style="text-align:center"><code>menuconfig</code> 菜单配置（Kconfig）</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>项目</tag>
-        <tag>ESP32</tag>
-        <tag>LVGL</tag>
-        <tag>物联网</tag>
       </tags>
   </entry>
   <entry>
@@ -4190,37 +4263,6 @@ e(k)是速度环中目标速度与当前速度的偏差 \\
       </tags>
   </entry>
   <entry>
-    <title>调试BUG与一些说明</title>
-    <url>/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/</url>
-    <content><![CDATA[<p>这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。</p>
-<h1 id="调试bug"><a class="markdownIt-Anchor" href="#调试bug"></a> 调试BUG</h1>
-<h2 id="stm32芯片被锁"><a class="markdownIt-Anchor" href="#stm32芯片被锁"></a> STM32芯片被锁</h2>
-<p>有一段时间没用STM32芯片，发现<strong>ST-LINK读不到</strong>，毫无头绪。</p>
-<p><strong>解决办法</strong>：使用软件<strong>STM32 ST-LINK Utility</strong>，<strong>点击Connect + 按住STM32上芯片复位键</strong>才能连接，连接后将程序给清除掉，成功解决。</p>
-<h2 id="串口通信出现乱码"><a class="markdownIt-Anchor" href="#串口通信出现乱码"></a> 串口通信出现乱码</h2>
-<p>编码格式、波特率、主频都可能是问题原因；</p>
-<p><strong>如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。</strong></p>
-<h2 id="esp32的新版i2c驱动不了摄像头"><a class="markdownIt-Anchor" href="#esp32的新版i2c驱动不了摄像头"></a> ESP32的新版I2C驱动不了摄像头</h2>
-<p>这个问题来自于<strong>旧I2C不支持新版摄像头驱动</strong>，一直报错，ESP IDF 5.4<strong>降低</strong>到ESP IDF 5.2即可。</p>
-<p>更新过驱动，也实现了摄像头，但是配合其他外设也需要修改对应的旧版I2C（液晶屏触摸等），暂不操作。</p>
-<h1 id="一些说明"><a class="markdownIt-Anchor" href="#一些说明"></a> 一些说明</h1>
-<ul>
-<li><code>#pragma once</code>，表示本头文件只可以包含一次，相当于 <code>#ifndef #define #endif</code></li>
-</ul>
-<h2 id="为什么编码器要用short来表示16位"><a class="markdownIt-Anchor" href="#为什么编码器要用short来表示16位"></a> 为什么编码器要用short来表示16位</h2>
-<p>STM32平衡车项目中处理编码器的计数使用short；</p>
-<p><strong>计算机存的是补码</strong>，short字节范围：-32768~ 32767，负数会变成32768 - n</p>
-<p><strong>正数的原码 = 反码 = 补码</strong></p>
-<p><strong>负数的反码是原码除了符号位其他位取反，补码是反码加1</strong></p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>调试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何做一个这样的网站</title>
     <url>/2024/01/15/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99/</url>
     <content><![CDATA[<h2 id="这个人太懒了根本就妹写正文呀还是来看看可爱猫猫吧"><a class="markdownIt-Anchor" href="#这个人太懒了根本就妹写正文呀还是来看看可爱猫猫吧"></a> 这个人太懒了，根本就妹写正文呀！还是来看看可爱猫猫吧！</h2>
@@ -4302,6 +4344,37 @@ Emmmm…，不过后来拿了省一，挺意外的。</p>
       </categories>
       <tags>
         <tag>比赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>调试BUG与一些说明</title>
+    <url>/2025/05/08/%E8%B0%83%E8%AF%95BUG%E4%B8%8E%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<p>这里记录了调试过程中遇到的一些调试问题，往往一困就是几天，人麻了。</p>
+<h1 id="调试bug"><a class="markdownIt-Anchor" href="#调试bug"></a> 调试BUG</h1>
+<h2 id="stm32芯片被锁"><a class="markdownIt-Anchor" href="#stm32芯片被锁"></a> STM32芯片被锁</h2>
+<p>有一段时间没用STM32芯片，发现<strong>ST-LINK读不到</strong>，毫无头绪。</p>
+<p><strong>解决办法</strong>：使用软件<strong>STM32 ST-LINK Utility</strong>，<strong>点击Connect + 按住STM32上芯片复位键</strong>才能连接，连接后将程序给清除掉，成功解决。</p>
+<h2 id="串口通信出现乱码"><a class="markdownIt-Anchor" href="#串口通信出现乱码"></a> 串口通信出现乱码</h2>
+<p>编码格式、波特率、主频都可能是问题原因；</p>
+<p><strong>如果输入英文和数字都出现问题，那大概率晶振问题，看一下是不是焊错了。</strong></p>
+<h2 id="esp32的新版i2c驱动不了摄像头"><a class="markdownIt-Anchor" href="#esp32的新版i2c驱动不了摄像头"></a> ESP32的新版I2C驱动不了摄像头</h2>
+<p>这个问题来自于<strong>旧I2C不支持新版摄像头驱动</strong>，一直报错，ESP IDF 5.4<strong>降低</strong>到ESP IDF 5.2即可。</p>
+<p>更新过驱动，也实现了摄像头，但是配合其他外设也需要修改对应的旧版I2C（液晶屏触摸等），暂不操作。</p>
+<h1 id="一些说明"><a class="markdownIt-Anchor" href="#一些说明"></a> 一些说明</h1>
+<ul>
+<li><code>#pragma once</code>，表示本头文件只可以包含一次，相当于 <code>#ifndef #define #endif</code></li>
+</ul>
+<h2 id="为什么编码器要用short来表示16位"><a class="markdownIt-Anchor" href="#为什么编码器要用short来表示16位"></a> 为什么编码器要用short来表示16位</h2>
+<p>STM32平衡车项目中处理编码器的计数使用short；</p>
+<p><strong>计算机存的是补码</strong>，short字节范围：-32768~ 32767，负数会变成32768 - n</p>
+<p><strong>正数的原码 = 反码 = 补码</strong></p>
+<p><strong>负数的反码是原码除了符号位其他位取反，补码是反码加1</strong></p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>调试</tag>
       </tags>
   </entry>
   <entry>

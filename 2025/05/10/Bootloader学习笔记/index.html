@@ -520,6 +520,15 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>在无需CPU帮助下，<strong>DMA</strong>负责外设与寄存器之间<strong>数据传输</strong></p>
 <p><strong>空闲中断</strong>（IDLE）是串口通信中<strong>判断“接收完成”的经典方式</strong></p>
 <p><strong>环形缓冲区</strong>：<strong>数据传输</strong>过程中，<strong>接收速度和处理速度可能不一致</strong>，因此<strong>需要缓冲区先保存数据，防止数据丢失</strong>；一维数组，确认<strong>单次接收最大量</strong>，防止出现越界问题</p>
+<p><strong>Q：如何判断Read和Write的状态问题？</strong></p>
+<ol>
+<li>
+<p><strong>预留一个空位。Read == Write，即空；（Write + 1）% N == R，即满；</strong></p>
+</li>
+<li>
+<p>通过一个count计数，W是生产者，R是消费者；每次W就count+1，每次R就count-1；0&lt;=count&lt;=Max_Count。</p>
+</li>
+</ol>
 <p><strong>SE指针对（环形缓冲）</strong>：缓冲区是一维数组，总长度为 2048 Byte，划分为10个数据块，每个数据块200 Byte。通过两个指针 IN（生产者指针）和 OUT（消费者指针）管理缓冲区的读写操作。当 IN ≠ OUT 时，表示缓冲区中存在待处理的数据包。指针每次移动一个数据块（200字节），当指针到达缓冲区末尾时自动回卷到起始位置，实现环形缓冲机制。</p>
 <img src="https://s2.loli.net/2025/08/22/Mg31NUZXFtv5TCk.png" style="zoom:50%;" />
 <p>❗TIP：每次接收后，都<strong>需要判断剩余空间</strong>，以防内存不足，及时回卷；需要记录已经存放的<strong>累加值</strong></p>
@@ -942,9 +951,9 @@ header .header__right .dropdown-menus .dropdown-menu {
           
           
               
-                <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
-              
                 <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
+              
+                <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
               
           
     </div>
