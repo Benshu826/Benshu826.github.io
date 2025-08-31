@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>C语言常见知识点 - Ben Shu &#39;s Blog</title>
+    <title>C语言常见问题 - Ben Shu &#39;s Blog</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="Big Ben">
     <meta name="keywords" content="">
-    <meta property="og:title" content="C语言常见知识点"/>
+    <meta property="og:title" content="C语言常见问题"/>
     <style>
 
 
@@ -458,7 +458,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>C语言常见知识点</h3>
+  <h3>C语言常见问题</h3>
     
       <span class="post-meta-label">
         Big Ben
@@ -506,13 +506,13 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>TIP：希尔排序其实就是分组的插入排序。</p>
 <h2 id="3将递归算法改成非递归算法一般用栈"><a class="markdownIt-Anchor" href="#3将递归算法改成非递归算法一般用栈"></a> 3.将递归算法改成非递归算法，一般用栈</h2>
 <h2 id="4关于指针和数组"><a class="markdownIt-Anchor" href="#4关于指针和数组"></a> 4.关于指针和数组</h2>
-<p>*<em>指针数组： int <em>arr[10];</em></em></p>
+<p><strong>指针数组： int *arr[10];</strong></p>
 <p>数组里的<strong>每个元素都是一个指针</strong>，arr是数组名，arr[i]是一个指针。</p>
-<p>*<em>数组指针： int (<em>p)[10];</em></em></p>
+<p><strong>数组指针： int (*p)[10];</strong></p>
 <p><strong>一个指针，指向整个数组</strong>，</p>
-<p>**Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, <em>(int <em>)(&amp;a + 1) - 1)的输出</em></em></p>
+<p><strong>Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, *(int *)(&amp;a + 1) - 1)的输出</strong></p>
 <p>(&amp;a + 1)是a + 6， 这里的*(int *)没什么意义,*(int *)(&amp;a + 1) - 1)是a + 5，即6。</p>
-<p>**Q2：char <em>buff[] = {“char”, “int”, “double”}; printf(“%c\n”, <em>(buff+1)[1])的输出</em></em></p>
+<p><strong>Q2：char *buff[] = {“char”, “int”, “double”}; printf(“%c\n”, *(buff+1)[1])的输出</strong></p>
 <p>(buff+1)是&quot;int&quot;，因为[]的优先级大于*，所以*(buff+1)[1]=*(buff+1+1)=*(buff+2)，即取&quot;double&quot;的首元素&quot;d&quot;。</p>
 <ul>
 <li>
@@ -526,9 +526,9 @@ header .header__right .dropdown-menus .dropdown-menu {
 </li>
 </ul>
 <h2 id="5常量指针和指针常量"><a class="markdownIt-Anchor" href="#5常量指针和指针常量"></a> 5.常量指针和指针常量</h2>
-<p>**常量指针：const int <em>a[]; / int const <em>a[];</em></em></p>
+<p><strong>常量指针：const int *a[]; / int const *a[];</strong></p>
 <p><strong>底层Const</strong>，指针<strong>所指内容</strong>是常量，<strong>不能通过指针修改</strong>（但指针可以指向别处）</p>
-<p>*<em>指针常量：int <em>const a[];</em></em></p>
+<p><strong>指针常量：int *const a[];</strong></p>
 <p><strong>顶层Const</strong>，<strong>指针</strong>本身是常量，<strong>初始化后不能再指向别的地址</strong>。</p>
 
       </div>

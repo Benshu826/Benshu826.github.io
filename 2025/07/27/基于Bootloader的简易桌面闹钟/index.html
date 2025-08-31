@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 3.4k 字
+        共 3.5k 字
       </span>
     
     
@@ -565,6 +565,16 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>在用户模式下进行任务切换</p>
 </li>
 </ul>
+<blockquote>
+<p><strong>Q：为什么使用PendSV_Handler来切换任务？</strong></p>
+<p><strong>Pend</strong> → 可挂起的</p>
+<p><strong>SV</strong> → 系统服务</p>
+<ul>
+<li><strong>中断优先级最低</strong>；不影响其他中断</li>
+<li><strong>只能软件触发</strong>，可控；CPU不会意外触发它</li>
+<li><strong>硬件自动保存部分上下文</strong>；减少软件负担</li>
+</ul>
+</blockquote>
 <table>
 <thead>
 <tr>
