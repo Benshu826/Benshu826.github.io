@@ -487,126 +487,99 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mqtt%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text"> MQTT协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text"> 配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mqtt%E6%8A%A5%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text"> MQTT报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%A9%E4%BD%99%E9%95%BF%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 剩余长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%E7%AD%89%E7%BA%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 服务质量等级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#connect"><span class="toc-number">1.2.3.</span> <span class="toc-text"> CONNECT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#connack"><span class="toc-number">1.2.4.</span> <span class="toc-text"> CONNACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#disconnect"><span class="toc-number">1.2.5.</span> <span class="toc-text"> DISCONNECT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#subscribe"><span class="toc-number">1.2.6.</span> <span class="toc-text"> SUBSCRIBE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#suback"><span class="toc-number">1.2.7.</span> <span class="toc-text"> SUBACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unsubscribe"><span class="toc-number">1.2.8.</span> <span class="toc-text"> UNSUBSCRIBE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unsuback"><span class="toc-number">1.2.9.</span> <span class="toc-text"> UNSUBACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ping"><span class="toc-number">1.2.10.</span> <span class="toc-text"> PING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pingrsp"><span class="toc-number">1.2.11.</span> <span class="toc-text"> PINGRSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.12.</span> <span class="toc-text"> 报文分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#publish"><span class="toc-number">1.2.13.</span> <span class="toc-text"> PUBLISH</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#qos0"><span class="toc-number">1.2.13.1.</span> <span class="toc-text"> Qos&#x3D;0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#qos1"><span class="toc-number">1.2.13.2.</span> <span class="toc-text"> Qos&#x3D;1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#qos2"><span class="toc-number">1.2.13.3.</span> <span class="toc-text"> Qos&#x3D;2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E6%B8%85%E7%90%86%E4%B8%8E%E4%BF%9D%E7%95%99"><span class="toc-number">1.2.14.</span> <span class="toc-text"> 会话清理与保留</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#connect%E7%9A%84sp"><span class="toc-number">1.2.14.1.</span> <span class="toc-text"> CONNECT的SP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%97%E5%98%B1"><span class="toc-number">1.2.15.</span> <span class="toc-text"> 遗嘱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text"> 资料</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MQTT%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">MQTT协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MQTT%E6%8A%A5%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">MQTT报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%A9%E4%BD%99%E9%95%BF%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">剩余长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%E7%AD%89%E7%BA%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text">服务质量等级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONNECT"><span class="toc-number">1.2.3.</span> <span class="toc-text">CONNECT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONNACK"><span class="toc-number">1.2.4.</span> <span class="toc-text">CONNACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DISCONNECT"><span class="toc-number">1.2.5.</span> <span class="toc-text">DISCONNECT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUBSCRIBE"><span class="toc-number">1.2.6.</span> <span class="toc-text">SUBSCRIBE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUBACK"><span class="toc-number">1.2.7.</span> <span class="toc-text">SUBACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UNSUBSCRIBE"><span class="toc-number">1.2.8.</span> <span class="toc-text">UNSUBSCRIBE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UNSUBACK"><span class="toc-number">1.2.9.</span> <span class="toc-text">UNSUBACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PING"><span class="toc-number">1.2.10.</span> <span class="toc-text">PING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PINGRSP"><span class="toc-number">1.2.11.</span> <span class="toc-text">PINGRSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.12.</span> <span class="toc-text">报文分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUBLISH"><span class="toc-number">1.2.13.</span> <span class="toc-text">PUBLISH</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Qos-0"><span class="toc-number">1.2.13.1.</span> <span class="toc-text">Qos&#x3D;0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Qos-1"><span class="toc-number">1.2.13.2.</span> <span class="toc-text">Qos&#x3D;1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Qos-2"><span class="toc-number">1.2.13.3.</span> <span class="toc-text">Qos&#x3D;2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E6%B8%85%E7%90%86%E4%B8%8E%E4%BF%9D%E7%95%99"><span class="toc-number">1.2.14.</span> <span class="toc-text">会话清理与保留</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CONNECT%E7%9A%84SP"><span class="toc-number">1.2.14.1.</span> <span class="toc-text">CONNECT的SP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%97%E5%98%B1"><span class="toc-number">1.2.15.</span> <span class="toc-text">遗嘱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text">资料</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="mqtt协议"><a class="markdownIt-Anchor" href="#mqtt协议"></a> MQTT协议</h1>
-<p>MQTT是<strong>应用层协议</strong>，基于传输层的<strong>TCP发送</strong>。</p>
+        <h1 id="MQTT协议"><a href="#MQTT协议" class="headerlink" title="MQTT协议"></a>MQTT协议</h1><p>MQTT是<strong>应用层协议</strong>，基于传输层的<strong>TCP发送</strong>。</p>
 <p><strong>通常端口：1883</strong></p>
 <p><strong>客户端给服务端发送</strong>，表示<strong>发布</strong></p>
 <p><strong>服务端给客户端发送</strong>，表示<strong>推送</strong></p>
 <p><strong>ClientID是用户名Username和密码Password相同下之下的多个角色，有记忆</strong></p>
-<h2 id="配置环境"><a class="markdownIt-Anchor" href="#配置环境"></a> 配置环境</h2>
-<p>下载安装包<br />
-资料下载地址: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg">https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg</a> 提取码: n25a<br />
-安装<strong>emqx作为服务端</strong>，打开PowerShell</p>
-<p><img src="https://s2.loli.net/2025/07/25/k7BpLfqRMID9568.png" alt="" /></p>
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>下载安装包<br>资料下载地址: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg">https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg</a> 提取码: n25a<br>安装<strong>emqx作为服务端</strong>，打开PowerShell</p>
+<p><img src="https://s2.loli.net/2025/07/25/k7BpLfqRMID9568.png" alt=""></p>
 <p>输入bin/emqx start，接着在浏览器打开<strong>127.0.0.1:18083</strong>，网页默认用户名和密码是<strong>admin/public</strong></p>
 <p>使用<strong>网络调试助手和mqttx作为客户端</strong></p>
-<h2 id="mqtt报文"><a class="markdownIt-Anchor" href="#mqtt报文"></a> MQTT报文</h2>
-<img src="https://s2.loli.net/2025/08/04/cMoPVbNeAg2YsJ3.png" style="zoom:80%;" />
-<h3 id="剩余长度"><a class="markdownIt-Anchor" href="#剩余长度"></a> 剩余长度</h3>
-<p>剩余长度 = 可变报头长度 + 负载长度</p>
-<p>可变长编码（1-4个字节）（<strong>128进制</strong>-----只要每个Byte的最高位为1，就继续往下读）</p>
-<p><img src="https://s2.loli.net/2025/08/04/tZIql9ObwxrsAiN.png" alt="" /></p>
-<h3 id="服务质量等级"><a class="markdownIt-Anchor" href="#服务质量等级"></a> 服务质量等级</h3>
-<p><img src="https://s2.loli.net/2025/08/04/2CeHJXMjp5imrYa.png" alt="" /></p>
+<h2 id="MQTT报文"><a href="#MQTT报文" class="headerlink" title="MQTT报文"></a>MQTT报文</h2><p><img src="https://s2.loli.net/2025/08/04/cMoPVbNeAg2YsJ3.png" style="zoom:80%;" /></p>
+<h3 id="剩余长度"><a href="#剩余长度" class="headerlink" title="剩余长度"></a>剩余长度</h3><p>剩余长度 = 可变报头长度 + 负载长度</p>
+<p>可变长编码（1-4个字节）（<strong>128进制</strong>——-只要每个Byte的最高位为1，就继续往下读）</p>
+<p><img src="https://s2.loli.net/2025/08/04/tZIql9ObwxrsAiN.png" alt=""></p>
+<h3 id="服务质量等级"><a href="#服务质量等级" class="headerlink" title="服务质量等级"></a>服务质量等级</h3><p><img src="https://s2.loli.net/2025/08/04/2CeHJXMjp5imrYa.png" alt=""></p>
 <ul>
 <li>0：不需要签收，开销小</li>
 <li>1：需要1次签收</li>
 <li>2：需要一次签收，并且需要一次回访</li>
 </ul>
-<h3 id="connect"><a class="markdownIt-Anchor" href="#connect"></a> CONNECT</h3>
-<p><img src="https://s2.loli.net/2025/08/04/TUD2fN1JXtlaOup.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/MvnPiY3xOaLA276.png" alt="" /></p>
+<h3 id="CONNECT"><a href="#CONNECT" class="headerlink" title="CONNECT"></a>CONNECT</h3><p><img src="https://s2.loli.net/2025/08/04/TUD2fN1JXtlaOup.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/04/MvnPiY3xOaLA276.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//输入：</span><br><span class="line">//固定报头（MQTT报文类型 + Reserved保留位） 剩余长度37 Byte</span><br><span class="line"></span><br><span class="line">//可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">//+ 连接标志C2）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line"></span><br><span class="line">//ClientID</span><br><span class="line">//Username</span><br><span class="line">//Password</span><br><span class="line"></span><br><span class="line">10 25</span><br><span class="line"></span><br><span class="line">00 04 4D 51 54 54 04 C2 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line"></span><br><span class="line">//返回：</span><br><span class="line">20 02 00 00</span><br></pre></td></tr></table></figure>
-<h3 id="connack"><a class="markdownIt-Anchor" href="#connack"></a> CONNACK</h3>
-<p><img src="https://s2.loli.net/2025/08/04/Of9k5MEBLCY6naX.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/EAHqJh1gS5luxbi.png" alt="" /></p>
-<p>第1个字节是 连接确认标志，<strong>位7-1是保留位且必须设置为0</strong>。</p>
+<h3 id="CONNACK"><a href="#CONNACK" class="headerlink" title="CONNACK"></a>CONNACK</h3><p><img src="https://s2.loli.net/2025/08/04/Of9k5MEBLCY6naX.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/04/EAHqJh1gS5luxbi.png" alt=""></p>
+<p>第1个字节是 连接确认标志，<strong>位7-1是保留位且必须设置为0</strong>。   </p>
 <p>第0 (SP)位 是当前会话（Session Present）标志，即CONNECT的Clean Session。</p>
-<p><img src="https://s2.loli.net/2025/08/04/dxnjYzrkKDLAcyo.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/OTWLvEsuRAZYwze.png" alt="" /></p>
-<h3 id="disconnect"><a class="markdownIt-Anchor" href="#disconnect"></a> DISCONNECT</h3>
-<p><img src="https://s2.loli.net/2025/08/04/MlnWYhd5LNiZFwC.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/04/dxnjYzrkKDLAcyo.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/04/OTWLvEsuRAZYwze.png" alt=""></p>
+<h3 id="DISCONNECT"><a href="#DISCONNECT" class="headerlink" title="DISCONNECT"></a>DISCONNECT</h3><p><img src="https://s2.loli.net/2025/08/04/MlnWYhd5LNiZFwC.png" alt=""></p>
 <p><strong>DISCONNECT</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E0 00</span><br></pre></td></tr></table></figure>
-<h3 id="subscribe"><a class="markdownIt-Anchor" href="#subscribe"></a> SUBSCRIBE</h3>
-<p><img src="https://s2.loli.net/2025/08/04/UTPOYEXuR17ay9x.png" alt="" /></p>
-<p><strong>剩余长度</strong>等于<strong>可变报头的长度</strong>（2字节）<strong>加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/04/kBJQqtMxLRNF7TY.png" alt="" /></p>
+<h3 id="SUBSCRIBE"><a href="#SUBSCRIBE" class="headerlink" title="SUBSCRIBE"></a>SUBSCRIBE</h3><p><img src="https://s2.loli.net/2025/08/04/UTPOYEXuR17ay9x.png" alt=""></p>
+<p><strong>剩余长度</strong>等于<strong>可变报头的长度</strong>（2字节）<strong>加上有效载荷的长度</strong>。 </p>
+<p><img src="https://s2.loli.net/2025/08/04/kBJQqtMxLRNF7TY.png" alt=""></p>
 <p><strong>报文标识符，需要订阅和确认反馈一致，具体可以自己定义。</strong></p>
-<h3 id="suback"><a class="markdownIt-Anchor" href="#suback"></a> SUBACK</h3>
-<p><img src="https://s2.loli.net/2025/08/05/omYZWrDNzCEOLQ3.png" alt="" /></p>
-<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/PeAOYRljWvhLyoS.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/05/NvfWYeH75nh3Xug.png" alt="" /></p>
+<h3 id="SUBACK"><a href="#SUBACK" class="headerlink" title="SUBACK"></a>SUBACK</h3><p><img src="https://s2.loli.net/2025/08/05/omYZWrDNzCEOLQ3.png" alt=""></p>
+<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。 </p>
+<p><img src="https://s2.loli.net/2025/08/05/PeAOYRljWvhLyoS.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/05/NvfWYeH75nh3Xug.png" alt=""></p>
 <p><strong>0x80 - Failure（失败）</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//发送：</span><br><span class="line">//固定报头82 + 剩余长度0C</span><br><span class="line">//报文标识符00 0A</span><br><span class="line">//USER002长7字节，后续跟随USER002（Topic） + Qos（02）</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 55 53 45 52 30 30 32 02</span><br><span class="line"></span><br><span class="line">//接收：</span><br><span class="line">//固定报头90 + 剩余长度03 + 报文标识符00 0A +有效载荷 Qos（02）</span><br><span class="line">90 03 00 0A 02</span><br></pre></td></tr></table></figure>
-<h3 id="unsubscribe"><a class="markdownIt-Anchor" href="#unsubscribe"></a> UNSUBSCRIBE</h3>
-<p><img src="https://s2.loli.net/2025/08/05/ola4T9fxmytOVQI.png" alt="" /></p>
+<h3 id="UNSUBSCRIBE"><a href="#UNSUBSCRIBE" class="headerlink" title="UNSUBSCRIBE"></a>UNSUBSCRIBE</h3><p><img src="https://s2.loli.net/2025/08/05/ola4T9fxmytOVQI.png" alt=""></p>
 <p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/UZGarJh2dvANDkH.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/05/kNPSDjy12W8EvVc.png" alt="" /></p>
-<h3 id="unsuback"><a class="markdownIt-Anchor" href="#unsuback"></a> UNSUBACK</h3>
-<p><img src="https://s2.loli.net/2025/08/05/oOmBWwF1hCrXxzd.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/UZGarJh2dvANDkH.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/05/kNPSDjy12W8EvVc.png" alt=""></p>
+<h3 id="UNSUBACK"><a href="#UNSUBACK" class="headerlink" title="UNSUBACK"></a>UNSUBACK</h3><p><img src="https://s2.loli.net/2025/08/05/oOmBWwF1hCrXxzd.png" alt=""></p>
 <p><strong>剩余长度 = 0x02</strong></p>
-<p><img src="https://s2.loli.net/2025/08/05/mus69ZdDpz4FCHi.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/mus69ZdDpz4FCHi.png" alt=""></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 发送：</span><br><span class="line">// 固定报头A2 + 剩余长度</span><br><span class="line">// 报文标识符12 34</span><br><span class="line">// 长度表示00 07 + USER002（Topic）</span><br><span class="line">A2 0B</span><br><span class="line">12 34</span><br><span class="line">00 07 55 53 45 52 30 30 32</span><br><span class="line"></span><br><span class="line">// 接收：</span><br><span class="line">// 固定报头 + 剩余长度 + 报文标识符</span><br><span class="line">B0 02 12 34</span><br></pre></td></tr></table></figure>
-<h3 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> PING</h3>
-<p><img src="https://s2.loli.net/2025/08/04/KqGWmaBygMDn85l.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/1LGOa6KteHkgWjd.png" alt="" /></p>
+<h3 id="PING"><a href="#PING" class="headerlink" title="PING"></a>PING</h3><p><img src="https://s2.loli.net/2025/08/04/KqGWmaBygMDn85l.png" alt=""></p>
+<p><img src="https://s2.loli.net/2025/08/04/1LGOa6KteHkgWjd.png" alt=""></p>
 <p><strong>PING</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C0 00</span><br></pre></td></tr></table></figure>
-<h3 id="pingrsp"><a class="markdownIt-Anchor" href="#pingrsp"></a> PINGRSP</h3>
-<p><img src="https://s2.loli.net/2025/08/04/uo9azSLckJDfBxn.png" alt="" /></p>
+<h3 id="PINGRSP"><a href="#PINGRSP" class="headerlink" title="PINGRSP"></a>PINGRSP</h3><p><img src="https://s2.loli.net/2025/08/04/uo9azSLckJDfBxn.png" alt=""></p>
 <p><strong>PINGRSP</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D0 00</span><br></pre></td></tr></table></figure>
-<h3 id="报文分类"><a class="markdownIt-Anchor" href="#报文分类"></a> 报文分类</h3>
-<ul>
-<li>
-<p>Qos=0的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，没有接收方的事</p>
+<h3 id="报文分类"><a href="#报文分类" class="headerlink" title="报文分类"></a>报文分类</h3><ul>
+<li><p>Qos=0的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，没有接收方的事</p>
 </li>
-<li>
-<p>Qos=1的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBACK</strong>报文表示签收</p>
+<li><p>Qos=1的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBACK</strong>报文表示签收</p>
 </li>
-<li>
-<p>Qos=2的PUBLISH：发送方先用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBREC</strong>报文表示签收；发送方再用<strong>PUBREL</strong>报文开启回访，<strong>接收方</strong>用<strong>PUBCOMP</strong>报文表示回访确认</p>
+<li><p>Qos=2的PUBLISH：发送方先用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBREC</strong>报文表示签收；发送方再用<strong>PUBREL</strong>报文开启回访，<strong>接收方</strong>用<strong>PUBCOMP</strong>报文表示回访确认</p>
 </li>
 </ul>
-<h3 id="publish"><a class="markdownIt-Anchor" href="#publish"></a> PUBLISH</h3>
-<p><img src="https://s2.loli.net/2025/08/05/8phjXnc3r2b1Baw.png" alt="" /></p>
+<h3 id="PUBLISH"><a href="#PUBLISH" class="headerlink" title="PUBLISH"></a>PUBLISH</h3><p><img src="https://s2.loli.net/2025/08/05/8phjXnc3r2b1Baw.png" alt=""></p>
 <p>在Qos=0时，<strong>DUP设置为0，即不重发</strong>；</p>
 <p><strong>RETAIN = 1</strong>，Qos=0的带<strong>保留功能</strong>，即<strong>保留本条PUBLISH报文</strong>（最重要的，只有一条，后面关注的都会立即看到）。</p>
-<p><img src="https://s2.loli.net/2025/08/05/3wVzHdkasA9BLhb.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/3wVzHdkasA9BLhb.png" alt=""></p>
 <p><strong>有效负载就是需要发送的数据</strong></p>
 <p>有效载荷的长度计算：用固定报头中的剩余长度字段的值减去可变报头的长度。</p>
-<h4 id="qos0"><a class="markdownIt-Anchor" href="#qos0"></a> Qos=0</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度00 07 + 自己的topic（USER001）</span><br><span class="line">//发送的字符串123</span><br><span class="line">30 0C</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">31 32 33</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2025/08/05/YIZQ7fyzCRopPeX.png" alt="" /></p>
-<h4 id="qos1"><a class="markdownIt-Anchor" href="#qos1"></a> Qos=1</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度 + USER001</span><br><span class="line">//字符串123</span><br><span class="line">32 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34 </span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：</span><br><span class="line">3A 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//User001显示</span><br><span class="line">//40表示4号报文，接收成功；12 34是报文标识符</span><br><span class="line">40 02 12 34</span><br><span class="line"></span><br><span class="line">//User001签收（4号报文+长度+Qos=1）</span><br><span class="line">40 02 00 01</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2025/08/05/GfPpSMkRETasHQ4.png" alt="" /></p>
+<h4 id="Qos-0"><a href="#Qos-0" class="headerlink" title="Qos=0"></a>Qos=0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度00 07 + 自己的topic（USER001）</span><br><span class="line">//发送的字符串123</span><br><span class="line">30 0C</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">31 32 33</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2025/08/05/YIZQ7fyzCRopPeX.png" alt=""></p>
+<h4 id="Qos-1"><a href="#Qos-1" class="headerlink" title="Qos=1"></a>Qos=1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度 + USER001</span><br><span class="line">//字符串123</span><br><span class="line">32 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34 </span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：</span><br><span class="line">3A 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//User001显示</span><br><span class="line">//40表示4号报文，接收成功；12 34是报文标识符</span><br><span class="line">40 02 12 34</span><br><span class="line"></span><br><span class="line">//User001签收（4号报文+长度+Qos=1）</span><br><span class="line">40 02 00 01</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2025/08/05/GfPpSMkRETasHQ4.png" alt=""></p>
 <p>没有签收，会一直发送请求，<strong>签收后就不会再发</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/lATZgwSN7mUJVkv.png" alt="" /></p>
-<h4 id="qos2"><a class="markdownIt-Anchor" href="#qos2"></a> Qos=2</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">// 3号PUBLISH报文</span><br><span class="line">34 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">// 返回5号报文</span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">//需要回访，否则再输入,USER002也不显示</span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">//返回7号报文</span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：(如果是7号没有回访确认，不重发3号，而是重发6号报文)</span><br><span class="line"></span><br><span class="line">3C 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="会话清理与保留"><a class="markdownIt-Anchor" href="#会话清理与保留"></a> 会话清理与保留</h3>
-<p><img src="https://s2.loli.net/2025/08/05/TEeWHVBtuF23p7v.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/lATZgwSN7mUJVkv.png" alt=""></p>
+<h4 id="Qos-2"><a href="#Qos-2" class="headerlink" title="Qos=2"></a>Qos=2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">// 3号PUBLISH报文</span><br><span class="line">34 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">// 返回5号报文</span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">//需要回访，否则再输入,USER002也不显示</span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">//返回7号报文</span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：(如果是7号没有回访确认，不重发3号，而是重发6号报文)</span><br><span class="line"></span><br><span class="line">3C 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="会话清理与保留"><a href="#会话清理与保留" class="headerlink" title="会话清理与保留"></a>会话清理与保留</h3><p><img src="https://s2.loli.net/2025/08/05/TEeWHVBtuF23p7v.png" alt=""></p>
 <ul>
-<li>
-<p>1：清理会话：<strong>没有记忆</strong>，不保留订阅。<strong>每次登陆后需要重新订阅需要的TOPIC</strong>。<strong>收不到离线消息</strong>。</p>
+<li><p>1：清理会话：<strong>没有记忆</strong>，不保留订阅。<strong>每次登陆后需要重新订阅需要的TOPIC</strong>。<strong>收不到离线消息</strong>。</p>
 </li>
-<li>
-<p>0：保留会话：<strong>有记忆，不用重新订阅TOPIC</strong>。<strong>离线期间的消息</strong>（PUBLISH）我们可以<strong>收到</strong>。</p>
+<li><p>0：保留会话：<strong>有记忆，不用重新订阅TOPIC</strong>。<strong>离线期间的消息</strong>（PUBLISH）我们可以<strong>收到</strong>。</p>
 </li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//1，清理</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C2 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">//0，保留</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C0 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br></pre></td></tr></table></figure>
-<h4 id="connect的sp"><a class="markdownIt-Anchor" href="#connect的sp"></a> CONNECT的SP</h4>
-<p><strong>Clean Session = 1 — SP= 0</strong></p>
+<h4 id="CONNECT的SP"><a href="#CONNECT的SP" class="headerlink" title="CONNECT的SP"></a>CONNECT的SP</h4><p><strong>Clean Session = 1 —- SP= 0</strong></p>
 <p><strong>Clean Session = 0，不一定</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -627,19 +600,18 @@ header .header__right .dropdown-menus .dropdown-menu {
 </tr>
 </tbody>
 </table>
-<h3 id="遗嘱"><a class="markdownIt-Anchor" href="#遗嘱"></a> 遗嘱</h3>
-<p><s>很好，我选择跟它一起G了</s></p>
+</div>
+<h3 id="遗嘱"><a href="#遗嘱" class="headerlink" title="遗嘱"></a>遗嘱</h3><p><del>很好，我选择跟它一起G了</del></p>
 <p>报警功能，非正常断线（<strong>正常断线用14号报文，这里是直接断开TCP/被踢下线</strong>）</p>
 <p><strong>服务器会向订阅了遗嘱TOPIC的客户端推送遗嘱PUBLISH报文</strong></p>
 <p>大白话：B订阅了A，A非正常断线，则B会收到A的遗嘱报文</p>
-<p><img src="https://s2.loli.net/2025/08/05/SviHJRZtYVhsMb2.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/SviHJRZtYVhsMb2.png" alt=""></p>
 <p><strong>USER002需要再订阅WILL001的遗嘱TOPIC</strong></p>
 <p><strong>WILL001（遗嘱TOPIC）</strong></p>
 <p><strong>WILL001（PUBLISH报文数据）</strong></p>
 <p>(可以不一样，设置一样是为了方便)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 固定报头 + 剩余长度</span><br><span class="line">// 可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">// + 连接标志位C6）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line">// Client_ID --- USER001</span><br><span class="line">// WILL001 遗嘱TOPIC</span><br><span class="line">// WILL001 PUBLISH报文数据</span><br><span class="line">// Username --- USER001</span><br><span class="line">// Password --- USER001</span><br><span class="line">10 37</span><br><span class="line">00 04 4D 51 54 54 04 C6 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line"></span><br><span class="line">// 订阅USER002，然后再强制关闭USER001，可以看到遗嘱效果</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 57 49 4C 4C 30 30 32 02</span><br></pre></td></tr></table></figure>
-<h2 id="资料"><a class="markdownIt-Anchor" href="#资料"></a> 资料</h2>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VDdoYhEYh/?spm_id_from=333.337.search-card.all.click&amp;vd_source=2686d8279192347a7d56afcb53bb00d9">【2025新版】MQTT协议手把手详解 EMQX自建服务器 所有报文功能 逐个字节构建分析与测试_哔哩哔哩_bilibili</a></p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VDdoYhEYh/?spm_id_from=333.337.search-card.all.click&amp;vd_source=2686d8279192347a7d56afcb53bb00d9">【2025新版】MQTT协议手把手详解 EMQX自建服务器 所有报文功能 逐个字节构建分析与测试_哔哩哔哩_bilibili</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421109780">(11 封私信) MQTT协议，终于有人讲清楚了 - 知乎</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jackwmj12/article/details/129163012">MQTT协议详解(完整版)-CSDN博客</a></p>
 
