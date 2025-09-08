@@ -267,20 +267,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2025-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/hexo/</loc>
-    <lastmod>2025-09-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/Opencv/</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -289,6 +275,20 @@
   
   <url>
     <loc>http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/hexo/</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -381,7 +381,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E5%98%89%E7%AB%8B%E5%88%9B/</loc>
+    <loc>http://example.com/categories/Opencv/</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -395,7 +395,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/Opencv/</loc>
+    <loc>http://example.com/categories/%E5%98%89%E7%AB%8B%E5%88%9B/</loc>
     <lastmod>2025-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
