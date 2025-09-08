@@ -1,6 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CAN通信学习</title>
+    <url>/2025/06/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="can通信笔记"><a class="markdownIt-Anchor" href="#can通信笔记"></a> CAN通信笔记</h1>
+<p>CAN（Controller Area Network Bus），控制局域网总线。</p>
+<h2 id="基本特征"><a class="markdownIt-Anchor" href="#基本特征"></a> 基本特征</h2>
+<ul>
+<li>
+<p>两根通信线（CAN_H、CAN_L），<strong>无需共地</strong></p>
+</li>
+<li>
+<p><strong>差分信号</strong>通信，抗干扰能力强</p>
+</li>
+<li>
+<p>高速CAN（ISO11898）：125k~1Mbps，&lt;40m</p>
+</li>
+<li>
+<p>低速CAN（ISO11519）：10k~125kbps，&lt;1km</p>
+</li>
+<li>
+<p><strong>异步</strong>，无需时钟线，通信速率由双方协定</p>
+</li>
+<li>
+<p><strong>半双工</strong>，可挂载多设备，<strong>多设备同时发送通过仲裁判断先后</strong></p>
+</li>
+<li>
+<p><strong>11/29位报文ID</strong>，用于区分消息功能，同时决定优先级**（小的优先）**</p>
+</li>
+<li>
+<p>可配置<strong>1~8字节的有效载荷</strong></p>
+</li>
+<li>
+<p>可实现<strong>广播式和请求式</strong>两种传输</p>
+</li>
+<li>
+<p>应答、CRC校验、位填充、位同步、错误处理等特性</p>
+</li>
+</ul>
+<h2 id="硬件电路"><a class="markdownIt-Anchor" href="#硬件电路"></a> 硬件电路</h2>
+<p><img src="https://s2.loli.net/2025/07/24/FydOPNIJWvxrp94.png" alt="" /></p>
+<h3 id="两个终端电阻的意义"><a class="markdownIt-Anchor" href="#两个终端电阻的意义"></a> 两个终端电阻的意义</h3>
+<ol>
+<li>
+<p><strong>防止回波反射</strong></p>
+</li>
+<li>
+<p><strong>没有设备操作时</strong>，将两根差分线电压“收紧”，<strong>使其电压一致</strong></p>
+</li>
+</ol>
+<p>（高速CAN的电阻阻值小，所以收紧更快，但能耗更大）</p>
+<h3 id="电平标准"><a class="markdownIt-Anchor" href="#电平标准"></a> 电平标准</h3>
+<p>CAN总线使用<strong>差分信号</strong>,即（<strong>Vcan_H - Vcan_L</strong>）</p>
+<ul>
+<li><strong>高速CAN</strong>规定</li>
+</ul>
+<p>电压差为0V表示逻辑1（隐性电平）</p>
+<p>电压差为2V表示逻辑0（显性电平）</p>
+<ul>
+<li><strong>低速CAN</strong>规定</li>
+</ul>
+<p>电压差为-1.5V表示逻辑1（隐性电平）</p>
+<p>电压差为3V表示逻辑0（显性电平）</p>
+<h2 id="位填充"><a class="markdownIt-Anchor" href="#位填充"></a> 位填充</h2>
+<p><strong>规则</strong>：发送方<strong>连续发送5个相同电平</strong>后，自动<strong>追加一个相反电平</strong>的填充位；<strong>接收方</strong>检测到填充位时，<strong>会自动移除</strong>，恢复原始数据。</p>
+<p>例如：<br />
+即时发送： 100000110       10000011110</p>
+<p>实际发送： 1000001110     1000001111100</p>
+<p>实际接收： 1000001110     1000001111100</p>
+<p>移除填充： 100000110       10000011110</p>
+<p><strong>位填充的作用</strong>：</p>
+<ul>
+<li>增加波形的定位信息，利于接收方执行“再同步”，防止波形长时间无变化，当只接收方不能精准掌握数据采样时机</li>
+<li>将正常数据流与“错误帧”、“过载帧”区分开</li>
+<li>保持CAN总线在发送正常数据流时的活跃状态，防止被总线误认为空闲</li>
+</ul>
+<h2 id="帧格式"><a class="markdownIt-Anchor" href="#帧格式"></a> 帧格式</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">帧类型</th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据帧</td>
+<td style="text-align:center">发送设备主动发送数据</td>
+</tr>
+<tr>
+<td style="text-align:center">遥控帧</td>
+<td style="text-align:center">接收设备主动请求数据</td>
+</tr>
+<tr>
+<td style="text-align:center">错误帧</td>
+<td style="text-align:center">某个设备检测出错误时向其他设备通知错误</td>
+</tr>
+<tr>
+<td style="text-align:center">过载帧</td>
+<td style="text-align:center">接收设备通知其尚未做好接收准备</td>
+</tr>
+<tr>
+<td style="text-align:center">帧间隔</td>
+<td style="text-align:center">用于将数据帧及遥控帧与前面的帧分隔开</td>
+</tr>
+</tbody>
+</table>
+<p><strong>帧ID值越小，优先级越高</strong></p>
+<h3 id="数据帧"><a class="markdownIt-Anchor" href="#数据帧"></a> 数据帧</h3>
+<p><img src="https://s2.loli.net/2025/07/24/NIBvbY56zMZ3LQx.png" alt="" /></p>
+<p>SOF（Start of Frame）：帧起始，表示后面一段波形是传输的数据位</p>
+<p>ID（Identify）：标识符，区分功能，决定优先级</p>
+<p>RTR（Remote Transmission Request）：数据帧（0），遥控帧（1）。</p>
+<p>IDE（Identifier Extension）：用于区分标准格式（0）和扩展格式（1）</p>
+<p>r0/r1（Reserve）：保留位，为后续留空间</p>
+<p>DLC（Data Length Code）：数据长度</p>
+<p>ACK槽，发送方（1），接收方（0），如果没有接收方就（1），告知发送方</p>
+<p><strong>ACK槽允许多个接收方共同拉开总线</strong></p>
+<p><strong>SRR</strong>：替代RTR的位，用于<strong>保证标准格式高于扩展格式的优先级</strong></p>
+<p>EOF（End of Frame）：帧结束，表示传输完毕</p>
+<blockquote>
+<p>Q：为什么DLC是4位，但可以描述0-64个Byte？</p>
+<p>0-8 对应 0-8Byte</p>
+<p>9-15 分别对应 12、16、20、24、32、58、64Byte</p>
+</blockquote>
+<h3 id="遥控帧"><a class="markdownIt-Anchor" href="#遥控帧"></a> 遥控帧</h3>
+<p><strong>遥控帧无数据段，RTR为隐形电平1</strong>，其他部分与数据帧相同</p>
+<p><img src="https://s2.loli.net/2025/07/24/ivsZVrE8J4Tb5FU.png" alt="" /></p>
+<h3 id="错误帧"><a class="markdownIt-Anchor" href="#错误帧"></a> 错误帧</h3>
+<p>总线上所有设备都会监督总线数据，一旦发现“位错误”、“填充错误”、“CRC错误”、“格式错误”、“应答错误”，<strong>这些设备就会发出错误帧来破坏数据，同时终止当前的发送设备</strong>。</p>
+<p><img src="https://s2.loli.net/2025/07/24/ywMD7HjAbCeGX3B.png" alt="" /></p>
+<ul>
+<li>主动错误会破坏别人的，被动错误会破坏自己的</li>
+</ul>
+<h3 id="过载帧"><a class="markdownIt-Anchor" href="#过载帧"></a> 过载帧</h3>
+<p>接收方收到大量数据而无法处理时，其可以发出过载帧，延缓发送方的数据发送，以平衡总线负担，避免数据丢失。</p>
+<p><img src="https://s2.loli.net/2025/07/24/4RGkZDB1efXtS5U.png" alt="" /></p>
+<h3 id="帧间隔"><a class="markdownIt-Anchor" href="#帧间隔"></a> 帧间隔</h3>
+<p>在 CAN 总线上，每一帧报文（数据帧、远程帧、错误帧、过载帧）结束之后，不会立刻开始下一帧，中间必须插入一段 <strong>固定格式的空隙</strong>，这就是 <strong>帧间隔</strong>。<strong>固定是3个隐性“1”。</strong></p>
+<p><img src="https://s2.loli.net/2025/07/24/Au6SR5a4dLzi2br.png" alt="" /></p>
+<h2 id="位同步"><a class="markdownIt-Anchor" href="#位同步"></a> 位同步</h2>
+<ul>
+<li>
+<p>CAN总线没有时钟线，总线上所有设备通过<strong>约定波特率</strong>来<strong>确定每一位数据位时长</strong></p>
+</li>
+<li>
+<p>发送方以约定的位时长，每隔固定时间输出一个数据位</p>
+</li>
+<li>
+<p>接收方以约定的位时长，每隔固定时间采样总线的电平，输入一个数据位</p>
+</li>
+<li>
+<p>理想状态下，接收方能依次采样到发送方发出的每个数据位，且采样点位于数据位中心附近</p>
+</li>
+</ul>
+<h3 id="位时序"><a class="markdownIt-Anchor" href="#位时序"></a> 位时序</h3>
+<p>为了能够灵活调整每个采样点的位置，使采样点对齐数据位中心附近，<strong>CAN总线对每一个数据位的时长进行更细划分</strong>，分为同步段（SS）、传播时间段（PTS–Propagation Time Segement）、相位缓冲段1（PBS1）和相位缓冲段2（PBS2），每隔段由若干个最小时间单位（Tq）构成</p>
+<ul>
+<li>SS = 1Tq</li>
+<li>PTS = 1 ~ 8 Tq</li>
+<li>PBS1 = 1 ~ 8 Tq</li>
+<li>PBS2 = 2 ~ 8 Tq</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/ntCflEzV3guBori.png" alt="" /></p>
+<p><strong>最开始就没有同步时序</strong>。</p>
+<h3 id="硬同步初始位置同步"><a class="markdownIt-Anchor" href="#硬同步初始位置同步"></a> 硬同步(初始位置同步)</h3>
+<p>每个设备都有一个位时序计时周期，当某个设备（发送方）率先发送报文，其他所有设备（接收方）收到SOF的下降沿时，接收方会将自己的位时序计时周期拨到SS段，与发送方的位时序计时周期保持同步；</p>
+<p><strong>硬同步只在第一个下降沿（SOF下降沿）有效</strong>；</p>
+<p>经过硬同步后，若发送方和接收方的时钟几乎没有误差，则后续所有数据位的采样点必然都会对齐数据位中心附近</p>
+<p><img src="https://s2.loli.net/2025/07/24/lwtY9Hd21jNs7Zz.png" alt="" /></p>
+<p><strong>最开始接收采样正确，但仍有误差，随着误差积累，采样点逐渐偏离。</strong></p>
+<h3 id="再同步"><a class="markdownIt-Anchor" href="#再同步"></a> 再同步</h3>
+<ul>
+<li>若发送方或接收方的时钟有误差，随着误差积累，数据位边沿逐渐偏离SS段，则此时接收方根据再同步补偿宽度（SJW）通过<strong>加长PBS1段，或缩短PBS2段</strong>，调整同步</li>
+<li>再同步可以发生在每一个下降沿之后的每个数据位跳变边沿</li>
+</ul>
+<p>SJW = 1 ~ 4 Tq</p>
+<p><strong>如果误差值小于等于SJW指定值，则误差几个Tq，补偿几个Tq，否则补偿SJW</strong></p>
+<p>SJW是补偿的上限，防止波形中的噪声对位时序造成过大影响。</p>
+<p><img src="https://s2.loli.net/2025/07/24/jDnNcMzGxSUtuOK.png" alt="" /></p>
+<h3 id="波特率的计算"><a class="markdownIt-Anchor" href="#波特率的计算"></a> 波特率的计算</h3>
+<p>波特率 = 1 / (一个数据位的时长) = 1 / (Tss + Tpts + Tpbs1 + Tpbs2)</p>
+<p>举例</p>
+<p>SS = 1 Tq，PTS = 3 Tq，PBS1 = 3 Tq，PBS2 = 3 Tq；Tq = 0.5 us</p>
+<p>波特率 = 1 / (0.5us + 1.5us + 1.5us + 1.5us) = 200kbps</p>
+<h2 id="仲裁"><a class="markdownIt-Anchor" href="#仲裁"></a> 仲裁</h2>
+<p>CAN总线只有一对差分信号线，同一时间只能有一个设备操作总线发送数据，<strong>如果多个设备同时有发送需求，该如何分配？</strong></p>
+<h3 id="规则1先占先得"><a class="markdownIt-Anchor" href="#规则1先占先得"></a> 规则1——先占先得</h3>
+<ul>
+<li>
+<p>若当前<strong>已经有设备操作总线发送数据帧/遥控帧</strong>，则其他任何设备不能再同时发送数据帧/遥控帧（<strong>可以发送错误帧/过载帧破坏当前数据</strong>）</p>
+</li>
+<li>
+<p>任何设备检测到<strong>连续11个隐性电平（帧间隔）</strong>，即认为<strong>总线空闲</strong>，<strong>只有总线空闲，设备才可以发送数据帧/遥控帧</strong></p>
+</li>
+<li>
+<p>一旦有设备正在发送数据帧/遥控帧，总线就会变活跃状态，必然不会出现连续11个隐性电平（连续6个就是错误帧/过载帧），其他设备自然也不会破坏当前发送</p>
+</li>
+<li>
+<p>若总线活跃，其他设备有发送需求，则需要等待总线变空闲，才能执行发送需求</p>
+</li>
+</ul>
+<h3 id="规则2非破坏性仲裁"><a class="markdownIt-Anchor" href="#规则2非破坏性仲裁"></a> 规则2——非破坏性仲裁</h3>
+<p><strong>根据ID号（仲裁段）进行非破坏性仲裁，ID号小的取到总线控制权</strong>，ID号大的仲裁失利将转为接收状态，等待下一次总线空闲时再尝试发送。</p>
+<h4 id="实现非破坏性仲裁两个要求"><a class="markdownIt-Anchor" href="#实现非破坏性仲裁两个要求"></a> 实现非破坏性仲裁两个要求：</h4>
+<ul>
+<li>
+<p>线与特性：总线上任何一个设备发送显性电平0时，总线就会呈现显性电平0，只有当所有设备都发送隐性电平1时，总线才会呈现隐性电平1；即0 &amp; X  = 0， 1 &amp; 1 = 1.</p>
+</li>
+<li>
+<p>回读机制：每隔设备发出一个数据位后，都会读回总线当前的电平状态，以确认自己发出的电平是否被真实发送出去了。根据线与特性，发出0，读回必然是0，但是发出1读回不一定是1.<strong>（此刻是还在仲裁段，发出数据1，读回数据0，表示有设备在占用总线，ID小的优先）</strong></p>
+</li>
+</ul>
+<h4 id="优先级补充"><a class="markdownIt-Anchor" href="#优先级补充"></a> 优先级补充</h4>
+<ul>
+<li>
+<p><strong>数据帧和遥控帧ID号一样时，数据帧的优先级高于遥控帧</strong></p>
+</li>
+<li>
+<p><strong>标准格式的11位ID号和扩展格式29位ID号的前11位系统，标准格式的优先级高于扩展格式</strong>（SSR必须始终为1）</p>
+</li>
+</ul>
+<h2 id="错误类型"><a class="markdownIt-Anchor" href="#错误类型"></a> 错误类型</h2>
+<p>错误有5种：位错误、填充错误、CRC错误、格式错误、应答错误</p>
+<p><img src="https://s2.loli.net/2025/07/24/MmE48gt5k3LKpD7.png" alt="" /></p>
+<p>为了防止某个设备发疯，一直认为别的设备发送是错误帧，引入<strong>错误状态</strong></p>
+<h3 id="错误状态"><a class="markdownIt-Anchor" href="#错误状态"></a> 错误状态</h3>
+<ul>
+<li>主动错误状态的设备正常参与通信并检测到错误时发出主动错误帧（会破坏别的数据帧）</li>
+<li>被动错误状态的设备正常参与通信但检测到错误时只能发出被动错误帧（不会破坏别的数据帧）</li>
+<li>总线关闭状态的设备不能参与通信</li>
+<li>每隔设备内部管理一个TEC和REC，根据TEC和REC确定直接的状态</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/SkbB8ojwI2rM1O5.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/07/24/I68snYPTvfMuiQU.png" alt="" /></p>
+<h2 id="stm32-can外设"><a class="markdownIt-Anchor" href="#stm32-can外设"></a> STM32 CAN外设</h2>
+<ul>
+<li>
+<p>波特率最高可达1Mbps</p>
+</li>
+<li>
+<p>3个可配置优先级的发送邮箱 —— 发送缓冲区</p>
+</li>
+<li>
+<p>2个3级深度接收FIFO —— 接收缓冲区</p>
+</li>
+<li>
+<p>14个过滤器组 —— 过滤无关报文</p>
+</li>
+<li>
+<p>时间触发通信、自动离线恢复、自动唤醒、禁止自动重传、接收FIFO溢出处理方式可配置、发送优先级可配置、双CAN模式</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/4fXN3hrozaApKw2.png" alt="" /></p>
+<h3 id="标识符过滤器"><a class="markdownIt-Anchor" href="#标识符过滤器"></a> 标识符过滤器</h3>
+<ul>
+<li>
+<p>每个过滤器的核心由两个32位寄存器组成：R1[31:0]和R2[31:0]；x = 0,…,13</p>
+</li>
+<li>
+<p>FSCx：位宽设置；置0，16位；置1，32位</p>
+</li>
+<li>
+<p>FBMx：模式设置；置0，屏蔽模式；置1，列表模式</p>
+</li>
+<li>
+<p>FFAx：关联模式；置0，FIFO 0；置1，FIFO 1</p>
+</li>
+<li>
+<p>FACTx：激活设置；置0，禁用；置1，启用、</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/07/24/D53jncszLtSyEKO.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/07/24/NzLVncImCh8sZjB.png" alt="" /></p>
+<p>（TIP：第二行Mask的0x700 ---- 0111 0000 0000，表示接收的第2到4位必须和ID相同）</p>
+<h3 id="测试模式"><a class="markdownIt-Anchor" href="#测试模式"></a> 测试模式</h3>
+<p><img src="https://s2.loli.net/2025/07/24/oHWz7Z3FiTdPuan.png" alt="" /></p>
+<h3 id="工作模式"><a class="markdownIt-Anchor" href="#工作模式"></a> 工作模式</h3>
+<p><img src="https://s2.loli.net/2025/07/24/l7gpX8YyLdzs21e.png" alt="" /></p>
+<h3 id="位时间特征"><a class="markdownIt-Anchor" href="#位时间特征"></a> 位时间特征</h3>
+<p><img src="https://s2.loli.net/2025/07/24/vFjc6RTKwbhLIXs.png" alt="" /></p>
+<p>TIP：STM32里面PBS1和PBS2合并成一个BS段</p>
+<h3 id="中断"><a class="markdownIt-Anchor" href="#中断"></a> 中断</h3>
+<p><img src="https://s2.loli.net/2025/07/24/hHASOJDMRbKeBvT.png" alt="" /></p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>CAN通信</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bootloader学习笔记</title>
     <url>/2025/05/10/Bootloader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="bootloaderiap"><a class="markdownIt-Anchor" href="#bootloaderiap"></a> Bootloader+IAP</h1>
@@ -461,300 +753,8 @@
         <category>嵌入式</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>STM32</tag>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CAN通信学习</title>
-    <url>/2025/06/12/CAN%E9%80%9A%E4%BF%A1%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="can通信笔记"><a class="markdownIt-Anchor" href="#can通信笔记"></a> CAN通信笔记</h1>
-<p>CAN（Controller Area Network Bus），控制局域网总线。</p>
-<h2 id="基本特征"><a class="markdownIt-Anchor" href="#基本特征"></a> 基本特征</h2>
-<ul>
-<li>
-<p>两根通信线（CAN_H、CAN_L），<strong>无需共地</strong></p>
-</li>
-<li>
-<p><strong>差分信号</strong>通信，抗干扰能力强</p>
-</li>
-<li>
-<p>高速CAN（ISO11898）：125k~1Mbps，&lt;40m</p>
-</li>
-<li>
-<p>低速CAN（ISO11519）：10k~125kbps，&lt;1km</p>
-</li>
-<li>
-<p><strong>异步</strong>，无需时钟线，通信速率由双方协定</p>
-</li>
-<li>
-<p><strong>半双工</strong>，可挂载多设备，<strong>多设备同时发送通过仲裁判断先后</strong></p>
-</li>
-<li>
-<p><strong>11/29位报文ID</strong>，用于区分消息功能，同时决定优先级**（小的优先）**</p>
-</li>
-<li>
-<p>可配置<strong>1~8字节的有效载荷</strong></p>
-</li>
-<li>
-<p>可实现<strong>广播式和请求式</strong>两种传输</p>
-</li>
-<li>
-<p>应答、CRC校验、位填充、位同步、错误处理等特性</p>
-</li>
-</ul>
-<h2 id="硬件电路"><a class="markdownIt-Anchor" href="#硬件电路"></a> 硬件电路</h2>
-<p><img src="https://s2.loli.net/2025/07/24/FydOPNIJWvxrp94.png" alt="" /></p>
-<h3 id="两个终端电阻的意义"><a class="markdownIt-Anchor" href="#两个终端电阻的意义"></a> 两个终端电阻的意义</h3>
-<ol>
-<li>
-<p><strong>防止回波反射</strong></p>
-</li>
-<li>
-<p><strong>没有设备操作时</strong>，将两根差分线电压“收紧”，<strong>使其电压一致</strong></p>
-</li>
-</ol>
-<p>（高速CAN的电阻阻值小，所以收紧更快，但能耗更大）</p>
-<h3 id="电平标准"><a class="markdownIt-Anchor" href="#电平标准"></a> 电平标准</h3>
-<p>CAN总线使用<strong>差分信号</strong>,即（<strong>Vcan_H - Vcan_L</strong>）</p>
-<ul>
-<li><strong>高速CAN</strong>规定</li>
-</ul>
-<p>电压差为0V表示逻辑1（隐性电平）</p>
-<p>电压差为2V表示逻辑0（显性电平）</p>
-<ul>
-<li><strong>低速CAN</strong>规定</li>
-</ul>
-<p>电压差为-1.5V表示逻辑1（隐性电平）</p>
-<p>电压差为3V表示逻辑0（显性电平）</p>
-<h2 id="位填充"><a class="markdownIt-Anchor" href="#位填充"></a> 位填充</h2>
-<p><strong>规则</strong>：发送方<strong>连续发送5个相同电平</strong>后，自动<strong>追加一个相反电平</strong>的填充位；<strong>接收方</strong>检测到填充位时，<strong>会自动移除</strong>，恢复原始数据。</p>
-<p>例如：<br />
-即时发送： 100000110       10000011110</p>
-<p>实际发送： 1000001110     1000001111100</p>
-<p>实际接收： 1000001110     1000001111100</p>
-<p>移除填充： 100000110       10000011110</p>
-<p><strong>位填充的作用</strong>：</p>
-<ul>
-<li>增加波形的定位信息，利于接收方执行“再同步”，防止波形长时间无变化，当只接收方不能精准掌握数据采样时机</li>
-<li>将正常数据流与“错误帧”、“过载帧”区分开</li>
-<li>保持CAN总线在发送正常数据流时的活跃状态，防止被总线误认为空闲</li>
-</ul>
-<h2 id="帧格式"><a class="markdownIt-Anchor" href="#帧格式"></a> 帧格式</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">帧类型</th>
-<th style="text-align:center">用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">数据帧</td>
-<td style="text-align:center">发送设备主动发送数据</td>
-</tr>
-<tr>
-<td style="text-align:center">遥控帧</td>
-<td style="text-align:center">接收设备主动请求数据</td>
-</tr>
-<tr>
-<td style="text-align:center">错误帧</td>
-<td style="text-align:center">某个设备检测出错误时向其他设备通知错误</td>
-</tr>
-<tr>
-<td style="text-align:center">过载帧</td>
-<td style="text-align:center">接收设备通知其尚未做好接收准备</td>
-</tr>
-<tr>
-<td style="text-align:center">帧间隔</td>
-<td style="text-align:center">用于将数据帧及遥控帧与前面的帧分隔开</td>
-</tr>
-</tbody>
-</table>
-<p><strong>帧ID值越小，优先级越高</strong></p>
-<h3 id="数据帧"><a class="markdownIt-Anchor" href="#数据帧"></a> 数据帧</h3>
-<p><img src="https://s2.loli.net/2025/07/24/NIBvbY56zMZ3LQx.png" alt="" /></p>
-<p>SOF（Start of Frame）：帧起始，表示后面一段波形是传输的数据位</p>
-<p>ID（Identify）：标识符，区分功能，决定优先级</p>
-<p>RTR（Remote Transmission Request）：数据帧（0），遥控帧（1）。</p>
-<p>IDE（Identifier Extension）：用于区分标准格式（0）和扩展格式（1）</p>
-<p>r0/r1（Reserve）：保留位，为后续留空间</p>
-<p>DLC（Data Length Code）：数据长度</p>
-<p>ACK槽，发送方（1），接收方（0），如果没有接收方就（1），告知发送方</p>
-<p><strong>ACK槽允许多个接收方共同拉开总线</strong></p>
-<p><strong>SRR</strong>：替代RTR的位，用于<strong>保证标准格式高于扩展格式的优先级</strong></p>
-<p>EOF（End of Frame）：帧结束，表示传输完毕</p>
-<blockquote>
-<p>Q：为什么DLC是4位，但可以描述0-64个Byte？</p>
-<p>0-8 对应 0-8Byte</p>
-<p>9-15 分别对应 12、16、20、24、32、58、64Byte</p>
-</blockquote>
-<h3 id="遥控帧"><a class="markdownIt-Anchor" href="#遥控帧"></a> 遥控帧</h3>
-<p><strong>遥控帧无数据段，RTR为隐形电平1</strong>，其他部分与数据帧相同</p>
-<p><img src="https://s2.loli.net/2025/07/24/ivsZVrE8J4Tb5FU.png" alt="" /></p>
-<h3 id="错误帧"><a class="markdownIt-Anchor" href="#错误帧"></a> 错误帧</h3>
-<p>总线上所有设备都会监督总线数据，一旦发现“位错误”、“填充错误”、“CRC错误”、“格式错误”、“应答错误”，<strong>这些设备就会发出错误帧来破坏数据，同时终止当前的发送设备</strong>。</p>
-<p><img src="https://s2.loli.net/2025/07/24/ywMD7HjAbCeGX3B.png" alt="" /></p>
-<ul>
-<li>主动错误会破坏别人的，被动错误会破坏自己的</li>
-</ul>
-<h3 id="过载帧"><a class="markdownIt-Anchor" href="#过载帧"></a> 过载帧</h3>
-<p>接收方收到大量数据而无法处理时，其可以发出过载帧，延缓发送方的数据发送，以平衡总线负担，避免数据丢失。</p>
-<p><img src="https://s2.loli.net/2025/07/24/4RGkZDB1efXtS5U.png" alt="" /></p>
-<h3 id="帧间隔"><a class="markdownIt-Anchor" href="#帧间隔"></a> 帧间隔</h3>
-<p>在 CAN 总线上，每一帧报文（数据帧、远程帧、错误帧、过载帧）结束之后，不会立刻开始下一帧，中间必须插入一段 <strong>固定格式的空隙</strong>，这就是 <strong>帧间隔</strong>。<strong>固定是3个隐性“1”。</strong></p>
-<p><img src="https://s2.loli.net/2025/07/24/Au6SR5a4dLzi2br.png" alt="" /></p>
-<h2 id="位同步"><a class="markdownIt-Anchor" href="#位同步"></a> 位同步</h2>
-<ul>
-<li>
-<p>CAN总线没有时钟线，总线上所有设备通过<strong>约定波特率</strong>来<strong>确定每一位数据位时长</strong></p>
-</li>
-<li>
-<p>发送方以约定的位时长，每隔固定时间输出一个数据位</p>
-</li>
-<li>
-<p>接收方以约定的位时长，每隔固定时间采样总线的电平，输入一个数据位</p>
-</li>
-<li>
-<p>理想状态下，接收方能依次采样到发送方发出的每个数据位，且采样点位于数据位中心附近</p>
-</li>
-</ul>
-<h3 id="位时序"><a class="markdownIt-Anchor" href="#位时序"></a> 位时序</h3>
-<p>为了能够灵活调整每个采样点的位置，使采样点对齐数据位中心附近，<strong>CAN总线对每一个数据位的时长进行更细划分</strong>，分为同步段（SS）、传播时间段（PTS–Propagation Time Segement）、相位缓冲段1（PBS1）和相位缓冲段2（PBS2），每隔段由若干个最小时间单位（Tq）构成</p>
-<ul>
-<li>SS = 1Tq</li>
-<li>PTS = 1 ~ 8 Tq</li>
-<li>PBS1 = 1 ~ 8 Tq</li>
-<li>PBS2 = 2 ~ 8 Tq</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/ntCflEzV3guBori.png" alt="" /></p>
-<p><strong>最开始就没有同步时序</strong>。</p>
-<h3 id="硬同步初始位置同步"><a class="markdownIt-Anchor" href="#硬同步初始位置同步"></a> 硬同步(初始位置同步)</h3>
-<p>每个设备都有一个位时序计时周期，当某个设备（发送方）率先发送报文，其他所有设备（接收方）收到SOF的下降沿时，接收方会将自己的位时序计时周期拨到SS段，与发送方的位时序计时周期保持同步；</p>
-<p><strong>硬同步只在第一个下降沿（SOF下降沿）有效</strong>；</p>
-<p>经过硬同步后，若发送方和接收方的时钟几乎没有误差，则后续所有数据位的采样点必然都会对齐数据位中心附近</p>
-<p><img src="https://s2.loli.net/2025/07/24/lwtY9Hd21jNs7Zz.png" alt="" /></p>
-<p><strong>最开始接收采样正确，但仍有误差，随着误差积累，采样点逐渐偏离。</strong></p>
-<h3 id="再同步"><a class="markdownIt-Anchor" href="#再同步"></a> 再同步</h3>
-<ul>
-<li>若发送方或接收方的时钟有误差，随着误差积累，数据位边沿逐渐偏离SS段，则此时接收方根据再同步补偿宽度（SJW）通过<strong>加长PBS1段，或缩短PBS2段</strong>，调整同步</li>
-<li>再同步可以发生在每一个下降沿之后的每个数据位跳变边沿</li>
-</ul>
-<p>SJW = 1 ~ 4 Tq</p>
-<p><strong>如果误差值小于等于SJW指定值，则误差几个Tq，补偿几个Tq，否则补偿SJW</strong></p>
-<p>SJW是补偿的上限，防止波形中的噪声对位时序造成过大影响。</p>
-<p><img src="https://s2.loli.net/2025/07/24/jDnNcMzGxSUtuOK.png" alt="" /></p>
-<h3 id="波特率的计算"><a class="markdownIt-Anchor" href="#波特率的计算"></a> 波特率的计算</h3>
-<p>波特率 = 1 / (一个数据位的时长) = 1 / (Tss + Tpts + Tpbs1 + Tpbs2)</p>
-<p>举例</p>
-<p>SS = 1 Tq，PTS = 3 Tq，PBS1 = 3 Tq，PBS2 = 3 Tq；Tq = 0.5 us</p>
-<p>波特率 = 1 / (0.5us + 1.5us + 1.5us + 1.5us) = 200kbps</p>
-<h2 id="仲裁"><a class="markdownIt-Anchor" href="#仲裁"></a> 仲裁</h2>
-<p>CAN总线只有一对差分信号线，同一时间只能有一个设备操作总线发送数据，<strong>如果多个设备同时有发送需求，该如何分配？</strong></p>
-<h3 id="规则1先占先得"><a class="markdownIt-Anchor" href="#规则1先占先得"></a> 规则1——先占先得</h3>
-<ul>
-<li>
-<p>若当前<strong>已经有设备操作总线发送数据帧/遥控帧</strong>，则其他任何设备不能再同时发送数据帧/遥控帧（<strong>可以发送错误帧/过载帧破坏当前数据</strong>）</p>
-</li>
-<li>
-<p>任何设备检测到<strong>连续11个隐性电平（帧间隔）</strong>，即认为<strong>总线空闲</strong>，<strong>只有总线空闲，设备才可以发送数据帧/遥控帧</strong></p>
-</li>
-<li>
-<p>一旦有设备正在发送数据帧/遥控帧，总线就会变活跃状态，必然不会出现连续11个隐性电平（连续6个就是错误帧/过载帧），其他设备自然也不会破坏当前发送</p>
-</li>
-<li>
-<p>若总线活跃，其他设备有发送需求，则需要等待总线变空闲，才能执行发送需求</p>
-</li>
-</ul>
-<h3 id="规则2非破坏性仲裁"><a class="markdownIt-Anchor" href="#规则2非破坏性仲裁"></a> 规则2——非破坏性仲裁</h3>
-<p><strong>根据ID号（仲裁段）进行非破坏性仲裁，ID号小的取到总线控制权</strong>，ID号大的仲裁失利将转为接收状态，等待下一次总线空闲时再尝试发送。</p>
-<h4 id="实现非破坏性仲裁两个要求"><a class="markdownIt-Anchor" href="#实现非破坏性仲裁两个要求"></a> 实现非破坏性仲裁两个要求：</h4>
-<ul>
-<li>
-<p>线与特性：总线上任何一个设备发送显性电平0时，总线就会呈现显性电平0，只有当所有设备都发送隐性电平1时，总线才会呈现隐性电平1；即0 &amp; X  = 0， 1 &amp; 1 = 1.</p>
-</li>
-<li>
-<p>回读机制：每隔设备发出一个数据位后，都会读回总线当前的电平状态，以确认自己发出的电平是否被真实发送出去了。根据线与特性，发出0，读回必然是0，但是发出1读回不一定是1.<strong>（此刻是还在仲裁段，发出数据1，读回数据0，表示有设备在占用总线，ID小的优先）</strong></p>
-</li>
-</ul>
-<h4 id="优先级补充"><a class="markdownIt-Anchor" href="#优先级补充"></a> 优先级补充</h4>
-<ul>
-<li>
-<p><strong>数据帧和遥控帧ID号一样时，数据帧的优先级高于遥控帧</strong></p>
-</li>
-<li>
-<p><strong>标准格式的11位ID号和扩展格式29位ID号的前11位系统，标准格式的优先级高于扩展格式</strong>（SSR必须始终为1）</p>
-</li>
-</ul>
-<h2 id="错误类型"><a class="markdownIt-Anchor" href="#错误类型"></a> 错误类型</h2>
-<p>错误有5种：位错误、填充错误、CRC错误、格式错误、应答错误</p>
-<p><img src="https://s2.loli.net/2025/07/24/MmE48gt5k3LKpD7.png" alt="" /></p>
-<p>为了防止某个设备发疯，一直认为别的设备发送是错误帧，引入<strong>错误状态</strong></p>
-<h3 id="错误状态"><a class="markdownIt-Anchor" href="#错误状态"></a> 错误状态</h3>
-<ul>
-<li>主动错误状态的设备正常参与通信并检测到错误时发出主动错误帧（会破坏别的数据帧）</li>
-<li>被动错误状态的设备正常参与通信但检测到错误时只能发出被动错误帧（不会破坏别的数据帧）</li>
-<li>总线关闭状态的设备不能参与通信</li>
-<li>每隔设备内部管理一个TEC和REC，根据TEC和REC确定直接的状态</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/SkbB8ojwI2rM1O5.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/07/24/I68snYPTvfMuiQU.png" alt="" /></p>
-<h2 id="stm32-can外设"><a class="markdownIt-Anchor" href="#stm32-can外设"></a> STM32 CAN外设</h2>
-<ul>
-<li>
-<p>波特率最高可达1Mbps</p>
-</li>
-<li>
-<p>3个可配置优先级的发送邮箱 —— 发送缓冲区</p>
-</li>
-<li>
-<p>2个3级深度接收FIFO —— 接收缓冲区</p>
-</li>
-<li>
-<p>14个过滤器组 —— 过滤无关报文</p>
-</li>
-<li>
-<p>时间触发通信、自动离线恢复、自动唤醒、禁止自动重传、接收FIFO溢出处理方式可配置、发送优先级可配置、双CAN模式</p>
-</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/4fXN3hrozaApKw2.png" alt="" /></p>
-<h3 id="标识符过滤器"><a class="markdownIt-Anchor" href="#标识符过滤器"></a> 标识符过滤器</h3>
-<ul>
-<li>
-<p>每个过滤器的核心由两个32位寄存器组成：R1[31:0]和R2[31:0]；x = 0,…,13</p>
-</li>
-<li>
-<p>FSCx：位宽设置；置0，16位；置1，32位</p>
-</li>
-<li>
-<p>FBMx：模式设置；置0，屏蔽模式；置1，列表模式</p>
-</li>
-<li>
-<p>FFAx：关联模式；置0，FIFO 0；置1，FIFO 1</p>
-</li>
-<li>
-<p>FACTx：激活设置；置0，禁用；置1，启用、</p>
-</li>
-</ul>
-<p><img src="https://s2.loli.net/2025/07/24/D53jncszLtSyEKO.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/07/24/NzLVncImCh8sZjB.png" alt="" /></p>
-<p>（TIP：第二行Mask的0x700 ---- 0111 0000 0000，表示接收的第2到4位必须和ID相同）</p>
-<h3 id="测试模式"><a class="markdownIt-Anchor" href="#测试模式"></a> 测试模式</h3>
-<p><img src="https://s2.loli.net/2025/07/24/oHWz7Z3FiTdPuan.png" alt="" /></p>
-<h3 id="工作模式"><a class="markdownIt-Anchor" href="#工作模式"></a> 工作模式</h3>
-<p><img src="https://s2.loli.net/2025/07/24/l7gpX8YyLdzs21e.png" alt="" /></p>
-<h3 id="位时间特征"><a class="markdownIt-Anchor" href="#位时间特征"></a> 位时间特征</h3>
-<p><img src="https://s2.loli.net/2025/07/24/vFjc6RTKwbhLIXs.png" alt="" /></p>
-<p>TIP：STM32里面PBS1和PBS2合并成一个BS段</p>
-<h3 id="中断"><a class="markdownIt-Anchor" href="#中断"></a> 中断</h3>
-<p><img src="https://s2.loli.net/2025/07/24/hHASOJDMRbKeBvT.png" alt="" /></p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>CAN通信</tag>
       </tags>
   </entry>
   <entry>
@@ -1007,239 +1007,6 @@
       <tags>
         <tag>学习笔记</tag>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MQTT协议</title>
-    <url>/2025/08/04/MQTT%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<h1 id="mqtt协议"><a class="markdownIt-Anchor" href="#mqtt协议"></a> MQTT协议</h1>
-<p>MQTT是<strong>应用层协议</strong>，基于传输层的<strong>TCP发送</strong>。</p>
-<p><strong>通常端口：1883</strong></p>
-<p><strong>客户端给服务端发送</strong>，表示<strong>发布</strong></p>
-<p><strong>服务端给客户端发送</strong>，表示<strong>推送</strong></p>
-<p><strong>ClientID是用户名Username和密码Password相同下之下的多个角色，有记忆</strong></p>
-<h2 id="配置环境"><a class="markdownIt-Anchor" href="#配置环境"></a> 配置环境</h2>
-<p>下载安装包<br />
-资料下载地址: <a href="https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg">https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg</a> 提取码: n25a<br />
-安装<strong>emqx作为服务端</strong>，打开PowerShell</p>
-<p><img src="https://s2.loli.net/2025/07/25/k7BpLfqRMID9568.png" alt="" /></p>
-<p>输入bin/emqx start，接着在浏览器打开<strong>127.0.0.1:18083</strong>，网页默认用户名和密码是<strong>admin/public</strong></p>
-<p>使用<strong>网络调试助手和mqttx作为客户端</strong></p>
-<h2 id="mqtt报文"><a class="markdownIt-Anchor" href="#mqtt报文"></a> MQTT报文</h2>
-<img src="https://s2.loli.net/2025/08/04/cMoPVbNeAg2YsJ3.png" style="zoom:80%;" />
-<h3 id="剩余长度"><a class="markdownIt-Anchor" href="#剩余长度"></a> 剩余长度</h3>
-<p>剩余长度 = 可变报头长度 + 负载长度</p>
-<p>可变长编码（1-4个字节）（<strong>128进制</strong>-----只要每个Byte的最高位为1，就继续往下读）</p>
-<p><img src="https://s2.loli.net/2025/08/04/tZIql9ObwxrsAiN.png" alt="" /></p>
-<h3 id="服务质量等级"><a class="markdownIt-Anchor" href="#服务质量等级"></a> 服务质量等级</h3>
-<p><img src="https://s2.loli.net/2025/08/04/2CeHJXMjp5imrYa.png" alt="" /></p>
-<ul>
-<li>0：不需要签收，开销小</li>
-<li>1：需要1次签收</li>
-<li>2：需要一次签收，并且需要一次回访</li>
-</ul>
-<h3 id="connect"><a class="markdownIt-Anchor" href="#connect"></a> CONNECT</h3>
-<p><img src="https://s2.loli.net/2025/08/04/TUD2fN1JXtlaOup.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/MvnPiY3xOaLA276.png" alt="" /></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输入：</span><br><span class="line">//固定报头（MQTT报文类型 + Reserved保留位） 剩余长度37 Byte</span><br><span class="line"></span><br><span class="line">//可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">//+ 连接标志C2）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line"></span><br><span class="line">//ClientID</span><br><span class="line">//Username</span><br><span class="line">//Password</span><br><span class="line"></span><br><span class="line">10 25</span><br><span class="line"></span><br><span class="line">00 04 4D 51 54 54 04 C2 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line"></span><br><span class="line">//返回：</span><br><span class="line">20 02 00 00</span><br></pre></td></tr></table></figure>
-<h3 id="connack"><a class="markdownIt-Anchor" href="#connack"></a> CONNACK</h3>
-<p><img src="https://s2.loli.net/2025/08/04/Of9k5MEBLCY6naX.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/EAHqJh1gS5luxbi.png" alt="" /></p>
-<p>第1个字节是 连接确认标志，<strong>位7-1是保留位且必须设置为0</strong>。</p>
-<p>第0 (SP)位 是当前会话（Session Present）标志，即CONNECT的Clean Session。</p>
-<p><img src="https://s2.loli.net/2025/08/04/dxnjYzrkKDLAcyo.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/OTWLvEsuRAZYwze.png" alt="" /></p>
-<h3 id="disconnect"><a class="markdownIt-Anchor" href="#disconnect"></a> DISCONNECT</h3>
-<p><img src="https://s2.loli.net/2025/08/04/MlnWYhd5LNiZFwC.png" alt="" /></p>
-<p><strong>DISCONNECT</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E0 00</span><br></pre></td></tr></table></figure>
-<h3 id="subscribe"><a class="markdownIt-Anchor" href="#subscribe"></a> SUBSCRIBE</h3>
-<p><img src="https://s2.loli.net/2025/08/04/UTPOYEXuR17ay9x.png" alt="" /></p>
-<p><strong>剩余长度</strong>等于<strong>可变报头的长度</strong>（2字节）<strong>加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/04/kBJQqtMxLRNF7TY.png" alt="" /></p>
-<p><strong>报文标识符，需要订阅和确认反馈一致，具体可以自己定义。</strong></p>
-<h3 id="suback"><a class="markdownIt-Anchor" href="#suback"></a> SUBACK</h3>
-<p><img src="https://s2.loli.net/2025/08/05/omYZWrDNzCEOLQ3.png" alt="" /></p>
-<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/PeAOYRljWvhLyoS.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/05/NvfWYeH75nh3Xug.png" alt="" /></p>
-<p><strong>0x80 - Failure（失败）</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//发送：</span><br><span class="line">//固定报头82 + 剩余长度0C</span><br><span class="line">//报文标识符00 0A</span><br><span class="line">//USER002长7字节，后续跟随USER002（Topic） + Qos（02）</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 55 53 45 52 30 30 32 02</span><br><span class="line"></span><br><span class="line">//接收：</span><br><span class="line">//固定报头90 + 剩余长度03 + 报文标识符00 0A +有效载荷 Qos（02）</span><br><span class="line">90 03 00 0A 02</span><br></pre></td></tr></table></figure>
-<h3 id="unsubscribe"><a class="markdownIt-Anchor" href="#unsubscribe"></a> UNSUBSCRIBE</h3>
-<p><img src="https://s2.loli.net/2025/08/05/ola4T9fxmytOVQI.png" alt="" /></p>
-<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/UZGarJh2dvANDkH.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/05/kNPSDjy12W8EvVc.png" alt="" /></p>
-<h3 id="unsuback"><a class="markdownIt-Anchor" href="#unsuback"></a> UNSUBACK</h3>
-<p><img src="https://s2.loli.net/2025/08/05/oOmBWwF1hCrXxzd.png" alt="" /></p>
-<p><strong>剩余长度 = 0x02</strong></p>
-<p><img src="https://s2.loli.net/2025/08/05/mus69ZdDpz4FCHi.png" alt="" /></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 发送：</span><br><span class="line">// 固定报头A2 + 剩余长度</span><br><span class="line">// 报文标识符12 34</span><br><span class="line">// 长度表示00 07 + USER002（Topic）</span><br><span class="line">A2 0B</span><br><span class="line">12 34</span><br><span class="line">00 07 55 53 45 52 30 30 32</span><br><span class="line"></span><br><span class="line">// 接收：</span><br><span class="line">// 固定报头 + 剩余长度 + 报文标识符</span><br><span class="line">B0 02 12 34</span><br></pre></td></tr></table></figure>
-<h3 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> PING</h3>
-<p><img src="https://s2.loli.net/2025/08/04/KqGWmaBygMDn85l.png" alt="" /></p>
-<p><img src="https://s2.loli.net/2025/08/04/1LGOa6KteHkgWjd.png" alt="" /></p>
-<p><strong>PING</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C0 00</span><br></pre></td></tr></table></figure>
-<h3 id="pingrsp"><a class="markdownIt-Anchor" href="#pingrsp"></a> PINGRSP</h3>
-<p><img src="https://s2.loli.net/2025/08/04/uo9azSLckJDfBxn.png" alt="" /></p>
-<p><strong>PINGRSP</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D0 00</span><br></pre></td></tr></table></figure>
-<h3 id="报文分类"><a class="markdownIt-Anchor" href="#报文分类"></a> 报文分类</h3>
-<ul>
-<li>
-<p>Qos=0的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，没有接收方的事</p>
-</li>
-<li>
-<p>Qos=1的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBACK</strong>报文表示签收</p>
-</li>
-<li>
-<p>Qos=2的PUBLISH：发送方先用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBREC</strong>报文表示签收；发送方再用<strong>PUBREL</strong>报文开启回访，<strong>接收方</strong>用<strong>PUBCOMP</strong>报文表示回访确认</p>
-</li>
-</ul>
-<h3 id="publish"><a class="markdownIt-Anchor" href="#publish"></a> PUBLISH</h3>
-<p><img src="https://s2.loli.net/2025/08/05/8phjXnc3r2b1Baw.png" alt="" /></p>
-<p>在Qos=0时，<strong>DUP设置为0，即不重发</strong>；</p>
-<p><strong>RETAIN = 1</strong>，Qos=0的带<strong>保留功能</strong>，即<strong>保留本条PUBLISH报文</strong>（最重要的，只有一条，后面关注的都会立即看到）。</p>
-<p><img src="https://s2.loli.net/2025/08/05/3wVzHdkasA9BLhb.png" alt="" /></p>
-<p><strong>有效负载就是需要发送的数据</strong></p>
-<p>有效载荷的长度计算：用固定报头中的剩余长度字段的值减去可变报头的长度。</p>
-<h4 id="qos0"><a class="markdownIt-Anchor" href="#qos0"></a> Qos=0</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度00 07 + 自己的topic（USER001）</span><br><span class="line">//发送的字符串123</span><br><span class="line">30 0C</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">31 32 33</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2025/08/05/YIZQ7fyzCRopPeX.png" alt="" /></p>
-<h4 id="qos1"><a class="markdownIt-Anchor" href="#qos1"></a> Qos=1</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度 + USER001</span><br><span class="line">//字符串123</span><br><span class="line">32 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34 </span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：</span><br><span class="line">3A 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//User001显示</span><br><span class="line">//40表示4号报文，接收成功；12 34是报文标识符</span><br><span class="line">40 02 12 34</span><br><span class="line"></span><br><span class="line">//User001签收（4号报文+长度+Qos=1）</span><br><span class="line">40 02 00 01</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2025/08/05/GfPpSMkRETasHQ4.png" alt="" /></p>
-<p>没有签收，会一直发送请求，<strong>签收后就不会再发</strong>。</p>
-<p><img src="https://s2.loli.net/2025/08/05/lATZgwSN7mUJVkv.png" alt="" /></p>
-<h4 id="qos2"><a class="markdownIt-Anchor" href="#qos2"></a> Qos=2</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">// 3号PUBLISH报文</span><br><span class="line">34 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">// 返回5号报文</span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">//需要回访，否则再输入,USER002也不显示</span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">//返回7号报文</span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：(如果是7号没有回访确认，不重发3号，而是重发6号报文)</span><br><span class="line"></span><br><span class="line">3C 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="会话清理与保留"><a class="markdownIt-Anchor" href="#会话清理与保留"></a> 会话清理与保留</h3>
-<p><img src="https://s2.loli.net/2025/08/05/TEeWHVBtuF23p7v.png" alt="" /></p>
-<ul>
-<li>
-<p>1：清理会话：<strong>没有记忆</strong>，不保留订阅。<strong>每次登陆后需要重新订阅需要的TOPIC</strong>。<strong>收不到离线消息</strong>。</p>
-</li>
-<li>
-<p>0：保留会话：<strong>有记忆，不用重新订阅TOPIC</strong>。<strong>离线期间的消息</strong>（PUBLISH）我们可以<strong>收到</strong>。</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//1，清理</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C2 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">//0，保留</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C0 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br></pre></td></tr></table></figure>
-<h4 id="connect的sp"><a class="markdownIt-Anchor" href="#connect的sp"></a> CONNECT的SP</h4>
-<p><strong>Clean Session = 1 — SP= 0</strong></p>
-<p><strong>Clean Session = 0，不一定</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">C2</th>
-<th style="text-align:center">C0</th>
-<th style="text-align:center">C0</th>
-<th style="text-align:center">C0</th>
-<th style="text-align:center">C0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-</tr>
-</tbody>
-</table>
-<h3 id="遗嘱"><a class="markdownIt-Anchor" href="#遗嘱"></a> 遗嘱</h3>
-<p><s>很好，我选择跟它一起G了</s></p>
-<p>报警功能，非正常断线（<strong>正常断线用14号报文，这里是直接断开TCP/被踢下线</strong>）</p>
-<p><strong>服务器会向订阅了遗嘱TOPIC的客户端推送遗嘱PUBLISH报文</strong></p>
-<p>大白话：B订阅了A，A非正常断线，则B会收到A的遗嘱报文</p>
-<p><img src="https://s2.loli.net/2025/08/05/SviHJRZtYVhsMb2.png" alt="" /></p>
-<p><strong>USER002需要再订阅WILL001的遗嘱TOPIC</strong></p>
-<p><strong>WILL001（遗嘱TOPIC）</strong></p>
-<p><strong>WILL001（PUBLISH报文数据）</strong></p>
-<p>(可以不一样，设置一样是为了方便)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 固定报头 + 剩余长度</span><br><span class="line">// 可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">// + 连接标志位C6）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line">// Client_ID --- USER001</span><br><span class="line">// WILL001 遗嘱TOPIC</span><br><span class="line">// WILL001 PUBLISH报文数据</span><br><span class="line">// Username --- USER001</span><br><span class="line">// Password --- USER001</span><br><span class="line">10 37</span><br><span class="line">00 04 4D 51 54 54 04 C6 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line"></span><br><span class="line">// 订阅USER002，然后再强制关闭USER001，可以看到遗嘱效果</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 57 49 4C 4C 30 30 32 02</span><br></pre></td></tr></table></figure>
-<h2 id="资料"><a class="markdownIt-Anchor" href="#资料"></a> 资料</h2>
-<p><a href="https://www.bilibili.com/video/BV1VDdoYhEYh/?spm_id_from=333.337.search-card.all.click&amp;vd_source=2686d8279192347a7d56afcb53bb00d9">【2025新版】MQTT协议手把手详解 EMQX自建服务器 所有报文功能 逐个字节构建分析与测试_哔哩哔哩_bilibili</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/421109780">(11 封私信) MQTT协议，终于有人讲清楚了 - 知乎</a></p>
-<p><a href="https://blog.csdn.net/jackwmj12/article/details/129163012">MQTT协议详解(完整版)-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>MQTT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown基础用法</title>
-    <url>/2023/04/12/Markdown%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1 id="markdown基础用法"><a class="markdownIt-Anchor" href="#markdown基础用法"></a> Markdown基础用法</h1>
-<h3 id="官网网址httpwwwtyporaio"><a class="markdownIt-Anchor" href="#官网网址httpwwwtyporaio"></a> 官网网址：<a href="http://www.typora.io/">http://www.typora.io/</a></h3>
-<p>可以下载排字模板和编辑主题。</p>
-<p><strong>使用Typora，通过Ctrl+/即可进入Markdown源代码编辑模式。</strong></p>
-<h3 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h3>
-<p>#+空格+标题名称-----------一级标题<br />
-##+空格+标题名称---------二级标题<br />
-###+空格+标题名称--------三级标题<br />
-####+空格+标题名称------四级标题<br />
-#####+空格+标题名称------五级标题<br />
-######+空格+标题名称-----六级标题<br />
-<em><strong>最大支持六级标题</strong></em></p>
-<h3 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h3>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> + 文字 + *         斜体</span><br><span class="line">** + 文字 + **       加粗</span><br><span class="line"><span class="strong">*** + 文字 + **</span>*     斜体加粗</span><br><span class="line">~~ + 文字 + ~~       删除线</span><br></pre></td></tr></table></figure>
-<p>对于标准的markdown文本是不支持居中对齐的。不过markdown同时兼容HTML，可以通过HTML语法格式书写来让文本居中对齐。</p>
-<h3 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h3>
-<blockquote>
-<p>‘&gt;’+加空格+文字</p>
-</blockquote>
-<h3 id="分割线"><a class="markdownIt-Anchor" href="#分割线"></a> 分割线</h3>
-<p>1.三个*然后回车<br />
-2.三个-（减号）回车</p>
-<h3 id="插入图片"><a class="markdownIt-Anchor" href="#插入图片"></a> 插入图片</h3>
-<p>①本地的图片：英文的！+[图片名称]+（路径）<br />
-②网络图：英文的！+[图片名称]+（网络图片地址）<br />
-比如：<br />
-<img src="https://s2.loli.net/2025/05/07/YhvXnKTEQL4FM2j.png" alt="" /></p>
-<h3 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h3>
-<p>[点击跳转到+名称]（网站、文件等地址）<br />
-比如：<a href="https://blog.csdn.net/weixin_47795024?spm=1001.2100.3001.5343">我的博客</a></p>
-<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
-<p>①有序列表；序号（1，①）+英文的句号（.）+输入得内容，然后回车自动补出下一个序号<br />
-②无序列表；减号（-）+空格+输入内容        回车自动补出下一个</p>
-<h3 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h3>
-<p>右击创建表格</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<p>Tab键上面的点（·）三个 + 代码类型（java c++ c#等）然后回车</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="数学公式"><a class="markdownIt-Anchor" href="#数学公式"></a> 数学公式</h3>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">
-\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1771em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-<p><a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">LaTeX公式格式</a></p>
-<h1 id="markdown快捷键"><a class="markdownIt-Anchor" href="#markdown快捷键"></a> Markdown快捷键</h1>
-<p>撤销：Ctrl/Command + Z<br />
-重做：Ctrl/Command + Y<br />
-加粗：Ctrl/Command + B<br />
-斜体：Ctrl/Command + I<br />
-标题：Ctrl/Command + Shift + H<br />
-无序列表：Ctrl/Command + Shift + U<br />
-有序列表：Ctrl/Command + Shift + O<br />
-检查列表：Ctrl/Command + Shift + C<br />
-插入代码：Ctrl/Command + Shift + K<br />
-插入链接：Ctrl/Command + Shift + L<br />
-插入图片：Ctrl/Command + Shift + G<br />
-查找：Ctrl/Command + F<br />
-mand + Shift + L<br />
-插入图片：Ctrl/Command + Shift + G<br />
-查找：Ctrl/Command + F<br />
-替换：Ctrl/Command + G</p>
-]]></content>
-      <categories>
-        <category>Markdown</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -2459,9 +2226,261 @@ mand + Shift + L<br />
         <category>嵌入式</category>
       </categories>
       <tags>
-        <tag>STM32</tag>
         <tag>学习笔记</tag>
+        <tag>STM32</tag>
         <tag>Bootloader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MQTT协议</title>
+    <url>/2025/08/04/MQTT%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h1 id="mqtt协议"><a class="markdownIt-Anchor" href="#mqtt协议"></a> MQTT协议</h1>
+<p>MQTT是<strong>应用层协议</strong>，基于传输层的<strong>TCP发送</strong>。</p>
+<p><strong>通常端口：1883</strong></p>
+<p><strong>客户端给服务端发送</strong>，表示<strong>发布</strong></p>
+<p><strong>服务端给客户端发送</strong>，表示<strong>推送</strong></p>
+<p><strong>ClientID是用户名Username和密码Password相同下之下的多个角色，有记忆</strong></p>
+<h2 id="配置环境"><a class="markdownIt-Anchor" href="#配置环境"></a> 配置环境</h2>
+<p>下载安装包<br />
+资料下载地址: <a href="https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg">https://pan.baidu.com/s/1qFuCzYW-lj1JnuUBcbiJxg</a> 提取码: n25a<br />
+安装<strong>emqx作为服务端</strong>，打开PowerShell</p>
+<p><img src="https://s2.loli.net/2025/07/25/k7BpLfqRMID9568.png" alt="" /></p>
+<p>输入bin/emqx start，接着在浏览器打开<strong>127.0.0.1:18083</strong>，网页默认用户名和密码是<strong>admin/public</strong></p>
+<p>使用<strong>网络调试助手和mqttx作为客户端</strong></p>
+<h2 id="mqtt报文"><a class="markdownIt-Anchor" href="#mqtt报文"></a> MQTT报文</h2>
+<img src="https://s2.loli.net/2025/08/04/cMoPVbNeAg2YsJ3.png" style="zoom:80%;" />
+<h3 id="剩余长度"><a class="markdownIt-Anchor" href="#剩余长度"></a> 剩余长度</h3>
+<p>剩余长度 = 可变报头长度 + 负载长度</p>
+<p>可变长编码（1-4个字节）（<strong>128进制</strong>-----只要每个Byte的最高位为1，就继续往下读）</p>
+<p><img src="https://s2.loli.net/2025/08/04/tZIql9ObwxrsAiN.png" alt="" /></p>
+<h3 id="服务质量等级"><a class="markdownIt-Anchor" href="#服务质量等级"></a> 服务质量等级</h3>
+<p><img src="https://s2.loli.net/2025/08/04/2CeHJXMjp5imrYa.png" alt="" /></p>
+<ul>
+<li>0：不需要签收，开销小</li>
+<li>1：需要1次签收</li>
+<li>2：需要一次签收，并且需要一次回访</li>
+</ul>
+<h3 id="connect"><a class="markdownIt-Anchor" href="#connect"></a> CONNECT</h3>
+<p><img src="https://s2.loli.net/2025/08/04/TUD2fN1JXtlaOup.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/04/MvnPiY3xOaLA276.png" alt="" /></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输入：</span><br><span class="line">//固定报头（MQTT报文类型 + Reserved保留位） 剩余长度37 Byte</span><br><span class="line"></span><br><span class="line">//可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">//+ 连接标志C2）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line"></span><br><span class="line">//ClientID</span><br><span class="line">//Username</span><br><span class="line">//Password</span><br><span class="line"></span><br><span class="line">10 25</span><br><span class="line"></span><br><span class="line">00 04 4D 51 54 54 04 C2 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line"></span><br><span class="line">//返回：</span><br><span class="line">20 02 00 00</span><br></pre></td></tr></table></figure>
+<h3 id="connack"><a class="markdownIt-Anchor" href="#connack"></a> CONNACK</h3>
+<p><img src="https://s2.loli.net/2025/08/04/Of9k5MEBLCY6naX.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/04/EAHqJh1gS5luxbi.png" alt="" /></p>
+<p>第1个字节是 连接确认标志，<strong>位7-1是保留位且必须设置为0</strong>。</p>
+<p>第0 (SP)位 是当前会话（Session Present）标志，即CONNECT的Clean Session。</p>
+<p><img src="https://s2.loli.net/2025/08/04/dxnjYzrkKDLAcyo.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/04/OTWLvEsuRAZYwze.png" alt="" /></p>
+<h3 id="disconnect"><a class="markdownIt-Anchor" href="#disconnect"></a> DISCONNECT</h3>
+<p><img src="https://s2.loli.net/2025/08/04/MlnWYhd5LNiZFwC.png" alt="" /></p>
+<p><strong>DISCONNECT</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">E0 00</span><br></pre></td></tr></table></figure>
+<h3 id="subscribe"><a class="markdownIt-Anchor" href="#subscribe"></a> SUBSCRIBE</h3>
+<p><img src="https://s2.loli.net/2025/08/04/UTPOYEXuR17ay9x.png" alt="" /></p>
+<p><strong>剩余长度</strong>等于<strong>可变报头的长度</strong>（2字节）<strong>加上有效载荷的长度</strong>。</p>
+<p><img src="https://s2.loli.net/2025/08/04/kBJQqtMxLRNF7TY.png" alt="" /></p>
+<p><strong>报文标识符，需要订阅和确认反馈一致，具体可以自己定义。</strong></p>
+<h3 id="suback"><a class="markdownIt-Anchor" href="#suback"></a> SUBACK</h3>
+<p><img src="https://s2.loli.net/2025/08/05/omYZWrDNzCEOLQ3.png" alt="" /></p>
+<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
+<p><img src="https://s2.loli.net/2025/08/05/PeAOYRljWvhLyoS.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/NvfWYeH75nh3Xug.png" alt="" /></p>
+<p><strong>0x80 - Failure（失败）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//发送：</span><br><span class="line">//固定报头82 + 剩余长度0C</span><br><span class="line">//报文标识符00 0A</span><br><span class="line">//USER002长7字节，后续跟随USER002（Topic） + Qos（02）</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 55 53 45 52 30 30 32 02</span><br><span class="line"></span><br><span class="line">//接收：</span><br><span class="line">//固定报头90 + 剩余长度03 + 报文标识符00 0A +有效载荷 Qos（02）</span><br><span class="line">90 03 00 0A 02</span><br></pre></td></tr></table></figure>
+<h3 id="unsubscribe"><a class="markdownIt-Anchor" href="#unsubscribe"></a> UNSUBSCRIBE</h3>
+<p><img src="https://s2.loli.net/2025/08/05/ola4T9fxmytOVQI.png" alt="" /></p>
+<p><strong>剩余长度</strong>等于<strong>可变报头的长度加上有效载荷的长度</strong>。</p>
+<p><img src="https://s2.loli.net/2025/08/05/UZGarJh2dvANDkH.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/05/kNPSDjy12W8EvVc.png" alt="" /></p>
+<h3 id="unsuback"><a class="markdownIt-Anchor" href="#unsuback"></a> UNSUBACK</h3>
+<p><img src="https://s2.loli.net/2025/08/05/oOmBWwF1hCrXxzd.png" alt="" /></p>
+<p><strong>剩余长度 = 0x02</strong></p>
+<p><img src="https://s2.loli.net/2025/08/05/mus69ZdDpz4FCHi.png" alt="" /></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 发送：</span><br><span class="line">// 固定报头A2 + 剩余长度</span><br><span class="line">// 报文标识符12 34</span><br><span class="line">// 长度表示00 07 + USER002（Topic）</span><br><span class="line">A2 0B</span><br><span class="line">12 34</span><br><span class="line">00 07 55 53 45 52 30 30 32</span><br><span class="line"></span><br><span class="line">// 接收：</span><br><span class="line">// 固定报头 + 剩余长度 + 报文标识符</span><br><span class="line">B0 02 12 34</span><br></pre></td></tr></table></figure>
+<h3 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> PING</h3>
+<p><img src="https://s2.loli.net/2025/08/04/KqGWmaBygMDn85l.png" alt="" /></p>
+<p><img src="https://s2.loli.net/2025/08/04/1LGOa6KteHkgWjd.png" alt="" /></p>
+<p><strong>PING</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C0 00</span><br></pre></td></tr></table></figure>
+<h3 id="pingrsp"><a class="markdownIt-Anchor" href="#pingrsp"></a> PINGRSP</h3>
+<p><img src="https://s2.loli.net/2025/08/04/uo9azSLckJDfBxn.png" alt="" /></p>
+<p><strong>PINGRSP</strong>报文<strong>没有可变报头和有效载荷</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D0 00</span><br></pre></td></tr></table></figure>
+<h3 id="报文分类"><a class="markdownIt-Anchor" href="#报文分类"></a> 报文分类</h3>
+<ul>
+<li>
+<p>Qos=0的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，没有接收方的事</p>
+</li>
+<li>
+<p>Qos=1的PUBLISH：<strong>发送方</strong>用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBACK</strong>报文表示签收</p>
+</li>
+<li>
+<p>Qos=2的PUBLISH：发送方先用到<strong>PUBLISH</strong>报文，<strong>接收方</strong>用<strong>PUBREC</strong>报文表示签收；发送方再用<strong>PUBREL</strong>报文开启回访，<strong>接收方</strong>用<strong>PUBCOMP</strong>报文表示回访确认</p>
+</li>
+</ul>
+<h3 id="publish"><a class="markdownIt-Anchor" href="#publish"></a> PUBLISH</h3>
+<p><img src="https://s2.loli.net/2025/08/05/8phjXnc3r2b1Baw.png" alt="" /></p>
+<p>在Qos=0时，<strong>DUP设置为0，即不重发</strong>；</p>
+<p><strong>RETAIN = 1</strong>，Qos=0的带<strong>保留功能</strong>，即<strong>保留本条PUBLISH报文</strong>（最重要的，只有一条，后面关注的都会立即看到）。</p>
+<p><img src="https://s2.loli.net/2025/08/05/3wVzHdkasA9BLhb.png" alt="" /></p>
+<p><strong>有效负载就是需要发送的数据</strong></p>
+<p>有效载荷的长度计算：用固定报头中的剩余长度字段的值减去可变报头的长度。</p>
+<h4 id="qos0"><a class="markdownIt-Anchor" href="#qos0"></a> Qos=0</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度00 07 + 自己的topic（USER001）</span><br><span class="line">//发送的字符串123</span><br><span class="line">30 0C</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">31 32 33</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2025/08/05/YIZQ7fyzCRopPeX.png" alt="" /></p>
+<h4 id="qos1"><a class="markdownIt-Anchor" href="#qos1"></a> Qos=1</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">//固定报头 + 剩余长度</span><br><span class="line">//长度 + USER001</span><br><span class="line">//字符串123</span><br><span class="line">32 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34 </span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：</span><br><span class="line">3A 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 12 34</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">//User001显示</span><br><span class="line">//40表示4号报文，接收成功；12 34是报文标识符</span><br><span class="line">40 02 12 34</span><br><span class="line"></span><br><span class="line">//User001签收（4号报文+长度+Qos=1）</span><br><span class="line">40 02 00 01</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2025/08/05/GfPpSMkRETasHQ4.png" alt="" /></p>
+<p>没有签收，会一直发送请求，<strong>签收后就不会再发</strong>。</p>
+<p><img src="https://s2.loli.net/2025/08/05/lATZgwSN7mUJVkv.png" alt="" /></p>
+<h4 id="qos2"><a class="markdownIt-Anchor" href="#qos2"></a> Qos=2</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//第一次发送，不带保留：</span><br><span class="line">// 3号PUBLISH报文</span><br><span class="line">34 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">// 返回5号报文</span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">//需要回访，否则再输入,USER002也不显示</span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">//返回7号报文</span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br><span class="line">//接收方第一次没有签收，发送方后续重发，不带保留：(如果是7号没有回访确认，不重发3号，而是重发6号报文)</span><br><span class="line"></span><br><span class="line">3C 0E</span><br><span class="line">00 07 55 53 45 52 30 30 31 11 22</span><br><span class="line">31 32 33</span><br><span class="line"></span><br><span class="line">(6)PUBREL:  62 02 11 22</span><br><span class="line"></span><br><span class="line">(5)PUBREC: 50 02 00 01</span><br><span class="line"></span><br><span class="line">(7)PUBCOMP :  70 02 00 01</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="会话清理与保留"><a class="markdownIt-Anchor" href="#会话清理与保留"></a> 会话清理与保留</h3>
+<p><img src="https://s2.loli.net/2025/08/05/TEeWHVBtuF23p7v.png" alt="" /></p>
+<ul>
+<li>
+<p>1：清理会话：<strong>没有记忆</strong>，不保留订阅。<strong>每次登陆后需要重新订阅需要的TOPIC</strong>。<strong>收不到离线消息</strong>。</p>
+</li>
+<li>
+<p>0：保留会话：<strong>有记忆，不用重新订阅TOPIC</strong>。<strong>离线期间的消息</strong>（PUBLISH）我们可以<strong>收到</strong>。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//1，清理</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C2 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">//0，保留</span><br><span class="line">10 25 </span><br><span class="line">00 04 4D 51 54 54 04 C0 00 64 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br></pre></td></tr></table></figure>
+<h4 id="connect的sp"><a class="markdownIt-Anchor" href="#connect的sp"></a> CONNECT的SP</h4>
+<p><strong>Clean Session = 1 — SP= 0</strong></p>
+<p><strong>Clean Session = 0，不一定</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">C2</th>
+<th style="text-align:center">C0</th>
+<th style="text-align:center">C0</th>
+<th style="text-align:center">C0</th>
+<th style="text-align:center">C0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="遗嘱"><a class="markdownIt-Anchor" href="#遗嘱"></a> 遗嘱</h3>
+<p><s>很好，我选择跟它一起G了</s></p>
+<p>报警功能，非正常断线（<strong>正常断线用14号报文，这里是直接断开TCP/被踢下线</strong>）</p>
+<p><strong>服务器会向订阅了遗嘱TOPIC的客户端推送遗嘱PUBLISH报文</strong></p>
+<p>大白话：B订阅了A，A非正常断线，则B会收到A的遗嘱报文</p>
+<p><img src="https://s2.loli.net/2025/08/05/SviHJRZtYVhsMb2.png" alt="" /></p>
+<p><strong>USER002需要再订阅WILL001的遗嘱TOPIC</strong></p>
+<p><strong>WILL001（遗嘱TOPIC）</strong></p>
+<p><strong>WILL001（PUBLISH报文数据）</strong></p>
+<p>(可以不一样，设置一样是为了方便)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 固定报头 + 剩余长度</span><br><span class="line">// 可变报头00 04 + ‘M’+&#x27;Q&#x27;+&#x27;T&#x27;+&#x27;T&#x27; + 协议级别04 </span><br><span class="line">// + 连接标志位C6）+ 保持连接（10 64 --- 4196s，实际上是1.5倍）</span><br><span class="line">// Client_ID --- USER001</span><br><span class="line">// WILL001 遗嘱TOPIC</span><br><span class="line">// WILL001 PUBLISH报文数据</span><br><span class="line">// Username --- USER001</span><br><span class="line">// Password --- USER001</span><br><span class="line">10 37</span><br><span class="line">00 04 4D 51 54 54 04 C6 10 64 </span><br><span class="line"></span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 57 49 4C 4C 30 30 31 </span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line">00 07 55 53 45 52 30 30 31</span><br><span class="line"></span><br><span class="line">// 订阅USER002，然后再强制关闭USER001，可以看到遗嘱效果</span><br><span class="line">82 0C</span><br><span class="line">00 0A</span><br><span class="line">00 07 57 49 4C 4C 30 30 32 02</span><br></pre></td></tr></table></figure>
+<h2 id="资料"><a class="markdownIt-Anchor" href="#资料"></a> 资料</h2>
+<p><a href="https://www.bilibili.com/video/BV1VDdoYhEYh/?spm_id_from=333.337.search-card.all.click&amp;vd_source=2686d8279192347a7d56afcb53bb00d9">【2025新版】MQTT协议手把手详解 EMQX自建服务器 所有报文功能 逐个字节构建分析与测试_哔哩哔哩_bilibili</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/421109780">(11 封私信) MQTT协议，终于有人讲清楚了 - 知乎</a></p>
+<p><a href="https://blog.csdn.net/jackwmj12/article/details/129163012">MQTT协议详解(完整版)-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>MQTT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown基础用法</title>
+    <url>/2023/04/12/Markdown%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="markdown基础用法"><a class="markdownIt-Anchor" href="#markdown基础用法"></a> Markdown基础用法</h1>
+<h3 id="官网网址httpwwwtyporaio"><a class="markdownIt-Anchor" href="#官网网址httpwwwtyporaio"></a> 官网网址：<a href="http://www.typora.io/">http://www.typora.io/</a></h3>
+<p>可以下载排字模板和编辑主题。</p>
+<p><strong>使用Typora，通过Ctrl+/即可进入Markdown源代码编辑模式。</strong></p>
+<h3 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h3>
+<p>#+空格+标题名称-----------一级标题<br />
+##+空格+标题名称---------二级标题<br />
+###+空格+标题名称--------三级标题<br />
+####+空格+标题名称------四级标题<br />
+#####+空格+标题名称------五级标题<br />
+######+空格+标题名称-----六级标题<br />
+<em><strong>最大支持六级标题</strong></em></p>
+<h3 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> + 文字 + *         斜体</span><br><span class="line">** + 文字 + **       加粗</span><br><span class="line"><span class="strong">*** + 文字 + **</span>*     斜体加粗</span><br><span class="line">~~ + 文字 + ~~       删除线</span><br></pre></td></tr></table></figure>
+<p>对于标准的markdown文本是不支持居中对齐的。不过markdown同时兼容HTML，可以通过HTML语法格式书写来让文本居中对齐。</p>
+<h3 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h3>
+<blockquote>
+<p>‘&gt;’+加空格+文字</p>
+</blockquote>
+<h3 id="分割线"><a class="markdownIt-Anchor" href="#分割线"></a> 分割线</h3>
+<p>1.三个*然后回车<br />
+2.三个-（减号）回车</p>
+<h3 id="插入图片"><a class="markdownIt-Anchor" href="#插入图片"></a> 插入图片</h3>
+<p>①本地的图片：英文的！+[图片名称]+（路径）<br />
+②网络图：英文的！+[图片名称]+（网络图片地址）<br />
+比如：<br />
+<img src="https://s2.loli.net/2025/05/07/YhvXnKTEQL4FM2j.png" alt="" /></p>
+<h3 id="链接"><a class="markdownIt-Anchor" href="#链接"></a> 链接</h3>
+<p>[点击跳转到+名称]（网站、文件等地址）<br />
+比如：<a href="https://blog.csdn.net/weixin_47795024?spm=1001.2100.3001.5343">我的博客</a></p>
+<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
+<p>①有序列表；序号（1，①）+英文的句号（.）+输入得内容，然后回车自动补出下一个序号<br />
+②无序列表；减号（-）+空格+输入内容        回车自动补出下一个</p>
+<h3 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h3>
+<p>右击创建表格</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<p>Tab键上面的点（·）三个 + 代码类型（java c++ c#等）然后回车</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数学公式"><a class="markdownIt-Anchor" href="#数学公式"></a> 数学公式</h3>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">
+\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1771em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p><a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">LaTeX公式格式</a></p>
+<h1 id="markdown快捷键"><a class="markdownIt-Anchor" href="#markdown快捷键"></a> Markdown快捷键</h1>
+<p>撤销：Ctrl/Command + Z<br />
+重做：Ctrl/Command + Y<br />
+加粗：Ctrl/Command + B<br />
+斜体：Ctrl/Command + I<br />
+标题：Ctrl/Command + Shift + H<br />
+无序列表：Ctrl/Command + Shift + U<br />
+有序列表：Ctrl/Command + Shift + O<br />
+检查列表：Ctrl/Command + Shift + C<br />
+插入代码：Ctrl/Command + Shift + K<br />
+插入链接：Ctrl/Command + Shift + L<br />
+插入图片：Ctrl/Command + Shift + G<br />
+查找：Ctrl/Command + F<br />
+mand + Shift + L<br />
+插入图片：Ctrl/Command + Shift + G<br />
+查找：Ctrl/Command + F<br />
+替换：Ctrl/Command + G</p>
+]]></content>
+      <categories>
+        <category>Markdown</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用新域名后不加载主题</title>
+    <url>/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="心路历程"><a class="markdownIt-Anchor" href="#心路历程"></a> <strong>心路历程</strong></h3>
+<p>看了一圈CSDN，基本上都是抄抄改改，只有几个还有点负责心，但依然没有解决我的问题，差点就放弃了，不过好在通过试错给试出来了。</p>
+<h3 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h3>
+<p>使用了新域名后，发现网页的CSS和JS都没用了，但本地静态可以正常运行。这个时候需要修改个人博客底下的_config.yml文件，先找到这个地方：</p>
+<p><img src="https://s2.loli.net/2025/05/07/KCLeSkUBlQGursV.png" alt="" /></p>
+<p>将url改为<strong><a href="http://githubname.github.io">githubname.github.io</a></strong>，<strong>不要出现下一层仓库名</strong>。</p>
+<p><strong>说明</strong>：CSDN上别人的解决方法不适用，是因为我们这个没有单独给出root，切记切记。</p>
+]]></content>
+      <categories>
+        <category>网页</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -2862,22 +2881,106 @@ kernel = cv2.getStructuringElement(MODE, SIZE, POINT)
       </tags>
   </entry>
   <entry>
-    <title>使用新域名后不加载主题</title>
-    <url>/2022/05/15/%E4%BD%BF%E7%94%A8%E6%96%B0%E5%9F%9F%E5%90%8D%E5%90%8E%E4%B8%8D%E5%8A%A0%E8%BD%BD%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="心路历程"><a class="markdownIt-Anchor" href="#心路历程"></a> <strong>心路历程</strong></h3>
-<p>看了一圈CSDN，基本上都是抄抄改改，只有几个还有点负责心，但依然没有解决我的问题，差点就放弃了，不过好在通过试错给试出来了。</p>
-<h3 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h3>
-<p>使用了新域名后，发现网页的CSS和JS都没用了，但本地静态可以正常运行。这个时候需要修改个人博客底下的_config.yml文件，先找到这个地方：</p>
-<p><img src="https://s2.loli.net/2025/05/07/KCLeSkUBlQGursV.png" alt="" /></p>
-<p>将url改为<strong><a href="http://githubname.github.io">githubname.github.io</a></strong>，<strong>不要出现下一层仓库名</strong>。</p>
-<p><strong>说明</strong>：CSDN上别人的解决方法不适用，是因为我们这个没有单独给出root，切记切记。</p>
+    <title>嘉立创画板</title>
+    <url>/2025/08/25/%E5%98%89%E7%AB%8B%E5%88%9B%E7%94%BB%E6%9D%BF/</url>
+    <content><![CDATA[<h1 id="嘉立创画板"><a class="markdownIt-Anchor" href="#嘉立创画板"></a> 嘉立创画板</h1>
+<p><s>复习，继续复习；学不完，根本学不完</s>~~~</p>
+<ul>
+<li>电容通交阻直</li>
+</ul>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>X</mi><mi>C</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>w</mi><mi>C</mi></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><mi>f</mi><mi>C</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+X_C=\frac{1}{wC}=\frac{1}{2 \pi fC}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">wC</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2019em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p>频率越<strong>高</strong>，<strong>电容阻抗越小</strong>，越容易通过。</p>
+<ul>
+<li>电感通直阻交</li>
+</ul>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>X</mi><mi>L</mi></msub><mo>=</mo><mi>w</mi><mi>L</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>f</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">
+X_L=wL=2 \pi fL
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">L</span></span></span></span></span>
+<p>频率越<strong>低</strong>，<strong>电感阻抗越小</strong>，越容易通过。</p>
+<h3 id="ldo"><a class="markdownIt-Anchor" href="#ldo"></a> LDO</h3>
+<p>Low dropout regulator，低压差线性稳压器</p>
+<ul>
+<li>外围器件少，电路简单，成本低</li>
+<li>负载响应快，输出纹波小，噪声少</li>
+<li>效率低，输入输出压差不能太大</li>
+<li><strong>只能降压</strong></li>
+</ul>
+<p><a href="https://blog.csdn.net/qq_36347513/article/details/121019508">电子电路学习笔记（14）——LDO(低压差线性稳压器)_ldo电路-CSDN博客</a></p>
+<img src="https://s2.loli.net/2025/08/11/nM45vBIUGFSRuWX.png" style="zoom:50%;" />
+<blockquote>
+<p>流程： V_out ↓ —&gt; V+↓  —&gt; V_b ↓ —&gt; V_eb ↑ —&gt; V_out ↑</p>
+</blockquote>
+<h3 id="dcdc转换器"><a class="markdownIt-Anchor" href="#dcdc转换器"></a> DC/DC转换器</h3>
+<ul>
+<li>外围器件多，电路复杂，成本高</li>
+<li>负载响应比LDO慢，输出纹波大，噪声大</li>
+<li>效率高，输入电压范围宽泛</li>
+<li><strong>既能升压，也能降压</strong></li>
+</ul>
+<p>开关电源稳压器，利用电容、电感的储能特性，通过可控开关，进行高频开关动作，将输入的电能存储在电容（感）里，当开关断开，电能再释放给负载，提供能量。</p>
+<ul>
+<li>
+<p><strong>降压</strong>DCDC被称为<strong>BUCK</strong>电路</p>
+</li>
+<li>
+<p><strong>升压</strong>DCDC被称为<strong>BOOST</strong>电路</p>
+</li>
+</ul>
+<p><a href="https://zhuanlan.zhihu.com/p/669118603">(11 封私信) 一文搞懂DCDC基础知识 - 知乎</a></p>
+<h4 id="buck斩压"><a class="markdownIt-Anchor" href="#buck斩压"></a> BUCK（斩压）</h4>
+<p>通过<strong>开关的通断，来斩断输入电压</strong>，把输入高电压“切”成脉冲，经过电感/电容平滑后得到较低的直流电压。</p>
+<img src="https://s2.loli.net/2025/08/11/O7xfzaCAtnIg56T.png" style="zoom:50%;" />
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>V</mi><mi>o</mi></msub><mo>=</mo><mi>D</mi><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><mtext>，</mtext><mi>D</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo><mtext>；</mtext></mrow><annotation encoding="application/x-tex">
+V_o = DV_{in}， D∈[0, 1]；
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord cjk_fallback">；</span></span></span></span></span>
+<h4 id="boost斩流"><a class="markdownIt-Anchor" href="#boost斩流"></a> BOOST（斩流）</h4>
+<p>开关管反复导通/关断，<strong>斩断电感电流</strong>，利用电感电流的连续性，在关断时把电感储能释放到负载，使输出电压高于输入。</p>
+<img src="https://s2.loli.net/2025/08/11/UKZvDpq7ncMWPTs.png" style="zoom:50%;" />
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>V</mi><mi>o</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></mfrac><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><mtext>，</mtext><mi>D</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo><mtext>；</mtext></mrow><annotation encoding="application/x-tex">
+V_o = \frac{1}{(1 - D)}V_{in}， D∈[0, 1]；
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord cjk_fallback">；</span></span></span></span></span>
+<h2 id="纹波"><a class="markdownIt-Anchor" href="#纹波"></a> 纹波</h2>
+<p><strong>纹波</strong>：直流输出上叠加的<strong>周期性</strong>交流分量。</p>
+<p><strong>大小表示</strong>：用<strong>峰峰值 Vpp</strong>或<strong>有效值 Vrms</strong></p>
+<p><img src="https://s2.loli.net/2025/08/11/zRVKmk81wxnJONy.png" alt="" /></p>
+<h2 id="需求"><a class="markdownIt-Anchor" href="#需求"></a> 需求</h2>
+<p>设计一款基于STM32的开发板。</p>
+<h3 id="电源设计"><a class="markdownIt-Anchor" href="#电源设计"></a> 电源设计</h3>
+<p><img src="https://s2.loli.net/2025/08/11/MJ84TnQicYKgWXH.png" alt="" /></p>
+<h2 id="pcb设计"><a class="markdownIt-Anchor" href="#pcb设计"></a> PCB设计</h2>
+<p><img src="https://s2.loli.net/2025/08/11/PFI7gjU4KBMJ6we.png" alt="" /></p>
+<h3 id="主控"><a class="markdownIt-Anchor" href="#主控"></a> 主控</h3>
+<p><img src="https://s2.loli.net/2025/08/11/B5eGWlrEDL6X8Nh.png" alt="" /></p>
+<h3 id="电源"><a class="markdownIt-Anchor" href="#电源"></a> 电源</h3>
+<p><img src="https://s2.loli.net/2025/08/11/iPRYphT2rvFWa19.png" alt="" /></p>
+<blockquote>
+<p><strong>Q：为什么需要模数地隔离，模拟为什么会受到数字地的攻击？</strong></p>
+<p><strong>模拟电路对电压、电流细微变化非常敏感</strong>，<strong>数字电路有大量高速翻转信号，容易产生噪声电压</strong>，如果直接混在一起，容易测量不准。</p>
+<p>数字电路的电流是<strong>阶跃式/突变的</strong>；底线也不是理想零电阻，有阻抗；当数字电流在地线上流动时，会在阻抗上形成瞬间压降，模拟电路会以为基准电压在抖动，从而出现偏差。</p>
+</blockquote>
+<h3 id="接口"><a class="markdownIt-Anchor" href="#接口"></a> 接口</h3>
+<p><img src="https://s2.loli.net/2025/08/11/BAOYa7rneQExWli.png" alt="" /></p>
+<h2 id="pcb"><a class="markdownIt-Anchor" href="#pcb"></a> PCB</h2>
+<h3 id="正面"><a class="markdownIt-Anchor" href="#正面"></a> 正面</h3>
+<p><img src="https://s2.loli.net/2025/08/25/VqzAU7mRGbHrf2Y.png" alt="" /></p>
+<h3 id="反面"><a class="markdownIt-Anchor" href="#反面"></a> 反面</h3>
+<p><img src="https://s2.loli.net/2025/08/25/mCQjkGhHI1T5eFy.png" alt="" /></p>
+<p>导出Gerber文件，进入下面网站领取优惠券，打板寄回！！！</p>
+<img src="https://s2.loli.net/2025/08/31/6df5MLK4UyN1z7H.png" style="zoom:50%;" />
+<p><a href="https://www.jlc.com/newOrder/#/collectCoupons?spm=JLC.MEMBER">嘉立创-领券专区</a></p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>本次画板花了两周左右，做了块STM32的最小单元板，相较于之前画的平衡车板子复杂了许多，想die…</p>
+<p><strong>原理图</strong>，是真的好画；理解，也好理解，但太容易忘了，还是得记住电源电路用的是LDO和DC-DC</p>
+<p><strong>PCB</strong>，是真的折磨；画完的那一刻，能够理解实习期间旁边的硬件工程师一直在那“发癫”的原因了（一边画，一边小嘴抹了蜜）</p>
+<p><a href="https://www.bilibili.com/video/BV1fFAfeZEBE?spm_id_from=333.788.videopod.episodes&amp;vd_source=2686d8279192347a7d56afcb53bb00d9&amp;p=2">【大师篇】1-产品设计流程_哔哩哔哩_bilibili</a></p>
 ]]></content>
       <categories>
-        <category>网页</category>
+        <category>嘉立创</category>
       </categories>
       <tags>
-        <tag>学习</tag>
-        <tag>hexo</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -3643,111 +3746,8 @@ CAN波特率=TQ*(TBS1 + TBS2 + SJY)   \\
         <category>嵌入式</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>STM32</tag>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>嘉立创画板</title>
-    <url>/2025/08/25/%E5%98%89%E7%AB%8B%E5%88%9B%E7%94%BB%E6%9D%BF/</url>
-    <content><![CDATA[<h1 id="嘉立创画板"><a class="markdownIt-Anchor" href="#嘉立创画板"></a> 嘉立创画板</h1>
-<p><s>复习，继续复习；学不完，根本学不完</s>~~~</p>
-<ul>
-<li>电容通交阻直</li>
-</ul>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>X</mi><mi>C</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>w</mi><mi>C</mi></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><mi>f</mi><mi>C</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-X_C=\frac{1}{wC}=\frac{1}{2 \pi fC}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">wC</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2019em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-<p>频率越<strong>高</strong>，<strong>电容阻抗越小</strong>，越容易通过。</p>
-<ul>
-<li>电感通直阻交</li>
-</ul>
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>X</mi><mi>L</mi></msub><mo>=</mo><mi>w</mi><mi>L</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>f</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">
-X_L=wL=2 \pi fL
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">L</span></span></span></span></span>
-<p>频率越<strong>低</strong>，<strong>电感阻抗越小</strong>，越容易通过。</p>
-<h3 id="ldo"><a class="markdownIt-Anchor" href="#ldo"></a> LDO</h3>
-<p>Low dropout regulator，低压差线性稳压器</p>
-<ul>
-<li>外围器件少，电路简单，成本低</li>
-<li>负载响应快，输出纹波小，噪声少</li>
-<li>效率低，输入输出压差不能太大</li>
-<li><strong>只能降压</strong></li>
-</ul>
-<p><a href="https://blog.csdn.net/qq_36347513/article/details/121019508">电子电路学习笔记（14）——LDO(低压差线性稳压器)_ldo电路-CSDN博客</a></p>
-<img src="https://s2.loli.net/2025/08/11/nM45vBIUGFSRuWX.png" style="zoom:50%;" />
-<blockquote>
-<p>流程： V_out ↓ —&gt; V+↓  —&gt; V_b ↓ —&gt; V_eb ↑ —&gt; V_out ↑</p>
-</blockquote>
-<h3 id="dcdc转换器"><a class="markdownIt-Anchor" href="#dcdc转换器"></a> DC/DC转换器</h3>
-<ul>
-<li>外围器件多，电路复杂，成本高</li>
-<li>负载响应比LDO慢，输出纹波大，噪声大</li>
-<li>效率高，输入电压范围宽泛</li>
-<li><strong>既能升压，也能降压</strong></li>
-</ul>
-<p>开关电源稳压器，利用电容、电感的储能特性，通过可控开关，进行高频开关动作，将输入的电能存储在电容（感）里，当开关断开，电能再释放给负载，提供能量。</p>
-<ul>
-<li>
-<p><strong>降压</strong>DCDC被称为<strong>BUCK</strong>电路</p>
-</li>
-<li>
-<p><strong>升压</strong>DCDC被称为<strong>BOOST</strong>电路</p>
-</li>
-</ul>
-<p><a href="https://zhuanlan.zhihu.com/p/669118603">(11 封私信) 一文搞懂DCDC基础知识 - 知乎</a></p>
-<h4 id="buck斩压"><a class="markdownIt-Anchor" href="#buck斩压"></a> BUCK（斩压）</h4>
-<p>通过<strong>开关的通断，来斩断输入电压</strong>，把输入高电压“切”成脉冲，经过电感/电容平滑后得到较低的直流电压。</p>
-<img src="https://s2.loli.net/2025/08/11/O7xfzaCAtnIg56T.png" style="zoom:50%;" />
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>V</mi><mi>o</mi></msub><mo>=</mo><mi>D</mi><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><mtext>，</mtext><mi>D</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo><mtext>；</mtext></mrow><annotation encoding="application/x-tex">
-V_o = DV_{in}， D∈[0, 1]；
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord cjk_fallback">；</span></span></span></span></span>
-<h4 id="boost斩流"><a class="markdownIt-Anchor" href="#boost斩流"></a> BOOST（斩流）</h4>
-<p>开关管反复导通/关断，<strong>斩断电感电流</strong>，利用电感电流的连续性，在关断时把电感储能释放到负载，使输出电压高于输入。</p>
-<img src="https://s2.loli.net/2025/08/11/UKZvDpq7ncMWPTs.png" style="zoom:50%;" />
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>V</mi><mi>o</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></mfrac><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><mtext>，</mtext><mi>D</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo><mtext>；</mtext></mrow><annotation encoding="application/x-tex">
-V_o = \frac{1}{(1 - D)}V_{in}， D∈[0, 1]；
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord cjk_fallback">；</span></span></span></span></span>
-<h2 id="纹波"><a class="markdownIt-Anchor" href="#纹波"></a> 纹波</h2>
-<p><strong>纹波</strong>：直流输出上叠加的<strong>周期性</strong>交流分量。</p>
-<p><strong>大小表示</strong>：用<strong>峰峰值 Vpp</strong>或<strong>有效值 Vrms</strong></p>
-<p><img src="https://s2.loli.net/2025/08/11/zRVKmk81wxnJONy.png" alt="" /></p>
-<h2 id="需求"><a class="markdownIt-Anchor" href="#需求"></a> 需求</h2>
-<p>设计一款基于STM32的开发板。</p>
-<h3 id="电源设计"><a class="markdownIt-Anchor" href="#电源设计"></a> 电源设计</h3>
-<p><img src="https://s2.loli.net/2025/08/11/MJ84TnQicYKgWXH.png" alt="" /></p>
-<h2 id="pcb设计"><a class="markdownIt-Anchor" href="#pcb设计"></a> PCB设计</h2>
-<p><img src="https://s2.loli.net/2025/08/11/PFI7gjU4KBMJ6we.png" alt="" /></p>
-<h3 id="主控"><a class="markdownIt-Anchor" href="#主控"></a> 主控</h3>
-<p><img src="https://s2.loli.net/2025/08/11/B5eGWlrEDL6X8Nh.png" alt="" /></p>
-<h3 id="电源"><a class="markdownIt-Anchor" href="#电源"></a> 电源</h3>
-<p><img src="https://s2.loli.net/2025/08/11/iPRYphT2rvFWa19.png" alt="" /></p>
-<blockquote>
-<p><strong>Q：为什么需要模数地隔离，模拟为什么会受到数字地的攻击？</strong></p>
-<p><strong>模拟电路对电压、电流细微变化非常敏感</strong>，<strong>数字电路有大量高速翻转信号，容易产生噪声电压</strong>，如果直接混在一起，容易测量不准。</p>
-<p>数字电路的电流是<strong>阶跃式/突变的</strong>；底线也不是理想零电阻，有阻抗；当数字电流在地线上流动时，会在阻抗上形成瞬间压降，模拟电路会以为基准电压在抖动，从而出现偏差。</p>
-</blockquote>
-<h3 id="接口"><a class="markdownIt-Anchor" href="#接口"></a> 接口</h3>
-<p><img src="https://s2.loli.net/2025/08/11/BAOYa7rneQExWli.png" alt="" /></p>
-<h2 id="pcb"><a class="markdownIt-Anchor" href="#pcb"></a> PCB</h2>
-<h3 id="正面"><a class="markdownIt-Anchor" href="#正面"></a> 正面</h3>
-<p><img src="https://s2.loli.net/2025/08/25/VqzAU7mRGbHrf2Y.png" alt="" /></p>
-<h3 id="反面"><a class="markdownIt-Anchor" href="#反面"></a> 反面</h3>
-<p><img src="https://s2.loli.net/2025/08/25/mCQjkGhHI1T5eFy.png" alt="" /></p>
-<p>导出Gerber文件，进入下面网站领取优惠券，打板寄回！！！</p>
-<img src="https://s2.loli.net/2025/08/31/6df5MLK4UyN1z7H.png" style="zoom:50%;" />
-<p><a href="https://www.jlc.com/newOrder/#/collectCoupons?spm=JLC.MEMBER">嘉立创-领券专区</a></p>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<p>本次画板花了两周左右，做了块STM32的最小单元板，相较于之前画的平衡车板子复杂了许多，想die…</p>
-<p><strong>原理图</strong>，是真的好画；理解，也好理解，但太容易忘了，还是得记住电源电路用的是LDO和DC-DC</p>
-<p><strong>PCB</strong>，是真的折磨；画完的那一刻，能够理解实习期间旁边的硬件工程师一直在那“发癫”的原因了（一边画，一边小嘴抹了蜜）</p>
-<p><a href="https://www.bilibili.com/video/BV1fFAfeZEBE?spm_id_from=333.788.videopod.episodes&amp;vd_source=2686d8279192347a7d56afcb53bb00d9&amp;p=2">【大师篇】1-产品设计流程_哔哩哔哩_bilibili</a></p>
-]]></content>
-      <categories>
-        <category>嘉立创</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -4609,51 +4609,6 @@ Emmmm…，不过后来拿了省一，挺意外的。</p>
       </categories>
       <tags>
         <tag>调试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>颜色、图片、文字、图标设置</title>
-    <url>/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="颜色-图片-文字-图标"><a class="markdownIt-Anchor" href="#颜色-图片-文字-图标"></a> 颜色、图片、文字、图标</h1>
-<h2 id="设置颜色"><a class="markdownIt-Anchor" href="#设置颜色"></a> 设置颜色</h2>
-<ol>
-<li><a href="https://vuetifyjs.com/en/styles/colors/#material-colors">Material color palette — Vuetify</a></li>
-</ol>
-<h2 id="设置图片"><a class="markdownIt-Anchor" href="#设置图片"></a> 设置图片</h2>
-<ol>
-<li>借助<strong>Image2LCD</strong>软件，按照如下图配置</li>
-</ol>
-<p><img src="https://s2.loli.net/2025/05/09/AV3Xr4FYEbSt1pL.png" style="zoom: 80%;" />将输出的数组存入.h中，加上static，在主函数调用。</p>
-<ol start="2">
-<li><a href="https://lvgl.io/tools/imageconverter">Image Converter — LVGL</a></li>
-</ol>
-<h2 id="设置文字"><a class="markdownIt-Anchor" href="#设置文字"></a> 设置文字</h2>
-<ol>
-<li>
-<p><a href="https://www.zitijia.com/i/250417369808129081.html">阿里巴巴普惠体系列打包免费字体下载 - 字体打包免费下载尽在字体家</a></p>
-</li>
-<li>
-<p><a href="https://fontconverter.com/zh/">字体转换器 – 免费在线转换字体</a></p>
-</li>
-<li>
-<p><a href="https://lvgl.io/tools/fontconverter">Font Converter — LVGL</a></p>
-</li>
-</ol>
-<h2 id="设置图标"><a class="markdownIt-Anchor" href="#设置图标"></a> 设置图标</h2>
-<ol>
-<li>
-<p><a href="https://fontawesome.com/">Font Awesome</a></p>
-</li>
-<li>
-<p><a href="https://www.iconfont.cn/">iconfont-阿里巴巴矢量图标库</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -8046,6 +8001,51 @@ Emmmm…，不过后来拿了省一，挺意外的。</p>
       </categories>
       <tags>
         <tag>语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>颜色、图片、文字、图标设置</title>
+    <url>/2025/01/10/%E9%A2%9C%E8%89%B2%E3%80%81%E5%9B%BE%E7%89%87%E3%80%81%E6%96%87%E5%AD%97%E3%80%81%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="颜色-图片-文字-图标"><a class="markdownIt-Anchor" href="#颜色-图片-文字-图标"></a> 颜色、图片、文字、图标</h1>
+<h2 id="设置颜色"><a class="markdownIt-Anchor" href="#设置颜色"></a> 设置颜色</h2>
+<ol>
+<li><a href="https://vuetifyjs.com/en/styles/colors/#material-colors">Material color palette — Vuetify</a></li>
+</ol>
+<h2 id="设置图片"><a class="markdownIt-Anchor" href="#设置图片"></a> 设置图片</h2>
+<ol>
+<li>借助<strong>Image2LCD</strong>软件，按照如下图配置</li>
+</ol>
+<p><img src="https://s2.loli.net/2025/05/09/AV3Xr4FYEbSt1pL.png" style="zoom: 80%;" />将输出的数组存入.h中，加上static，在主函数调用。</p>
+<ol start="2">
+<li><a href="https://lvgl.io/tools/imageconverter">Image Converter — LVGL</a></li>
+</ol>
+<h2 id="设置文字"><a class="markdownIt-Anchor" href="#设置文字"></a> 设置文字</h2>
+<ol>
+<li>
+<p><a href="https://www.zitijia.com/i/250417369808129081.html">阿里巴巴普惠体系列打包免费字体下载 - 字体打包免费下载尽在字体家</a></p>
+</li>
+<li>
+<p><a href="https://fontconverter.com/zh/">字体转换器 – 免费在线转换字体</a></p>
+</li>
+<li>
+<p><a href="https://lvgl.io/tools/fontconverter">Font Converter — LVGL</a></p>
+</li>
+</ol>
+<h2 id="设置图标"><a class="markdownIt-Anchor" href="#设置图标"></a> 设置图标</h2>
+<ol>
+<li>
+<p><a href="https://fontawesome.com/">Font Awesome</a></p>
+</li>
+<li>
+<p><a href="https://www.iconfont.cn/">iconfont-阿里巴巴矢量图标库</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>嵌入式</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
 </search>
