@@ -703,7 +703,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>二维数组</p>
 <ul>
 <li>num+1 是偏移一个一维数组</li>
-<li>&amp;num+1是整个数组</li>
+<li>&amp;num+1是偏移整个数组</li>
 </ul>
 </li>
 <li>
@@ -722,7 +722,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </li>
 </ul>
 <blockquote>
-<p><strong>Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, *(int *)(&amp;a + 1) - 1)的输出</strong></p>
+<p><strong>Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, *((int *)(&amp;a + 1) - 1))的输出</strong></p>
 <p>A：(&amp;a + 1)是a + 6， 这里的*(int *)没什么意义,*((int *)(&amp;a + 1) - 1)是a + 5，即6。</p>
 </blockquote>
 <blockquote>
