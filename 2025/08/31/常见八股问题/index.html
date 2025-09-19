@@ -1041,7 +1041,8 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li><strong>堆（Heap）</strong>：<strong>自己手动申请/释放</strong>，空间大，效率低，<strong>向高地址扩张</strong>。</li>
 </ul>
 <blockquote>
-<p>常见问题：堆使用不当可能导致 <strong>内存泄漏</strong>。</p>
+<p>常见问题：<strong>堆</strong>使用不当可能导致 <strong>内存泄漏</strong>和<strong>内存碎片</strong>。</p>
+<p>堆往往是不连续的内存区域，栈是连续的内存区域</p>
 </blockquote>
 <hr />
 <h2 id="malloc实现原理"><a class="markdownIt-Anchor" href="#malloc实现原理"></a> malloc实现原理</h2>
