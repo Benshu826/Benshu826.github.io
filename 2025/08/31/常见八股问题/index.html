@@ -729,8 +729,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 <blockquote>
 <p><strong>Q1：int a[6] = {1, 2, 3, 4, 5, 6};printf(“%d\n”, *((int *)(&amp;a + 1) - 1))的输出</strong></p>
 <p>A：(&amp;a + 1)是a + 6， 这里的*(int *)没什么意义,*((int *)(&amp;a + 1) - 1)是a + 5，即6。</p>
-</blockquote>
-<blockquote>
 <p><strong>Q2：char *buff[] = {“char”, “int”, “double”}; printf(“%c\n”, *(buff+1)[1])的输出</strong></p>
 <p>A：(buff+1)是&quot;int&quot;，<strong>[]的优先级大于*</strong>，所以*(buff+1)[1]=*(buff+1+1)=*(buff+2)，取&quot;double&quot;的首元素&quot;d&quot;。</p>
 <p><strong>Q3：如何不使用sizeof求数据类型字节的大小</strong></p>
@@ -958,10 +956,25 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li><strong>全局变量</strong>：定义在函数外，作用域是整个文件或程序，<strong>存储在静态区</strong>。</li>
 <li><strong>局部变量</strong>：定义在函数/代码块内，<strong>存储在栈</strong>，作用域仅在定义范围内。</li>
 </ul>
+<blockquote>
+<p><strong>Q：一个变量，没有初始化，如果它被使用了，会是什么值？</strong></p>
+<p>A：如果是全局变量，是0；<strong>局部变量</strong>，是<strong>垃圾值</strong>。</p>
+<ul>
+<li>
+<p><strong>已经初始化的全局变量</strong>，在<strong>数据段</strong>（.data段）</p>
+</li>
+<li>
+<p><strong>未初始化的全局变量</strong>，在<strong>BSS段</strong>（.bss段）</p>
+</li>
+<li>
+<p>无论是否初始化的<strong>局部变量</strong>，都在<strong>栈上</strong></p>
+</li>
+</ul>
+</blockquote>
 <hr />
 <h2 id="define-typedef-const-的区别"><a class="markdownIt-Anchor" href="#define-typedef-const-的区别"></a> <code>#define</code>、<code>typedef</code>、<code>const</code> 的区别</h2>
 <ul>
-<li><strong><code>#define</code></strong>：预处理指令，<strong>无类型检查</strong>。</li>
+<li><strong><code>#define</code></strong>：<strong>直接文本替换</strong>，预处理指令，<strong>无类型检查</strong>。</li>
 <li><strong><code>typedef</code></strong>：<strong>给类型取别名</strong>，<strong>有类型检查</strong>。</li>
 <li><strong><code>const</code></strong>：定义常量，编译器<strong>检查类型</strong>，<strong>分配内存</strong>。</li>
 </ul>
@@ -997,29 +1010,14 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p><strong>在 C++ 中</strong></p>
 <ul>
 <li>
-<p><strong>静态成员变量</strong>：属于类本身，所有对象共享同一份，不随对象的创建和销毁而改变。</p>
+<p><strong>静态成员变量</strong>：属于类本身，<strong>所有对象共享同一份</strong>，不随对象的创建和销毁而改变。</p>
 </li>
 <li>
-<p><strong>静态成员函数</strong>：不依赖对象调用，只能访问类的静态成员，不能访问 <code>this</code> 指针。</p>
+<p><strong>静态成员函数</strong>：不依赖对象调用，只能访问类的静态成员变量，不能访问 <code>this</code> 指针。</p>
 </li>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p><strong>Q：一个变量，没有初始化，如果它被使用了，是什么值？</strong></p>
-<p>A：如果是全局变量，它会是0；局部变量，它会是垃圾值。</p>
-<ul>
-<li>
-<p><strong>已经初始化的全局变量</strong>，在<strong>数据段</strong>（.data段）</p>
-</li>
-<li>
-<p><strong>未初始化的全局变量</strong>，在<strong>BSS段</strong>（.bss段）</p>
-</li>
-<li>
-<p>无论是否初始化的<strong>局部变量</strong>，都在<strong>栈上</strong></p>
-</li>
-</ul>
-</blockquote>
 <hr />
 <h2 id="register的作用了解"><a class="markdownIt-Anchor" href="#register的作用了解"></a> register的作用（了解）</h2>
 <p><strong>作用</strong>：提示编译器把变量尽量存放在 <strong>CPU 寄存器</strong> 中，并且是<strong>整数</strong>。</p>
