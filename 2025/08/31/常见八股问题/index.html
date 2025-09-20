@@ -2269,8 +2269,8 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li><strong>客户端向服务端发起一个 HTTPS 请求</strong>（含有<strong>Client Random</strong>、<strong>SSL/TLS套件版本</strong>）；</li>
 <li>服务器会将其<strong>数字证书（包含公钥）发送给客户端</strong>（含有<strong>Server Random</strong>）；</li>
 <li>客户端会验证该证书的合法性，包括检查其是否由可信机构颁发、是否在有效期内以及域名是否匹配等。验证通过后，<strong>客户端</strong>会生成一个用于后续<strong>对称加密</strong>的 <strong>Pre-Master Secret</strong>（预主密钥）；</li>
-<li><strong>客户端用服务器证书中的公钥进行加密</strong>后发送给服务器；</li>
-<li><strong>服务器使用自己的私钥解密</strong>，获取该预主密钥；</li>
+<li><strong>客户端用服务器证书中的公钥对Pre-Master Secret加密</strong>后发送给服务器；</li>
+<li><strong>服务器使用自己的私钥解密Pre-Master Secret</strong>，获取该预主密钥；</li>
 <li>随后，客户端和服务器会利用握手过程中交换的 <strong>Client Random</strong>（客户端随机数）、<strong>Server Random</strong>（服务端随机数）和刚刚协商出的 <strong>Pre-Master Secret</strong>，各自独立计算生成相同的<strong>会话密钥</strong>（Master Secret）；</li>
 <li>此后的所有通信数据都将使用这个会话密钥进行<strong>对称加密和解密</strong>，确保数据传输的机密性和完整性。</li>
 </ol>

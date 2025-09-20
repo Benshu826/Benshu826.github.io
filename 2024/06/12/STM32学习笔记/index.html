@@ -790,7 +790,9 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h2 id="dma"><a class="markdownIt-Anchor" href="#dma"></a> DMA</h2>
 <p><strong>Direct Memory Access</strong>：直接存储器访问控制器</p>
 <p><strong>用途</strong>：允许外设或存储器和存储器之间高速数据传输，<strong>无需CPU干预，节省CPU资源</strong></p>
-<p><em>使用小寄巧：DMA可以获取当前剩余数据量，根据设置的接收buffer大小减去当前剩余数据量，得到<strong>当前接收数据大小</strong></em></p>
+<blockquote>
+<p>使用小寄巧：DMA可以获取当前剩余数据量，根据设置的接收buffer大小减去当前剩余数据量，得到当前接收数据大小</p>
+</blockquote>
 <p>STM32F103C8T6 DMA资源： DMA1</p>
 <blockquote>
 <h3 id="qdma配置三要素"><a class="markdownIt-Anchor" href="#qdma配置三要素"></a> <strong>Q：DMA配置三要素</strong></h3>
@@ -862,7 +864,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h2 id="uart"><a class="markdownIt-Anchor" href="#uart"></a> UART</h2>
 <p><strong>串口通信</strong></p>
 <p><img src="https://s2.loli.net/2025/05/07/yfZ6Hv5uq1SL8m9.png" alt="" /></p>
-<p><strong>低位先行</strong>：若发送信息0X0F，则传输数据位是<strong>0111 0000</strong>，最终接收信息0X0F</p>
+<p><strong>低位先行</strong>：若发送信息0X0E，则传输数据位是<strong>0111 0000</strong>，最终接收信息0X0E</p>
 <p><strong>过程</strong>：起始一个<strong>低电平</strong>信号表示<strong>开始发送数据</strong>，接着是<strong>8个数据位</strong>，然后是校验位（奇/偶/NONE），最后是<strong>高电平</strong>表示停止位（0.5/1/1.5/2）</p>
 <p><img src="https://s2.loli.net/2025/05/07/NJ3RueE5X7DtIoj.png" alt="" /></p>
 <blockquote>
@@ -1268,9 +1270,9 @@ CAN波特率=TQ*(TBS1 + TBS2 + SJY)   \\
           
           
               
-                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
-              
                 <a class="hover-with-bg" href="/tags/STM32/"># STM32</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"># 学习笔记</a>
               
           
     </div>
