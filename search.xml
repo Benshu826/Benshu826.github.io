@@ -5903,8 +5903,8 @@ Emmmm…，不过后来拿了省一，挺意外的。</p>
 <hr />
 <h2 id="类如何实现只能静态分配和只能动态分配"><a class="markdownIt-Anchor" href="#类如何实现只能静态分配和只能动态分配"></a> 类如何实现只能静态分配和只能动态分配</h2>
 <ul>
-<li><strong>只能静态分配</strong>：把<strong>new、delete重载</strong>为<strong>private</strong>属性</li>
-<li><strong>只能动态分配</strong>：把<strong>构造、析构</strong>函数设为<strong>protected</strong>属性，再用子类动态创建</li>
+<li><strong>只能静态分配（禁止堆上创建）</strong>：把<strong>new、delete重载</strong>为<strong>private</strong>属性</li>
+<li><strong>只能动态分配（禁止栈上创建）</strong>：把<strong>构造、析构</strong>函数设为<strong>protected</strong>属性，再用子类动态创建</li>
 </ul>
 <hr />
 <h2 id="什么是静态绑定和动态绑定"><a class="markdownIt-Anchor" href="#什么是静态绑定和动态绑定"></a> 什么是静态绑定和动态绑定</h2>
