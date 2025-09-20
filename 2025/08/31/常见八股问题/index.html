@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 25k 字
+        共 25.1k 字
       </span>
     
     
@@ -1058,7 +1058,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ul>
 <p><strong>空闲块组织</strong>：</p>
 <ul>
-<li>使用 <strong>隐式链表</strong> 管理空闲块。</li>
+<li>使用 <strong>隐式双向链表</strong> 管理空闲块。</li>
 <li>每个空闲块会记录自身大小和指向下一块的指针。</li>
 <li>分配时可能会 <strong>分割</strong> 空闲块；释放时可能会 <strong>合并</strong> 相邻块，减少碎片。</li>
 </ul>
@@ -1100,7 +1100,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>支持 <strong>相邻空闲块合并</strong>，减少碎片。</p>
 </li>
 <li>
-<p>小块用 <code>sbrk()</code> 分配，大块可能用 <code>mmap()</code>。</p>
+<p>小块用 <code>brk()</code> 分配，大块可能用 <code>mmap()</code>。</p>
 </li>
 </ul>
 <hr />
@@ -1224,6 +1224,9 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p><strong>a++</strong>：<strong>需要开辟空间</strong>。</p>
 </li>
 </ul>
+<blockquote>
+<p><ins>a  -&gt; a = a + 1，使用的是左值，而a</ins>使用的是右值。</p>
+</blockquote>
 <hr />
 <h2 id="和-的作用"><a class="markdownIt-Anchor" href="#和-的作用"></a> # 和 ## 的作用</h2>
 <p><strong><code>#</code>（字符串化）</strong></p>
@@ -1265,6 +1268,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ul>
 <blockquote>
 <p>例：<code>13 % 8 == 13 &amp; 7 == 5</code>。</p>
+<p>8 -&gt; 1000，使用0111，可以取后几位。</p>
 </blockquote>
 <hr />
 <h2 id="取消内存对齐的方法了解"><a class="markdownIt-Anchor" href="#取消内存对齐的方法了解"></a> 取消内存对齐的方法（了解）</h2>
@@ -1355,7 +1359,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <ul>
 <li><strong>概念</strong>：派生类中 <strong>重新定义</strong> 基类的 <strong>虚函数</strong>，<strong>函数名必须相同</strong>。</li>
 <li><strong>发生位置</strong>：继承体系中。</li>
-<li><strong>关键点</strong>：运行时通过虚表决定调用 → <strong>动态多态</strong>。</li>
+<li><strong>关键点</strong>：运行时通过虚函数表决定调用 → <strong>动态多态</strong>。</li>
 </ul>
 </li>
 <li><strong>隐藏（Hide/Overwrite）</strong>
@@ -1496,7 +1500,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ol>
 <p>这个过程实现了<strong>动态绑定</strong>（运行时多态），使得调用的函数版本取决于对象的实际类型，而非指针或引用的声明类型。如果派生类重写了基类的虚函数，其虚函数表中对应的函数指针会被更新为指向派生类的函数。</p>
 <p><strong>虚函数</strong>是<strong>类定义的</strong>，但<strong>调用</strong>属于<strong>对象</strong></p>
-<p><strong>虚函数</strong>位于<strong>文本段</strong>(.text)，<strong>虚函数表</strong>位于<strong>数据段</strong>(.data)</p>
+<p><strong>虚函数</strong>位于<strong>文本段</strong>(.text)，<strong>虚函数表</strong>位于<strong>数据段</strong>(.data)，<strong>虚函数表指针</strong>（vptr）存放在<strong>每个对象实例的内存空间开头</strong>（具体位置与对象存储位置相同，可能在栈、堆或数据段）</p>
 </blockquote>
 <hr />
 <h2 id="什么是纯虚函数"><a class="markdownIt-Anchor" href="#什么是纯虚函数"></a> 什么是纯虚函数</h2>
@@ -1642,7 +1646,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li><strong>拷贝构造函数</strong>：<strong>对象不存在</strong>，用别的<strong>已经存在的对象来初始化</strong></li>
 <li><strong>赋值运算符</strong>：<strong>对象存在</strong>，用<strong>别的对象给它赋值</strong>。</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>()&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">const</span> A&amp; a)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    A&amp; <span class="keyword">operator</span> = (A&amp; a)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;赋值运算符&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A a1;		<span class="comment">//构造函数</span></span><br><span class="line">    A a2 = a1;	<span class="comment">//拷贝构造</span></span><br><span class="line">    a2 = a1;	<span class="comment">//赋值运算符</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构造函数</span></span><br><span class="line"><span class="comment">//拷贝构造</span></span><br><span class="line"><span class="comment">//赋值运算符</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>()&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">const</span> A&amp; a)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    A&amp; <span class="keyword">operator</span> = (A&amp; a)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;赋值运算符&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A a1;	<span class="comment">//构造函数</span></span><br><span class="line">    A a2 = a1;	<span class="comment">//拷贝构造</span></span><br><span class="line">    a2 = a1;	<span class="comment">//赋值运算符</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//打印出的结果：</span></span><br><span class="line"><span class="comment">//	构造函数</span></span><br><span class="line"><span class="comment">//	拷贝构造</span></span><br><span class="line"><span class="comment">//	赋值运算符</span></span><br></pre></td></tr></table></figure>
 <hr />
 <h2 id="只定义析构函数会自动生成哪些构造函数"><a class="markdownIt-Anchor" href="#只定义析构函数会自动生成哪些构造函数"></a> 只定义析构函数，会自动生成哪些构造函数</h2>
 <ul>
@@ -1676,8 +1680,9 @@ header .header__right .dropdown-menus .dropdown-menu {
 </blockquote>
 <hr />
 <h2 id="什么是虚拟继承"><a class="markdownIt-Anchor" href="#什么是虚拟继承"></a> 什么是虚拟继承</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span> : <span class="keyword">public</span> B, <span class="keyword">public</span> C&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(A) &lt;&lt; <span class="built_in">sizeof</span>(A) &lt;&lt; endl;	<span class="comment">// 1，空对象</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(B) &lt;&lt; <span class="built_in">sizeof</span>(B) &lt;&lt; endl;	<span class="comment">// 4，一个bptr指针</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(C) &lt;&lt; <span class="built_in">sizeof</span>(C) &lt;&lt; endl;	<span class="comment">// 4，一个bptr指针</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(D) &lt;&lt; <span class="built_in">sizeof</span>(D) &lt;&lt; endl;	<span class="comment">// 8，两个bptr指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span> : <span class="keyword">public</span> B, <span class="keyword">public</span> C&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(A) &lt;&lt; endl;	<span class="comment">// 1，空对象</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(B) &lt;&lt; endl;	<span class="comment">// 4，一个bptr指针</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(C) &lt;&lt; endl;	<span class="comment">// 4，一个bptr指针</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(D) &lt;&lt; endl;	<span class="comment">// 8，两个bptr指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上述中B和C虚拟继承A，D又继承B和C，这种方式是<strong>菱形继承/钻石继承</strong>，无论基类被继承多少次，只会存在一个实体。</p>
+<hr />
 <h2 id="指针和引用的区别"><a class="markdownIt-Anchor" href="#指针和引用的区别"></a> 指针和引用的区别</h2>
 <ul>
 <li>
