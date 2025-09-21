@@ -2851,7 +2851,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ul>
 <hr>
 <h2 id="什么是-IO-口悬空，可能带来哪些问题"><a href="#什么是-IO-口悬空，可能带来哪些问题" class="headerlink" title="什么是 IO 口悬空，可能带来哪些问题"></a>什么是 IO 口悬空，可能带来哪些问题</h2><ul>
-<li><strong>IO 悬空</strong>：输入引脚未接电路。</li>
+<li><strong>IO 悬空</strong>：输入引脚未接电路。（浮空输入）</li>
 <li><strong>问题</strong>：电平不确定，可能产生抖动、功耗增加、误触发。</li>
 <li><strong>解决</strong>：加上拉或下拉电阻。</li>
 </ul>
@@ -2979,25 +2979,28 @@ header .header__right .dropdown-menus .dropdown-menu {
 </li>
 </ul>
 <hr>
-<h2 id="STM32-上电后到-main-的过程"><a href="#STM32-上电后到-main-的过程" class="headerlink" title="STM32 上电后到 __main 的过程"></a>STM32 上电后到 <code>__main</code> 的过程</h2><ol>
-<li><strong>硬件复位</strong></li>
-</ol>
-<ul>
+<h2 id="STM32-上电后到-main-的过程"><a href="#STM32-上电后到-main-的过程" class="headerlink" title="STM32 上电后到 __main 的过程"></a>STM32 上电后到 <code>__main</code> 的过程</h2><ul>
+<li><strong>硬件复位</strong><ul>
 <li>上电/复位后，Cortex-M 内核自动完成：<ul>
 <li>取向量表第 0 项 → <strong>Initial_SP</strong>，装入 MSP。</li>
 <li>取向量表第 1 项 → <strong>Reset_Handler</strong> 地址，跳转执行。</li>
 </ul>
 </li>
 </ul>
-<ol>
-<li><strong>Reset_Handler</strong>（启动文件 <code>startup_xx.s</code> 中定义）</li>
-</ol>
+</li>
+</ul>
 <ul>
-<li>设置堆栈指针（MSP）、初始化中断向量表基址。</li>
-<li>调用 <strong><code>SystemInit()</code></strong>：<ul>
+<li><p><strong>Reset_Handler</strong>（启动文件 <code>startup_xx.s</code> 中定义）</p>
+<ul>
+<li><p>设置堆栈指针（MSP）、初始化中断向量表基址。</p>
+</li>
+<li><p>调用 <strong><code>SystemInit()</code></strong>：</p>
+<ul>
 <li>配置系统时钟（HSE/PLL 等）。</li>
 <li>配置 Flash 访问延时、总线分频。</li>
 <li>初始化外设时钟（FPU、Cache、MPU 等）。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3006,24 +3009,31 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li>有的厂商库里叫 <strong><code>HardwareInit()</code> / <code>SystemClock_Config()</code></strong>，作用类似。</li>
 </ul>
 </blockquote>
-<ol>
-<li><strong>C 运行时环境初始化</strong></li>
-</ol>
 <ul>
-<li><strong>数据段初始化</strong>：将已初始化全局变量从 Flash 拷贝到 RAM。</li>
-<li><strong>BSS 段清零</strong>：未初始化的全局/静态变量置 0。</li>
-<li>可能还会初始化堆区指针。</li>
+<li><p><strong>C 运行时环境初始化</strong></p>
+<ul>
+<li><p><strong>数据段初始化</strong>：将已初始化全局变量从 Flash 拷贝到 RAM。</p>
+</li>
+<li><p><strong>BSS 段清零</strong>：未初始化的全局/静态变量置 0。</p>
+</li>
+<li><p>可能还会初始化堆区指针。</p>
+</li>
 </ul>
-<ol>
-<li><strong>调用 <code>__main</code></strong>（C 库入口函数）</li>
-</ol>
+</li>
+</ul>
 <ul>
-<li>进一步完成 C/C++ 环境初始化：<ul>
+<li><p><strong>调用 <code>__main</code></strong>（C 库入口函数）</p>
+<ul>
+<li><p>进一步完成 C/C++ 环境初始化：</p>
+<ul>
 <li>运行全局/静态对象的构造函数（C++）。</li>
 <li>设置标准库需要的运行环境。</li>
 </ul>
 </li>
-<li>最终调用 <code>main()</code>。</li>
+<li><p>最终调用 <code>__main()</code>。</p>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h2 id="MSP-和-PSP-两个指针是什么，都在什么时候用"><a href="#MSP-和-PSP-两个指针是什么，都在什么时候用" class="headerlink" title="MSP 和 PSP 两个指针是什么，都在什么时候用"></a>MSP 和 PSP 两个指针是什么，都在什么时候用</h2><ul>
