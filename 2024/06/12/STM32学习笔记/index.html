@@ -897,7 +897,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h2 id="i2c"><a class="markdownIt-Anchor" href="#i2c"></a> I2C</h2>
 <p>Inter IC BUS（<strong>同步、半双工</strong>），支持<strong>一主多从和多主多从</strong>（MSB高位先行）</p>
 <p>两根通信线：SCL（Serial Clock）、SDA（Serial Data），上拉电阻一般4.7K~10K</p>
-<p><strong>STM32支持7/10位地址模式</strong></p>
+<p><strong>STM32支持7/10位地址模式</strong>，地址0x00通常被保留，不可用，因此从机地址127位。</p>
 <p><img src="https://s2.loli.net/2025/05/07/Lh49pJTuEyxrFGB.png" alt="" /></p>
 <blockquote>
 <h3 id="qi2c总线在传输过程中有哪些类型信号"><a class="markdownIt-Anchor" href="#qi2c总线在传输过程中有哪些类型信号"></a> Q：I2C总线在传输过程中有哪些类型信号？</h3>

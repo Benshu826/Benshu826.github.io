@@ -502,7 +502,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>和风天气作为服务端，配置相关端口号，实现WIFI获取。</p>
 <p>首先配置WIFI</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_EXAMPLE_WIFI_SSID=<span class="string">&quot;WIFI名称&quot;</span></span><br><span class="line">CONFIG_EXAMPLE_WIFI_PASSWORD=<span class="string">&quot;WIFI密码&quot;</span></span><br></pre></td></tr></table></figure>
-<p>**任务创建：**连接WiFi任务、获取网络时间任务、获取每日天气信息任务、获取实时天气信息任务、获取实时空气质量任务、主界面任务（从前往后依次执行）</p>
+<p><strong>任务创建</strong>：连接WiFi任务、获取网络时间任务、获取每日天气信息任务、获取实时天气信息任务、获取实时空气质量任务、主界面任务（从前往后依次执行）</p>
 <p>需要创建一个lv_timer定时器，每隔1s判断更新已有数据，比如网络时间是1s更新一次，室外温度和天气图标是30min更新一次，每日温度范围和空气质量是1h更新一次。</p>
 <h4 id="wifi连接任务"><a class="markdownIt-Anchor" href="#wifi连接任务"></a> WIFI连接任务</h4>
 <p>WIFI会有AP和STA两种状态，AP是客户，STA是类似基站，还有AP+STA；<strong>这里设置为AP模式</strong>。</p>
@@ -536,7 +536,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mp3_player_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获取spiffs中的文件</span></span><br><span class="line">    file_iterator = file_iterator_new(SPIFFS_BASE);</span><br><span class="line">    assert(file_iterator != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    player_config.mute_fn = _audio_player_mute_fn;</span><br><span class="line">    player_config.write_fn = _audio_player_write_fn;</span><br><span class="line">    player_config.clk_set_fn = _audio_player_std_clock;</span><br><span class="line">    player_config.priority = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    ESP_ERROR_CHECK(audio_player_new(player_config));</span><br><span class="line">    ESP_ERROR_CHECK(audio_player_callback_register(_audio_player_callback, <span class="literal">NULL</span>));</span><br><span class="line"></span><br><span class="line">    music_ui();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://wiki.lckfb.com/zh-hans/szpi-esp32s3/beginner/mp3.html">【立创·实战派ESP32-S3】文档教程 | 立创开发板技术文档中心</a></p>
 <h4 id="摄像头"><a class="markdownIt-Anchor" href="#摄像头"></a> 摄像头</h4>
-<p>GGC0308，像素30W，用的是DVP接口</p>
+<p>GC0308，像素30W，用的是DVP接口</p>
 <p>ESP32S3是一款<strong>双处理器</strong>的XTensa，可以使用<code>xTaskCreatePinnedToCore</code>将摄像头获取的画面和LCD显示分别放在不同的处理器进行处理，提升整体性能。</p>
 <p><a target="_blank" rel="noopener" href="https://wiki.lckfb.com/zh-hans/szpi-esp32s3/beginner/camera.html">【立创·实战派ESP32-S3】文档教程 | 立创开发板技术文档中心</a></p>
 <h4 id="个人信息显示"><a class="markdownIt-Anchor" href="#个人信息显示"></a> 个人信息显示</h4>
