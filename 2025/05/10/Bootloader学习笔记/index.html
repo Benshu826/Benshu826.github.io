@@ -606,7 +606,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>写W=0，0XA0；</p>
 <p><strong>按字节写入</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> AT24C02_WADDR 0xA0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> AT24C02_RADDR 0xA1</span></span><br></pre></td></tr></table></figure>
-<p>AT24C02共<strong>16页</strong>，<strong>一页16字节</strong>，共256字节；<strong>存在回卷问题</strong></p>
+<p>AT24C02共<strong>32页</strong>，<strong>一页8字节</strong>，共256字节；<strong>存在回卷问题</strong></p>
 <h4 id="写入"><a class="markdownIt-Anchor" href="#写入"></a> 写入</h4>
 <img src="https://s2.loli.net/2025/05/09/4LQS8qFYM3cmdbp.png" style="zoom:80%;" />
 <h5 id="byte-write"><a class="markdownIt-Anchor" href="#byte-write"></a> Byte Write</h5>
